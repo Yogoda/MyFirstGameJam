@@ -83,7 +83,7 @@ func _process(delta):
 			if player_pos.y < get_viewport_rect().end.y - PLAYER_Y_POS_START:
 				up_direction = false
 				player_control = true
-				invincible = false
+				#invincible = false
 				
 	set_pos(player_pos)
 	
