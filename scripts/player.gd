@@ -9,19 +9,19 @@ var is_shooting = false
 const SCREEN_MARGIN = 30
 var position_initialize = true
 var player_control = false
-const PLAYER_X_POS_START = 100 #x position afte which the player can take control
-const PLAYER_X_POS_INI = -200 #initial x position of the player out of screen
+const PLAYER_Y_POS_START = 100 #x position afte which the player can take control
+const PLAYER_Y_POS_INI = -200 #initial x position of the player out of screen
 var structure_points = 1 
 const STRUCTURE_POINTS_MAX = 4 #max level
 var lives = 3
 
 func _ready():
 	#initialize player position
-	var player_pos = self.get_pos()
-	player_pos.x = get_viewport_rect().pos.x - 200
-	player_pos.y = round(get_viewport_rect().end.y /2)
-	self.set_pos(player_pos)
-	right_direction = true
+	var player_pos = get_pos()
+	player_pos.y = get_viewport_rect().end.y - PLAYER_Y_POS_INI
+	player_pos.x = round(get_viewport_rect().end.x /2)
+	set_pos(player_pos)
+	down_direction = true
 	
 	#initialization
 	set_process(true)
@@ -57,7 +57,7 @@ func _input(event):
 				
 func _process(delta):
 	#step events
-	var player_pos = self.get_pos()
+	var player_pos = get_pos()
 	if left_direction == true:
 		player_pos.x -= SPEED * delta
 	if right_direction == true:
@@ -79,11 +79,11 @@ func _process(delta):
 			player_pos.y = get_viewport_rect().pos.y + SCREEN_MARGIN
 	else:
 		if position_initialize == true:
-			if player_pos.x > PLAYER_X_POS_START:
-				right_direction = false
+			if player_pos.y > PLAYER_Y_POS_START:
+				down_direction = false
 				player_control = true
 				
-	self.set_pos(player_pos)
+	set_pos(player_pos)
 	
 	
 	
