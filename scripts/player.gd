@@ -10,7 +10,7 @@ const SCREEN_MARGIN = 30
 var position_initialize = true
 var player_control = false
 const PLAYER_Y_POS_START = 100 #x position afte which the player can take control
-const PLAYER_Y_POS_INI = -200 #initial x position of the player out of screen
+const PLAYER_Y_POS_INI = 200 #initial y position of the player out of screen
 var structure_points = 1 
 const STRUCTURE_POINTS_MAX = 4 #max level
 var lives = 3
@@ -18,10 +18,10 @@ var lives = 3
 func _ready():
 	#initialize player position
 	var player_pos = get_pos()
-	player_pos.y = get_viewport_rect().end.y - PLAYER_Y_POS_INI
+	player_pos.y = get_viewport_rect().end.y + PLAYER_Y_POS_INI
 	player_pos.x = round(get_viewport_rect().end.x /2)
 	set_pos(player_pos)
-	down_direction = true
+	up_direction = true
 	
 	#initialization
 	set_process(true)
@@ -79,9 +79,10 @@ func _process(delta):
 			player_pos.y = get_viewport_rect().pos.y + SCREEN_MARGIN
 	else:
 		if position_initialize == true:
-			if player_pos.y > PLAYER_Y_POS_START:
-				down_direction = false
+			if player_pos.y < get_viewport_rect().end.y - PLAYER_Y_POS_START:
+				up_direction = false
 				player_control = true
+				print (player_pos.y)
 				
 	set_pos(player_pos)
 	
