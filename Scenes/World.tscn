@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[node name="World" type="Node"]
+
+[node name="Player" type="Node2D" parent="."]
+
+transform/pos = Vector2( 78.9018, 257.111 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Player"]
+
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+
