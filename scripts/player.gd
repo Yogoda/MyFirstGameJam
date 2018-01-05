@@ -14,6 +14,7 @@ const PLAYER_Y_POS_INI = 200 #initial y position of the player out of screen
 var structure_points = 1 
 const STRUCTURE_POINTS_MAX = 4 #max level
 var lives = 3
+var invicible = true
 
 func _ready():
 	#initialize player position
@@ -82,7 +83,7 @@ func _process(delta):
 			if player_pos.y < get_viewport_rect().end.y - PLAYER_Y_POS_START:
 				up_direction = false
 				player_control = true
-				print (player_pos.y)
+				invincible = false
 				
 	set_pos(player_pos)
 	
