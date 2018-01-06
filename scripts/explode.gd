@@ -12,9 +12,3 @@ func explode():
 		if child.get_type() == "RigidBody":
 			child.apply_impulse(get_global_transform().origin, (child.get_global_transform().origin - get_global_transform().origin) * 2)
 			child.set_angular_velocity(Vector3(rand_range(0,rotSpeed), rand_range(0,rotSpeed), rand_range(0,rotSpeed)))
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	randomize()
-	explode()
