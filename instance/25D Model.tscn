@@ -5,6 +5,7 @@
 
 [node name="25D Model" type="Node2D"]
 
+visibility/visible = false
 script/script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

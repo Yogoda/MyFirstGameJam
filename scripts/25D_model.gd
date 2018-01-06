@@ -20,3 +20,5 @@ func _process(delta):
 	var ray_direction = camera.project_ray_normal(get_parent().get_pos())
 	
 	ship.set_translation(ray_origin + ray_direction * camDist)
+	
+	get_node("Model").set_hidden(false)
