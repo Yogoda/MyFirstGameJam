@@ -4,7 +4,7 @@ extends Spatial
 # var a = 2
 # var b = "textvar"
 
-var rotSpeed = 1;
+var rotSpeed = 4;
 
 func explode():
 	
