@@ -15,6 +15,7 @@ var carrier
 var missile_angle = randi()%360
 const MISSILE_ANGLE_SPEED = 80
 var hp = 5
+var death = false
 var fire_mode = 3 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is 1 missile rotating around center, 3 is 4 missiles rotating around center
 const FIRE1_RATE = 0.7
 const FIRE1_SHIFT = 20
@@ -74,10 +75,12 @@ func _process(delta):
 		#inform carrier
 		carrier.ship_destroyed += 1
 			
-		if hp < 1:
+		if hp < 1 and death == false:
 			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
+			get_node("25D Model/Model").explode()
+			death = true
 		#destroy ship
-		queue_free()
+		#queue_free()
 		
 		#shooting
 	if fire1_alarm < 0:

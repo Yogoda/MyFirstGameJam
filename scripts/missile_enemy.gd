@@ -32,7 +32,6 @@ func _process(delta):
 	set_pos(missile_pos)
 	
 	if destroy == true:
-		print("fizzz")
 		queue_free()
 
 func _on_area_enter(other):
@@ -41,5 +40,4 @@ func _on_area_enter(other):
 		if other.invicible == false:
 			other.structure_points -= 1
 			queue_free()
-		print("splatt")
 		

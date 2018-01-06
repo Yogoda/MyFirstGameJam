@@ -18,6 +18,7 @@ var invicible = true
 const FIRE1_RATE = 0.15
 const FIRE1_Y_SHIFT = 20
 var fire1_alarm = 0
+var death = false
 const MISSILE_INSTANCE = preload("res://instance/missile_player.tscn")
 
 func _ready():
@@ -111,5 +112,8 @@ func _process(delta):
 				missile.set_pos(missile_pos)
 			
 	
-	if structure_points < 1:
-		queue_free()
+	if structure_points < 1 and death == false:
+		get_node("25D Model/Model").explode()
+		death = true
+		
+		#queue_free()
