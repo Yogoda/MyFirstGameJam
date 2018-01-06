@@ -9,12 +9,12 @@ const ALARM_CHECK = 0.2
 var alarm_0 = ALARM_CHECK
 
 func _ready():
+	connect("area_enter",self,"_on_area_enter")
 	set_process(true)
 
 func _process(delta):
 	alarm_0 -= delta
 	if alarm_0 < 0:
-		connect("area_enter",self,"_on_area_enter")
 		alarm_0 = ALARM_CHECK
 
 	#step events

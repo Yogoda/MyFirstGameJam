@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=2 format=1]
 
 [ext_resource path="res://Meshes/block_4x2.msh" type="Mesh" id=1]
-[ext_resource path="res://Materials/blue.tres" type="Material" id=2]
 
 [node name="RigidBody" type="RigidBody"]
 
@@ -15,7 +14,7 @@ mode = 0
 mass = 1.0
 friction = 1.0
 bounce = 0.0
-gravity_scale = 0.5
+gravity_scale = 0.0
 custom_integrator = false
 continuous_cd = false
 contacts_reported = 0
@@ -31,6 +30,7 @@ damp_override/angular = -1.0
 [node name="MeshInstance" type="MeshInstance" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 4 )
 layers = 1
 geometry/visible = true
 geometry/material_override = null
@@ -47,6 +47,6 @@ geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
 mesh/mesh = ExtResource( 1 )
 mesh/skeleton = NodePath("..")
-material/0 = ExtResource( 2 )
+material/0 = null
 
 
