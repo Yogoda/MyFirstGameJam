@@ -1,0 +1,44 @@
+extends Node2D
+
+const SHIP_Y_POS_INI = 100 #initial y position of the ship out of screen
+var spawn_delay = 4
+var alarm_0 = 0
+var overmind
+const BOMBER01_PATH = "res://instance/Bomber01.tscn"
+var ship_type = "Bomber01"
+var ship_max = 10
+var ship_num = 0
+var ship_destroyed = 0
+var ship_sim_max = 4 #number of spawner that are allowed simultaneously
+var ship_instance
+
+func _ready():
+	print("carrier spawned")
+	set_process(true)
+
+func _process(delta):
+	alarm_0 -= delta
+	if alarm_0 < 0:
+		print(ship_num)
+		alarm_0 = spawn_delay
+		if ship_num < ship_max:
+			if ship_num - ship_destroyed < ship_sim_max:
+				if ship_type == "Bomber01":
+					ship_instance = preload(BOMBER01_PATH)
+				ship_num += 1
+				var ship = ship_instance.instance()
+				get_tree().get_root().add_child(ship)
+				ship.carrier = self
+				var ship_pos = ship.get_pos()
+				ship_pos.x = round(rand_range(get_viewport_rect().pos.x,get_viewport_rect().end.x))
+				ship_pos.y = get_viewport_rect().pos.y - SHIP_Y_POS_INI
+				
+				ship.set_pos(ship_pos)
+				
+		else:
+			#report to the overmind that the ship fleet is destroyed
+			overmind.level_spawner_destroyed += 1
+			#destroy the carrier
+			print("carrier destroyed")
+			queue_free()
+			
