@@ -136,10 +136,6 @@ material/0 = null
 
 [node name="Overmind" parent="." instance=ExtResource( 4 )]
 
-[node name="NodeJoel" type="Node" parent="."]
-
-[node name="Node_Asta" type="Node2D" parent="."]
-
 
 [editable path="Player"]
 [editable path="Player/25D Model"]
