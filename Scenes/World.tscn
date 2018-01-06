@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://Scenes/World.gd" type="Script" id=1]
 [ext_resource path="res://instance/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://instance/25D Model.tscn" type="PackedScene" id=3]
 [ext_resource path="res://instance/PlayerShip.tscn" type="PackedScene" id=4]
 [ext_resource path="res://instance/Overmind.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/Score.gd" type="Script" id=6]
 
 [sub_resource type="Environment" id=1]
 
@@ -134,6 +135,21 @@ visibility/visible = false
 [node name="Model" parent="Player/25D Model" instance=ExtResource( 4 )]
 
 [node name="Overmind" parent="." instance=ExtResource( 5 )]
+
+[node name="Score" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 14.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = ExtResource( 6 )
 
 
 [editable path="Player"]
