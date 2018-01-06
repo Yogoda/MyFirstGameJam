@@ -139,8 +139,6 @@ material/0 = null
 transform/pos = Vector2( 218.371, -53.0546 )
 script/script = ExtResource( 4 )
 
-[node name="Node_Asta" type="Node2D" parent="."]
-
 
 [editable path="Player"]
 [editable path="Player/25D Model"]

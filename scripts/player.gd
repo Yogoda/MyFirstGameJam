@@ -15,6 +15,10 @@ var structure_points = 1
 const STRUCTURE_POINTS_MAX = 4 #max level
 var lives = 3
 var invicible = true
+const FIRE1_RATE = 0.15
+const FIRE1_Y_SHIFT = 20
+var fire1_alarm = 0
+const MISSILE_INSTANCE = preload("res://instance/missile_player.tscn")
 
 func _ready():
 	#initialize player position
@@ -57,6 +61,11 @@ func _input(event):
 			is_shooting = false
 				
 func _process(delta):
+	#update alarms
+	fire1_alarm -= delta
+	if fire1_alarm < 0:
+		fire1_alarm = -1
+		
 	#step events
 	var player_pos = get_pos()
 	if left_direction == true:
@@ -78,6 +87,7 @@ func _process(delta):
 			player_pos.x = get_viewport_rect().pos.x + SCREEN_MARGIN
 		if player_pos.y < get_viewport_rect().pos.y + SCREEN_MARGIN:
 			player_pos.y = get_viewport_rect().pos.y + SCREEN_MARGIN
+		
 	else:
 		if position_initialize == true:
 			if player_pos.y < get_viewport_rect().end.y - PLAYER_Y_POS_START:
@@ -87,5 +97,18 @@ func _process(delta):
 				
 	set_pos(player_pos)
 	
-	
+	#shooting
+	if player_control == true:
+		if is_shooting == true:
+			player_pos = get_pos()
+			if fire1_alarm < 0:
+				fire1_alarm = FIRE1_RATE
+				var missile = MISSILE_INSTANCE.instance()
+				get_tree().get_root().add_child(missile)
+				var missile_pos = missile.get_pos()
+				missile_pos.x = player_pos.x
+				missile_pos.y = player_pos.y - FIRE1_Y_SHIFT
+				missile.set_pos(missile_pos)
+				print("pewpew")
+			
 	
