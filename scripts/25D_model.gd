@@ -4,7 +4,7 @@ onready var ship = get_node("Model")
 onready var camera = get_node("/root/World/Camera")
 
 var speed = 4
-var camDist = 15;
+var camDist = 100;
 
 func _ready():
 	set_process(true)
