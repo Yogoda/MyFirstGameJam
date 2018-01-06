@@ -24,6 +24,7 @@ func _process(delta):
 		
 	if alarm_0 < 0:
 		if level_status == "starting":
+			get_tree().get_root().get_node("World").get_node("Level").level = current_level
 			level_spawner_num = 0
 			level_spawner_destroyed = 0
 			if current_level == 1:
