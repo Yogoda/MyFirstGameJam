@@ -15,9 +15,4 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Model" type="Spatial" parent="."]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, -0.317008, -0.948423, 0, 0.948423, -0.317008, 0, 0, 0 )
-
 
