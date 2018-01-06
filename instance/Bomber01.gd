@@ -1,7 +1,7 @@
 extends Node2D
 
 const SHIP_Y_POS_MARGIN = 200 #final y position margin before the ship is destroyed
-const VERTICAL_SPEED = 100
+const VERTICAL_SPEED = 60
 const HORIZONTAL_SPEED = 50
 const X_MARGIN = 40 #edge limits
 var up_direction = false
@@ -51,6 +51,7 @@ func _process(delta):
 	if ship_pos.y > get_viewport_rect().end.y + SHIP_Y_POS_MARGIN:
 		#inform carrier
 		carrier.ship_destroyed += 1
+			
 		print("ship destroyed")
 		#destroy ship
 		queue_free()

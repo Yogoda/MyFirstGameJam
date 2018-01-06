@@ -35,7 +35,7 @@ func _process(delta):
 				
 				ship.set_pos(ship_pos)
 				
-		else:
+		elif ship_destroyed == ship_max:
 			#report to the overmind that the ship fleet is destroyed
 			overmind.level_spawner_destroyed += 1
 			#destroy the carrier

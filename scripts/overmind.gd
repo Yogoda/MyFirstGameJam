@@ -41,7 +41,6 @@ func _process(delta):
 					level_spawner_num += 1
 					var carrier = CARRIER_INSTANCE.instance()
 					get_tree().get_root().add_child(carrier)
-					print("debug")
 					carrier.overmind = self
 					if current_level == 1:
 						carrier.ship_type = "Bomber01"
