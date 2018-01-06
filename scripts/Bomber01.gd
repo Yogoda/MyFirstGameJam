@@ -9,6 +9,7 @@ var down_direction = true
 var left_direction = false
 var right_direction = false
 var carrier
+var hp = 5
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -48,7 +49,7 @@ func _process(delta):
 	#check if out of screen
 	ship_pos = get_pos()
 	
-	if ship_pos.y > get_viewport_rect().end.y + SHIP_Y_POS_MARGIN:
+	if ship_pos.y > get_viewport_rect().end.y + SHIP_Y_POS_MARGIN or hp < 1:
 		#inform carrier
 		carrier.ship_destroyed += 1
 			
