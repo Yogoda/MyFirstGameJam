@@ -6,19 +6,18 @@ onready var camera = get_node("/root/World/Camera")
 var speed = 4
 var camDist = 100;
 
-func _ready():
-	set_process(true)
-
-	#print(get_viewport_rect().size)
-	#print(get_viewport_rect().end)
-
-func _process(delta):
-
-	#print(get_parent().get_pos())
-
+func set_ship_position():
+	
 	var ray_origin = camera.project_ray_origin(get_parent().get_pos())
 	var ray_direction = camera.project_ray_normal(get_parent().get_pos())
 	
 	ship.set_translation(ray_origin + ray_direction * camDist)
+
+func _ready():
 	
-	get_node("Model").set_hidden(false)
+	set_process(true)
+	set_ship_position()
+
+func _process(delta):
+
+	set_ship_position()
