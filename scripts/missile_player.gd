@@ -20,8 +20,7 @@ func _process(delta):
 	if alarm_0 < 0:
 		connect("area_enter",self,"_on_area_enter")
 		alarm_0 = ALARM_CHECK
-
-
+		
 	#step events
 	var missile_pos = get_pos()
 	

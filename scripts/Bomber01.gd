@@ -3,8 +3,8 @@ extends Area2D
 const SHIP_Y_POS_MARGIN = 200 #final y position margin before the ship is destroyed
 const VERTICAL_SPEED = 60
 const HORIZONTAL_SPEED = 50
-const HIT_SCORE = 100
-const KILL_SCORE = 1000
+const HIT_SCORE = 50
+const KILL_SCORE = 250
 const X_MARGIN = 40 #edge limits
 const MISSILE_SPEED = 200
 var up_direction = false
@@ -65,7 +65,8 @@ func _process(delta):
 		#inform carrier
 		carrier.ship_destroyed += 1
 			
-		print("ship destroyed")
+		if hp < 1:
+			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
 		#destroy ship
 		queue_free()
 		
