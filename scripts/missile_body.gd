@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends KinematicBody2D
 
 const SPEED = 500
 const SCREEN_MARGIN = 20
@@ -14,14 +14,12 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	var bodies = get_colliding_bodies()
- 
-	for body in bodies:
+	var body = get_collider()
+	if body != null:
 		if body.is_in_group("enemy"):
 			body.hp -= 1
 			destroy= true
-			print("splatt")
-
+		
 	#step events
 	var missile_pos = get_pos()
 	
@@ -45,6 +43,7 @@ func _process(delta):
 		destroy = true
 	if missile_pos.y > get_viewport_rect().end.y + SCREEN_MARGIN:
 		destroy = true
+	print (destroy)
 	
 	if destroy == true:
 		print("fizzz")
