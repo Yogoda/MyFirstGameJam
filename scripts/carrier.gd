@@ -19,6 +19,9 @@ func _ready():
 func _process(delta):
 	alarm_0 -= delta
 	if alarm_0 < 0:
+		alarm_0 = -1
+		
+	if alarm_0 < 0:
 		print(ship_num)
 		alarm_0 = spawn_delay
 		if ship_num < ship_max:

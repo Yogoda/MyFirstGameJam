@@ -20,6 +20,9 @@ func _process(delta):
 	#UPDATE ALARMS
 	alarm_0 -= delta
 	if alarm_0 < 0:
+		alarm_0 = -1
+		
+	if alarm_0 < 0:
 		if level_status == "starting":
 			level_spawner_num = 0
 			level_spawner_destroyed = 0
