@@ -11,8 +11,8 @@ var position_initialize = true
 var player_control = false
 const PLAYER_Y_POS_START = 100 #x position afte which the player can take control
 const PLAYER_Y_POS_INI = 200 #initial y position of the player out of screen
-var structure_points = 1 
-const STRUCTURE_POINTS_MAX = 4 #max level
+var structure_points = 3 
+const STRUCTURE_POINTS_MAX = 5 #max level
 var lives = 3
 var invicible = true
 const FIRE1_RATE = 0.15
@@ -93,7 +93,7 @@ func _process(delta):
 			if player_pos.y < get_viewport_rect().end.y - PLAYER_Y_POS_START:
 				up_direction = false
 				player_control = true
-				#invincible = false
+				invicible = false
 				
 	set_pos(player_pos)
 	
@@ -109,6 +109,7 @@ func _process(delta):
 				missile_pos.x = player_pos.x
 				missile_pos.y = player_pos.y - FIRE1_Y_SHIFT
 				missile.set_pos(missile_pos)
-				print("pewpew")
 			
 	
+	if structure_points < 1:
+		queue_free()

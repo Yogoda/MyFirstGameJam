@@ -1,15 +1,22 @@
-extends Node2D
+extends Area2D
 
 const SHIP_Y_POS_MARGIN = 200 #final y position margin before the ship is destroyed
 const VERTICAL_SPEED = 60
 const HORIZONTAL_SPEED = 50
+const HIT_SCORE = 100
+const KILL_SCORE = 1000
 const X_MARGIN = 40 #edge limits
+const MISSILE_SPEED = 200
 var up_direction = false
 var down_direction = true
 var left_direction = false
 var right_direction = false
 var carrier
 var hp = 5
+const FIRE1_RATE = 0.7
+const FIRE1_SHIFT = 20
+var fire1_alarm = 0
+const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -23,6 +30,11 @@ func _ready():
 		right_direction = true
 	
 func _process(delta):
+	#update alarms
+	fire1_alarm -= delta
+	if fire1_alarm < 0:
+		fire1_alarm = -1
+		
 	#step events
 	var ship_pos = get_pos()
 	
@@ -56,3 +68,14 @@ func _process(delta):
 		print("ship destroyed")
 		#destroy ship
 		queue_free()
+		
+		#shooting
+	if fire1_alarm < 0:
+		fire1_alarm = FIRE1_RATE
+		var missile = MISSILE_INSTANCE.instance()
+		get_tree().get_root().add_child(missile)
+		var missile_pos = missile.get_pos()
+		missile_pos.x = ship_pos.x
+		missile_pos.y = ship_pos.y + FIRE1_SHIFT
+		missile.set_pos(missile_pos)
+		missile.velocity = (Vector2(0,MISSILE_SPEED))
