@@ -71,6 +71,7 @@ func _process(delta):
 	
 	if death == true:
 		death_duration -= delta
+		get_node("25D Model/Model").explode()
 		if death_duration < 0:
 			#communicate death to the overmind
 			var overmind = get_tree().get_root().get_node("World").get_node("Overmind")
@@ -142,6 +143,5 @@ func _process(delta):
 		down_direction = false
 		left_direction = false
 		right_direction = false
-		get_node("25D Model/Model").explode()
 		death = true
 		

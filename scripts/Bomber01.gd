@@ -7,6 +7,7 @@ const HIT_SCORE = 50
 const KILL_SCORE = 250
 const X_MARGIN = 40 #edge limits
 const MISSILE_SPEED = 150
+var ini = true
 var carrier_informed = false
 var up_direction = false
 var down_direction = true
@@ -19,7 +20,7 @@ var hp = 5
 var death = false
 var death_duration = 0.5
 var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is 1 missile rotating around center, 3 is 4 missiles rotating around center
-const FIRE1_RATE = 0.8
+var fire1_rate = 0.8
 const FIRE1_SHIFT = 20
 var fire1_alarm = 0
 const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
@@ -34,10 +35,14 @@ func _ready():
 		left_direction = true
 	else:
 		right_direction = true
-	if fire_mode > 1:
-		FIRE1_RATE = 0.3
 	
 func _process(delta):
+	if ini == true:
+		if fire_mode == 2:
+			fire1_rate = 0.3
+		if fire_mode == 3:
+			fire1_rate = 0.4
+		ini = false
 	#update alarms
 	fire1_alarm -= delta
 	missile_angle += delta*MISSILE_ANGLE_SPEED
@@ -49,6 +54,7 @@ func _process(delta):
 
 	if death == true:
 		death_duration -= delta
+		get_node("25D Model/Model").explode()
 		if death_duration < 0:
 			queue_free()
 		
@@ -86,12 +92,11 @@ func _process(delta):
 			
 		if hp < 1 and death == false:
 			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
-			get_node("25D Model/Model").explode()
 			death = true
 		
 		#shooting
 	if fire1_alarm < 0 and death == false:
-		fire1_alarm = FIRE1_RATE
+		fire1_alarm = fire1_rate
 		if fire_mode == 0:
 			var missile = MISSILE_INSTANCE.instance()
 			get_tree().get_root().add_child(missile)

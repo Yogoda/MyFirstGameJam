@@ -1,12 +1,13 @@
 extends Node2D
 
-const MAX_LEVEL = 8 #number of game levels
+const MAX_LEVEL = 4 #number of game levels
 var current_level = 1
 var level_status = "starting"
 const CARRIER_INSTANCE = preload("res://instance/Carrier.tscn")
 const PLAYER_INSTANCE = preload("res://instance/Player.tscn")
 const GAME_OVER_INSTANCE = preload("res://instance/Game_over.tscn")
 const STAGE_CLEARED_INSTANCE = preload("res://instance/Stage_Cleared.tscn")
+const VICTORY_INSTANCE = preload("res://instance/Victory.tscn")
 const STARTING_DELAY = 2
 const ONGOING_DELAY = 2
 const ENDING_DELAY = 2
@@ -59,17 +60,17 @@ func _process(delta):
 				level_spawner_sim_max = 2
 				ship_level = 1
 			if current_level == 2:
-				level_spawner_max = 6
-				level_spawner_sim_max = 3
-				ship_level = 1
-			if current_level == 3:
 				level_spawner_max = 4
 				level_spawner_sim_max = 2
 				ship_level = 2
+			if current_level == 3:
+				level_spawner_max = 4
+				level_spawner_sim_max = 2
+				ship_level = 3
 			if current_level == 4:
-				level_spawner_max = 6
-				level_spawner_sim_max = 3
-				ship_level = 2
+				level_spawner_max = 4
+				level_spawner_sim_max = 2
+				ship_level = 4
 			if current_level == 5:
 				level_spawner_max = 4
 				level_spawner_sim_max = 2
@@ -110,5 +111,10 @@ func _process(delta):
 				if player_destroyed == false and game_over == false:
 					var player_ship = get_tree().get_root().get_node("Player")
 					player_ship.end_level = true
-					var stage_cleared = STAGE_CLEARED_INSTANCE.instance()
-					get_tree().get_root().add_child(stage_cleared)
+					if current_level < MAX_LEVEL:
+						var stage_cleared = STAGE_CLEARED_INSTANCE.instance()
+						get_tree().get_root().add_child(stage_cleared)
+					else:
+						#VICTORY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+						var game_victory = VICTORY_INSTANCE.instance()
+						get_tree().get_root().add_child(game_victory)
