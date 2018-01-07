@@ -1,4 +1,4 @@
-extends RigidBody
+extends MeshInstance
 
 var dir
 var explForce = 0.1

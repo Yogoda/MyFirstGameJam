@@ -15,7 +15,7 @@ func explode():
 
 	for child in get_children():
 		
-		if child.get_type() == "RigidBody":
+		if child.get_type() == "MeshInstance":
 
 			child.explode()
 #			print(child.get_translation() * Vector3(explForce, 0, explForce))
