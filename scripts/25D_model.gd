@@ -16,7 +16,6 @@ func set_ship_position():
 func _ready():
 	
 	set_process(true)
-	set_ship_position()
 
 func _process(delta):
 

@@ -6,6 +6,10 @@ extends Spatial
 
 var rotSpeed = 4;
 
+func _init():
+
+	set_translation(Vector3(-10000, -10000, -10000))
+
 func explode():
 
 	for child in get_children():
