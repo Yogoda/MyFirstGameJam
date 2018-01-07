@@ -5,12 +5,13 @@ var current_level = 1
 var level_status = "starting"
 const CARRIER_INSTANCE = preload("res://instance/Carrier.tscn")
 const PLAYER_INSTANCE = preload("res://instance/Player.tscn")
+const GAME_OVER_INSTANCE = preload("res://instance/Game_over.tscn")
 const STARTING_DELAY = 2
 const ONGOING_DELAY = 5
 const ENDING_DELAY = 5
 const RESPAWN_DELAY = 1
 var game_over = false
-var player_ship = 3
+var player_ship = 1
 var player_destroyed = true
 var player_respawn_delay = -1
 var alarm_0 = STARTING_DELAY
@@ -33,12 +34,16 @@ func _process(delta):
 		if player_respawn_delay < 0:
 			if player_ship > 0:
 				player_ship -= 1
+				print(player_ship)
 				player_respawn_delay = RESPAWN_DELAY
 				player_destroyed = false
 				var player_ship = PLAYER_INSTANCE.instance()
 				get_tree().get_root().add_child(player_ship)
 			else:
 				game_over = true
+				var game_over_inst = GAME_OVER_INSTANCE.instance()
+				get_tree().get_root().add_child(game_over_inst)
+				
 			
 	if alarm_0 < 0:
 		if level_status == "starting":

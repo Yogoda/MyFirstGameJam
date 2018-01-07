@@ -13,7 +13,6 @@ var ship_sim_max = 4 #number of spawner that are allowed simultaneously
 var ship_instance
 
 func _ready():
-	print("carrier spawned")
 	set_process(true)
 
 func _process(delta):
@@ -22,7 +21,6 @@ func _process(delta):
 		alarm_0 = -1
 		
 	if alarm_0 < 0:
-		print(ship_num)
 		alarm_0 = spawn_delay
 		if ship_num < ship_max:
 			if ship_num - ship_destroyed < ship_sim_max:
@@ -42,6 +40,5 @@ func _process(delta):
 			#report to the overmind that the ship fleet is destroyed
 			overmind.level_spawner_destroyed += 1
 			#destroy the carrier
-			print("carrier destroyed")
 			queue_free()
 			

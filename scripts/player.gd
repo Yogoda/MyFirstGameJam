@@ -73,7 +73,6 @@ func _process(delta):
 		if death_duration < 0:
 			#communicate death to the overmind
 			var overmind = get_tree().get_root().get_node("World").get_node("Overmind")
-			overmind.player_ship -= 1
 			overmind.player_destroyed = true
 			queue_free()
 		
@@ -123,6 +122,10 @@ func _process(delta):
 			
 	
 	if structure_points < 1 and death == false:
+		up_direction = false
+		down_direction = false
+		left_direction = false
+		right_direction = false
 		get_node("25D Model/Model").explode()
 		death = true
 		
