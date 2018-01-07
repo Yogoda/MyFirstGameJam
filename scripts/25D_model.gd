@@ -8,6 +8,7 @@ var camDist = 100;
 
 func set_ship_position():
 
+	ship.set_hidden(false)
 	var ray_origin = camera.project_ray_origin(get_parent().get_pos())
 	var ray_direction = camera.project_ray_normal(get_parent().get_pos())
 
