@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://instance/25D Model.tscn" type="PackedScene" id=3]
+[ext_resource path="res://instance/Ships/PlayerShip.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -28,15 +30,17 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 
+visibility/visible = false
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="25D Model" parent="." instance=ExtResource( 3 )]
+
+[node name="Model" parent="25D Model" instance=ExtResource( 4 )]
 
 

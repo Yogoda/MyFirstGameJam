@@ -19,6 +19,7 @@ const FIRE1_RATE = 0.15
 const FIRE1_Y_SHIFT = 20
 var fire1_alarm = 0
 var death = false
+var death_duration = 0.5
 const MISSILE_INSTANCE = preload("res://instance/missile_player.tscn")
 
 func _ready():
@@ -35,7 +36,7 @@ func _ready():
 	
 func _input(event):
 	#controls
-	if player_control == true:
+	if player_control == true and death == false:
 		if event.is_action("ui_left"):
 			left_direction = true
 		if event.is_action_released("ui_left"):
@@ -66,6 +67,15 @@ func _process(delta):
 	fire1_alarm -= delta
 	if fire1_alarm < 0:
 		fire1_alarm = -1
+	
+	if death == true:
+		death_duration -= delta
+		if death_duration < 0:
+			#communicate death to the overmind
+			var overmind = get_tree().get_root().get_node("World").get_node("Overmind")
+			overmind.player_ship -= 1
+			overmind.player_destroyed = true
+			queue_free()
 		
 	#step events
 	var player_pos = get_pos()
@@ -99,7 +109,7 @@ func _process(delta):
 	set_pos(player_pos)
 	
 	#shooting
-	if player_control == true:
+	if player_control == true and death == false:
 		if is_shooting == true:
 			player_pos = get_pos()
 			if fire1_alarm < 0:
@@ -116,4 +126,3 @@ func _process(delta):
 		get_node("25D Model/Model").explode()
 		death = true
 		
-		#queue_free()

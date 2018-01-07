@@ -16,7 +16,8 @@ var missile_angle = randi()%360
 const MISSILE_ANGLE_SPEED = 80
 var hp = 5
 var death = false
-var fire_mode = 3 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is 1 missile rotating around center, 3 is 4 missiles rotating around center
+var death_duration = 0.5
+var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is 1 missile rotating around center, 3 is 4 missiles rotating around center
 const FIRE1_RATE = 0.7
 const FIRE1_SHIFT = 20
 var fire1_alarm = 0
@@ -44,6 +45,11 @@ func _process(delta):
 		
 	if fire1_alarm < 0:
 		fire1_alarm = -1
+
+	if death == true:
+		death_duration -= delta
+		if death_duration < 0:
+			queue_free()
 		
 	#step events
 	var ship_pos = get_pos()
@@ -79,11 +85,9 @@ func _process(delta):
 			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
 			get_node("25D Model/Model").explode()
 			death = true
-		#destroy ship
-		#queue_free()
 		
 		#shooting
-	if fire1_alarm < 0:
+	if fire1_alarm < 0 and death == false:
 		fire1_alarm = FIRE1_RATE
 		if fire_mode == 0:
 			var missile = MISSILE_INSTANCE.instance()
