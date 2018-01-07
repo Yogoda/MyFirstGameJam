@@ -27,7 +27,6 @@ func _process(delta):
 			if ship_num - ship_destroyed < ship_sim_max:
 				if ship_type == "Bomber01":
 					ship_instance = preload(BOMBER01_PATH)
-				ship_num += 1
 				var ship = ship_instance.instance()
 				get_tree().get_root().add_child(ship)
 				ship.carrier = self
@@ -36,6 +35,7 @@ func _process(delta):
 				else:
 					ship.fire_mode = 0
 				var ship_pos = ship.get_pos()
+				ship_num += 1
 				ship_pos.x = round(rand_range(get_viewport_rect().pos.x,get_viewport_rect().end.x))
 				ship_pos.y = get_viewport_rect().pos.y - SHIP_Y_POS_INI
 				

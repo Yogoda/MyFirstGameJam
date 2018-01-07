@@ -13,6 +13,7 @@ const ONGOING_DELAY = 2
 const ENDING_DELAY = 2
 const RESPAWN_DELAY = 1
 var game_over = false
+var victory = false
 var player_ship = 3
 var ship_level = 1
 var player_destroyed = true
@@ -43,9 +44,10 @@ func _process(delta):
 				var player_ship = PLAYER_INSTANCE.instance()
 				get_tree().get_root().add_child(player_ship)
 			else:
-				game_over = true
-				var game_over_inst = GAME_OVER_INSTANCE.instance()
-				get_tree().get_root().add_child(game_over_inst)
+				if victory == false:
+					game_over = true
+					var game_over_inst = GAME_OVER_INSTANCE.instance()
+					get_tree().get_root().add_child(game_over_inst)
 				
 			
 	if alarm_0 < 0:
@@ -118,3 +120,4 @@ func _process(delta):
 						#VICTORY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 						var game_victory = VICTORY_INSTANCE.instance()
 						get_tree().get_root().add_child(game_victory)
+						victory = true
