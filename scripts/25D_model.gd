@@ -7,11 +7,11 @@ var speed = 4
 var camDist = 100;
 
 func set_ship_position():
-	if camera != null:
-		var ray_origin = camera.project_ray_origin(get_parent().get_pos())
-		var ray_direction = camera.project_ray_normal(get_parent().get_pos())
-		
-		ship.set_translation(ray_origin + ray_direction * camDist)
+
+	var ray_origin = camera.project_ray_origin(get_parent().get_pos())
+	var ray_direction = camera.project_ray_normal(get_parent().get_pos())
+
+	ship.set_translation(ray_origin + ray_direction * camDist)
 
 func _ready():
 	
