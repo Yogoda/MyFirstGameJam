@@ -47,6 +47,7 @@ func _process(delta):
 
 func _on_area_enter(other):
 	if other.is_in_group("enemy"):
-		other.hp -= 1
-		get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE
-		queue_free()
+		if other.death == false:
+			other.hp -= 1
+			get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE
+			queue_free()

@@ -7,4 +7,4 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	set_text(str("LEVEL: ",level))
+	set_text(str("STAGE: ",level))

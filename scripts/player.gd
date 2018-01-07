@@ -1,6 +1,7 @@
 extends Node2D
 
 const SPEED = 400
+var end_level = false
 var up_direction = false
 var down_direction = false
 var left_direction = false
@@ -75,6 +76,21 @@ func _process(delta):
 			var overmind = get_tree().get_root().get_node("World").get_node("Overmind")
 			overmind.player_destroyed = true
 			queue_free()
+	#end of level animation
+	if end_level == true:
+		player_control = false
+		invicible = true
+		left_direction = false
+		right_direction = false
+		up_direction = true
+		down_direction = false
+		var player_pos = get_pos()
+		if player_pos.y < get_viewport_rect().pos.y - PLAYER_Y_POS_START:
+			player_pos.y = get_viewport_rect().end.y + PLAYER_Y_POS_INI
+			player_pos.x = round(get_viewport_rect().end.x /2)
+			set_pos(player_pos)
+			end_level = false
+			position_initialize = true
 		
 	#step events
 	var player_pos = get_pos()

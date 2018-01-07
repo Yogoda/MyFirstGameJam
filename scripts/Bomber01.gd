@@ -7,6 +7,7 @@ const HIT_SCORE = 50
 const KILL_SCORE = 250
 const X_MARGIN = 40 #edge limits
 const MISSILE_SPEED = 150
+var carrier_informed = false
 var up_direction = false
 var down_direction = true
 var left_direction = false
@@ -17,7 +18,7 @@ const MISSILE_ANGLE_SPEED = 80
 var hp = 5
 var death = false
 var death_duration = 0.5
-var fire_mode = 3 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is 1 missile rotating around center, 3 is 4 missiles rotating around center
+var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is 1 missile rotating around center, 3 is 4 missiles rotating around center
 const FIRE1_RATE = 0.8
 const FIRE1_SHIFT = 20
 var fire1_alarm = 0
@@ -79,7 +80,9 @@ func _process(delta):
 	
 	if ship_pos.y > get_viewport_rect().end.y + SHIP_Y_POS_MARGIN or hp < 1:
 		#inform carrier
-		carrier.ship_destroyed += 1
+		if carrier_informed == false:
+			carrier.ship_destroyed += 1
+			carrier_informed = true
 			
 		if hp < 1 and death == false:
 			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE

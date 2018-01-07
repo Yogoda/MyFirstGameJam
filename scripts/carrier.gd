@@ -6,7 +6,8 @@ var alarm_0 = 0
 var overmind
 const BOMBER01_PATH = "res://instance/Bomber01.tscn"
 var ship_type = "Bomber01"
-var ship_max = 10
+var ship_level = 0
+var ship_max = 6
 var ship_num = 0
 var ship_destroyed = 0
 var ship_sim_max = 4 #number of spawner that are allowed simultaneously
@@ -30,13 +31,17 @@ func _process(delta):
 				var ship = ship_instance.instance()
 				get_tree().get_root().add_child(ship)
 				ship.carrier = self
+				if ship_level != 0:
+					ship.fire_mode = ship_num%ship_level
+				else:
+					ship.fire_mode = 0
 				var ship_pos = ship.get_pos()
 				ship_pos.x = round(rand_range(get_viewport_rect().pos.x,get_viewport_rect().end.x))
 				ship_pos.y = get_viewport_rect().pos.y - SHIP_Y_POS_INI
 				
 				ship.set_pos(ship_pos)
 				
-		elif ship_destroyed == ship_max:
+		elif ship_destroyed >= ship_max:
 			#report to the overmind that the ship fleet is destroyed
 			overmind.level_spawner_destroyed += 1
 			#destroy the carrier
