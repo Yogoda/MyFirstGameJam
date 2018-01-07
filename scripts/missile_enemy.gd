@@ -1,10 +1,10 @@
 extends Area2D
 
-const SPEED = 500
+const SPEED = 150
 const SCREEN_MARGIN = 20
 
 var destroy = false
-var velocity = Vector2(0,200)
+var velocity = Vector2(0,SPEED)
 
 func _ready():
 	connect("area_enter",self,"_on_area_enter")
