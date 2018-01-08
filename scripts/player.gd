@@ -1,6 +1,7 @@
 extends Node2D
 
 const SPEED = 400
+const MISSILE_SPEED = 500
 var end_level = false
 var up_direction = false
 var down_direction = false
@@ -16,9 +17,15 @@ var structure_points = 3
 const STRUCTURE_POINTS_MAX = 5 #max level
 var lives = 3
 var invicible = true
-const FIRE1_RATE = 0.15
+const FIRE1_RATE = 0.25
 const FIRE1_Y_SHIFT = 20
+const FIRE2_RATE = 0.75
+const FIRE2_X_SHIFT = 20
+const FIRE3_RATE = 1.5
+const FIRE3_X_SHIFT = 30
 var fire1_alarm = 0
+var fire2_alarm = 0
+var fire3_alarm = 0
 var death = false
 var death_duration = 0.5
 const MISSILE_INSTANCE = preload("res://instance/missile_player.tscn")
@@ -68,6 +75,14 @@ func _process(delta):
 	fire1_alarm -= delta
 	if fire1_alarm < 0:
 		fire1_alarm = -1
+		
+	fire2_alarm -= delta
+	if fire2_alarm < 0:
+		fire2_alarm = -1
+		
+	fire3_alarm -= delta
+	if fire3_alarm < 0:
+		fire3_alarm = -1
 	
 	if death == true:
 		death_duration -= delta
@@ -136,7 +151,57 @@ func _process(delta):
 				missile_pos.x = player_pos.x
 				missile_pos.y = player_pos.y - FIRE1_Y_SHIFT
 				missile.set_pos(missile_pos)
-			
+			if structure_points > 3 and fire2_alarm <0:
+				fire2_alarm = FIRE2_RATE
+				#secondary fire mode enabled !
+				var i
+				for i in range(2):
+					var missile_angle = 0
+					if i == 0:
+						missile_angle = 350
+					elif i == 1:
+						missile_angle = 10
+					var missile = MISSILE_INSTANCE.instance()
+					get_tree().get_root().add_child(missile)
+					var missile_pos = missile.get_pos()
+					if i == 0:
+						missile_pos.x = player_pos.x - FIRE2_X_SHIFT
+					else:
+						missile_pos.x = player_pos.x + FIRE2_X_SHIFT
+					missile_pos.y = player_pos.y - FIRE1_Y_SHIFT
+					missile.set_pos(missile_pos)
+					var norm_vector = Vector2(sin(deg2rad(missile_angle)),-cos(deg2rad(missile_angle)))
+					missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+			if structure_points > 4 and fire3_alarm <0:
+				fire3_alarm = FIRE3_RATE
+				#tertiary fire mode enabled !!!!
+				var i
+				for i in range(2):
+					var missile_angle = 0
+					if i == 0:
+						missile_angle = 325
+					elif i == 1:
+						missile_angle = 35
+					var missile = MISSILE_INSTANCE.instance()
+					get_tree().get_root().add_child(missile)
+					var missile_pos = missile.get_pos()
+					if i == 0:
+						missile_pos.x = player_pos.x - FIRE3_X_SHIFT
+					else:
+						missile_pos.x = player_pos.x + FIRE3_X_SHIFT
+					missile_pos.y = player_pos.y
+					missile.set_pos(missile_pos)
+					if i == 0:
+						var norm_vector = Vector2(sin(deg2rad(missile_angle)),-cos(deg2rad(missile_angle)))
+						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+					else:
+						var norm_vector = Vector2(-sin(deg2rad(missile_angle)),-cos(deg2rad(missile_angle)))
+						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+					missile.mad_dog_mode = true
+					if i == 0:
+						missile.amp_up= true
+					else:
+						missile.amp_up= false
 	
 	if structure_points < 1 and death == false:
 		up_direction = false

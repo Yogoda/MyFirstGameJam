@@ -38,6 +38,9 @@ func _on_area_enter(other):
 
 	if other.is_in_group("player"):
 		if other.invicible == false:
-			other.structure_points -= 1
+			if other.structure_points > 3:#lose all power ups
+				other.structure_points = 3
+			else:
+				other.structure_points -= 1
 			queue_free()
 		

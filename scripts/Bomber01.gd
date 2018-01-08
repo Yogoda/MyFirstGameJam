@@ -7,6 +7,7 @@ const HIT_SCORE = 50
 const KILL_SCORE = 250
 const X_MARGIN = 40 #edge limits
 const MISSILE_SPEED = 150
+const POWER_UP_DROP_RATE = 6
 var ini = true
 var carrier_informed = false
 var up_direction = false
@@ -29,6 +30,7 @@ const SHIP1_INSTANCE = preload("res://instance/Ships/Ship2.tscn")
 const SHIP2_INSTANCE = preload("res://instance/Ships/Ship4.tscn")
 const SHIP3_INSTANCE = preload("res://instance/Ships/Ship5.tscn")
 const SHIP4_INSTANCE = preload("res://instance/Ships/Ship6.tscn")
+const POWER_UP_INSTANCE = preload("res://instance/Power_Up.tscn")
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -44,7 +46,7 @@ func _ready():
 	
 func _fixed_process(delta):
 
-	if death == false and fire_mode == 3 or fire_mode == 4:
+	if death == false and (fire_mode == 3 or fire_mode == 4):
 		rotate(0.1)
 	
 func _process(delta):
@@ -122,6 +124,16 @@ func _process(delta):
 			
 		if hp < 1 and death == false:
 			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
+			var i = randi()%POWER_UP_DROP_RATE
+			if i == 0:
+				#create a power up
+				var power_up = POWER_UP_INSTANCE.instance()
+				get_tree().get_root().add_child(power_up)
+				var power_up_pos = power_up.get_pos()
+				power_up_pos.x = ship_pos.x
+				power_up_pos.y = ship_pos.y
+				power_up.set_pos(power_up_pos)
+				power_up.speed = VERTICAL_SPEED
 			death = true
 		
 		#shooting

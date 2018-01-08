@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Scenes/World.gd" type="Script" id=1]
 [ext_resource path="res://World.tres" type="Environment" id=2]
 [ext_resource path="res://instance/Overmind.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Score.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Level.gd" type="Script" id=5]
-[ext_resource path="res://instance/Ships/Ship2.tscn" type="PackedScene" id=6]
-[ext_resource path="res://instance/Ships/Ship1.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Theme" id=1]
 
@@ -118,45 +116,4 @@ lines_skipped = 0
 max_lines_visible = -1
 script/script = ExtResource( 5 )
 
-[node name="Model" parent="." instance=ExtResource( 6 )]
 
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
-
-[node name="Model 2" parent="." instance=ExtResource( 7 )]
-
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
-
-[node name="MeshInstance" parent="Model 2"]
-
-material/0 = null
-
-[node name="MeshInstance3" parent="Model 2"]
-
-material/0 = null
-
-[node name="MeshInstance4" parent="Model 2"]
-
-material/0 = null
-
-[node name="RigidBody 2" parent="Model 2"]
-
-material/0 = null
-
-[node name="RigidBody 3" parent="Model 2"]
-
-material/0 = null
-
-[node name="MeshInstance 2" parent="Model 2"]
-
-material/0 = null
-
-[node name="MeshInstance 3" parent="Model 2"]
-
-material/0 = null
-
-[node name="MeshInstance 4" parent="Model 2"]
-
-material/0 = null
-
-
-[editable path="Model 2"]
