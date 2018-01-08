@@ -8,8 +8,8 @@
 [ext_resource path="res://instance/Blocks/block_4x1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://instance/Blocks/Materials/black.tres" type="Material" id=7]
 [ext_resource path="res://instance/Blocks/block_4x2.tscn" type="PackedScene" id=8]
-[ext_resource path="res://instance/Blocks/Materials/green.tres" type="Material" id=9]
-[ext_resource path="res://instance/Blocks/block_3x2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://instance/Blocks/block_3x2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://instance/Blocks/Materials/blue.tres" type="Material" id=10]
 [ext_resource path="res://instance/Blocks/block_6x2.tscn" type="PackedScene" id=11]
 
 [node name="Model" type="Spatial"]
@@ -68,7 +68,7 @@ material/0 = ExtResource( 7 )
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 visibility/visible = false
-material/0 = ExtResource( 9 )
+material/0 = ExtResource( 7 )
 
 [node name="4x2 2" parent="." instance=ExtResource( 8 )]
 
@@ -76,39 +76,39 @@ transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
 visibility/visible = false
 material/0 = ExtResource( 7 )
 
-[node name="3x2" parent="." instance=ExtResource( 10 )]
+[node name="3x2" parent="." instance=ExtResource( 9 )]
 
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 0 )
-material/0 = ExtResource( 9 )
+material/0 = ExtResource( 10 )
 
-[node name="3x2 2" parent="." instance=ExtResource( 10 )]
+[node name="3x2 2" parent="." instance=ExtResource( 9 )]
 
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 0, 0 )
-material/0 = ExtResource( 9 )
+material/0 = ExtResource( 10 )
 
 [node name="2x6" parent="." instance=ExtResource( 11 )]
 
-material/0 = ExtResource( 9 )
+material/0 = ExtResource( 10 )
 
 [node name="2x2" parent="." instance=ExtResource( 2 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3 )
-material/0 = ExtResource( 9 )
+material/0 = ExtResource( 10 )
 
 [node name="2x2 2" parent="." instance=ExtResource( 2 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3 )
-material/0 = ExtResource( 9 )
+material/0 = ExtResource( 10 )
 
 [node name="2x2 3" parent="." instance=ExtResource( 2 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3 )
-material/0 = ExtResource( 9 )
+material/0 = ExtResource( 10 )
 
 [node name="2x2 4" parent="." instance=ExtResource( 2 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3 )
-material/0 = ExtResource( 9 )
+material/0 = ExtResource( 10 )
 
 
 [editable path="RigidBody 3"]
