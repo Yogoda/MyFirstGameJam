@@ -1,7 +1,7 @@
 extends Node2D
 
 const SPEED = 400
-const MISSILE_SPEED = 500
+var missile_speed = 500
 var end_level = false
 var up_direction = false
 var down_direction = false
@@ -17,11 +17,11 @@ var structure_points = 3
 const STRUCTURE_POINTS_MAX = 5 #max level
 var lives = 3
 var invicible = true
-const FIRE1_RATE = 0.25
+const FIRE1_RATE = 0.22
 const FIRE1_Y_SHIFT = 20
-const FIRE2_RATE = 0.75
+const FIRE2_RATE = 0.80
 const FIRE2_X_SHIFT = 20
-const FIRE3_RATE = 1.5
+const FIRE3_RATE = 1.7
 const FIRE3_X_SHIFT = 30
 var fire1_alarm = 0
 var fire2_alarm = 0
@@ -158,9 +158,9 @@ func _process(delta):
 				for i in range(2):
 					var missile_angle = 0
 					if i == 0:
-						missile_angle = 350
+						missile_angle = 355
 					elif i == 1:
-						missile_angle = 10
+						missile_angle = 5
 					var missile = MISSILE_INSTANCE.instance()
 					get_tree().get_root().add_child(missile)
 					var missile_pos = missile.get_pos()
@@ -171,17 +171,18 @@ func _process(delta):
 					missile_pos.y = player_pos.y - FIRE1_Y_SHIFT
 					missile.set_pos(missile_pos)
 					var norm_vector = Vector2(sin(deg2rad(missile_angle)),-cos(deg2rad(missile_angle)))
-					missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+					missile.velocity = (Vector2(norm_vector.x*missile_speed,norm_vector.y*missile_speed))
 			if structure_points > 4 and fire3_alarm <0:
 				fire3_alarm = FIRE3_RATE
 				#tertiary fire mode enabled !!!!
 				var i
 				for i in range(2):
 					var missile_angle = 0
+					var new_missile_speed = round(2*missile_speed/3)
 					if i == 0:
-						missile_angle = 325
+						missile_angle = 315
 					elif i == 1:
-						missile_angle = 35
+						missile_angle = 45
 					var missile = MISSILE_INSTANCE.instance()
 					get_tree().get_root().add_child(missile)
 					var missile_pos = missile.get_pos()
@@ -193,10 +194,10 @@ func _process(delta):
 					missile.set_pos(missile_pos)
 					if i == 0:
 						var norm_vector = Vector2(sin(deg2rad(missile_angle)),-cos(deg2rad(missile_angle)))
-						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+						missile.velocity = (Vector2(norm_vector.x*new_missile_speed,norm_vector.y*new_missile_speed))
 					else:
 						var norm_vector = Vector2(-sin(deg2rad(missile_angle)),-cos(deg2rad(missile_angle)))
-						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+						missile.velocity = (Vector2(norm_vector.x*new_missile_speed,norm_vector.y*new_missile_speed))
 					missile.mad_dog_mode = true
 					if i == 0:
 						missile.amp_up= true

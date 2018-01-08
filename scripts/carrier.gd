@@ -31,7 +31,8 @@ func _process(delta):
 				get_tree().get_root().add_child(ship)
 				ship.carrier = self
 				if ship_level != 0:
-					ship.fire_mode = ship_num%ship_level
+					var new_ship_level = randi()%ship_level#ship_num%ship_level
+					ship.fire_mode = new_ship_level
 				else:
 					ship.fire_mode = 0
 				var ship_pos = ship.get_pos()

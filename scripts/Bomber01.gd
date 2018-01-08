@@ -55,25 +55,31 @@ func _process(delta):
 		if fire_mode == 0:
 			var Model = SHIP0_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
+			hp = 5
+			
 		if fire_mode == 1:
 			var Model = SHIP1_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
+			hp = 6
 			
 		if fire_mode == 2:
 			var Model = SHIP2_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
 			left_direction = false
 			right_direction = false
+			hp = 10
 			
 		if fire_mode == 3:
 			var Model = SHIP3_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
-			fire1_rate = 0.3
+			fire1_rate = 0.4
+			hp = 8
 			
 		if fire_mode == 4:
 			var Model = SHIP4_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)	
-			fire1_rate = 0.4
+			fire1_rate = 0.5
+			hp = 7
 		ini = false
 	#update alarms
 	fire1_alarm -= delta

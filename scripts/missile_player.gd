@@ -1,12 +1,12 @@
 extends Area2D
 
 var speed = 500
-const SCREEN_MARGIN = 20
+const SCREEN_MARGIN = 8
 var velocity = Vector2(0,-speed)
 var mad_dog_mode = false
 var amplitude = 0
 var amp_up = false
-const MAX_AMPLITUDE  = 2
+const MAX_AMPLITUDE  = 0.6
 
 var destroy = false
 
@@ -31,8 +31,8 @@ func _process(delta):
 		missile_pos.x += velocity.x * delta
 		missile_pos.y += velocity.y *delta
 	else:
-		missile_pos.x += velocity.x*sin(amplitude) * delta
-		missile_pos.y += velocity.y * cos(amplitude)*delta
+		missile_pos.x += velocity.x*sin(amplitude)*delta
+		missile_pos.y += velocity.y*cos(amplitude)*delta
 		
 	set_pos(missile_pos)
 		
