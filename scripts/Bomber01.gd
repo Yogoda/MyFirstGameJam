@@ -19,7 +19,7 @@ const MISSILE_ANGLE_SPEED = 80
 var hp = 5
 var death = false
 var death_duration = 0.5
-var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is 1 missile rotating around center, 3 is 4 missiles rotating around center
+var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is two missiles to the diagonals, 3 is 1 missile rotating around center, 4 is 4 missiles rotating around center
 var fire1_rate = 0.8
 const FIRE1_SHIFT = 20
 var fire1_alarm = 0
@@ -28,6 +28,7 @@ const SHIP0_INSTANCE = preload("res://instance/Ships/Ship1.tscn")
 const SHIP1_INSTANCE = preload("res://instance/Ships/Ship2.tscn")
 const SHIP2_INSTANCE = preload("res://instance/Ships/Ship4.tscn")
 const SHIP3_INSTANCE = preload("res://instance/Ships/Ship5.tscn")
+const SHIP4_INSTANCE = preload("res://instance/Ships/Ship6.tscn")
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -43,7 +44,7 @@ func _ready():
 	
 func _fixed_process(delta):
 
-	if death == false and fire_mode == 2 or fire_mode == 3:
+	if death == false and fire_mode == 3 or fire_mode == 4:
 		rotate(0.1)
 	
 func _process(delta):
@@ -55,12 +56,20 @@ func _process(delta):
 		if fire_mode == 1:
 			var Model = SHIP1_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
+			
 		if fire_mode == 2:
 			var Model = SHIP2_INSTANCE.instance()
-			get_node("25D Model").add_child(Model)	
-			fire1_rate = 0.3
+			get_node("25D Model").add_child(Model)
+			left_direction = false
+			right_direction = false
+			
 		if fire_mode == 3:
 			var Model = SHIP3_INSTANCE.instance()
+			get_node("25D Model").add_child(Model)
+			fire1_rate = 0.3
+			
+		if fire_mode == 4:
+			var Model = SHIP4_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)	
 			fire1_rate = 0.4
 		ini = false
@@ -154,6 +163,25 @@ func _process(delta):
 					missile.set_pos(missile_pos)
 					missile.velocity = (Vector2(MISSILE_SPEED,0))
 		elif fire_mode == 2:
+			#spawns one missile to each sides at front at a 90° angle
+			var i
+			for i in range(4):
+				if i == 0:
+					missile_angle = 335
+				elif i == 1:
+					missile_angle = 25
+				else:
+					missile_angle = 0
+				var missile = MISSILE_INSTANCE.instance()
+				get_tree().get_root().add_child(missile)
+				var missile_pos = missile.get_pos()
+				missile_pos.x = ship_pos.x
+				missile_pos.y = ship_pos.y
+				missile.set_pos(missile_pos)
+				var norm_vector = Vector2(sin(deg2rad(missile_angle)),cos(deg2rad(missile_angle)))
+				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+			
+		elif fire_mode == 3:
 			#spawn one missile rotating around axis
 				var missile = MISSILE_INSTANCE.instance()
 				get_tree().get_root().add_child(missile)
@@ -163,7 +191,7 @@ func _process(delta):
 				missile.set_pos(missile_pos)
 				var norm_vector = Vector2(sin(deg2rad(missile_angle)),cos(deg2rad(missile_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-		elif fire_mode == 3:
+		elif fire_mode == 4:
 			#rotating missiles from 4 directions - rotating. Hell yeah !!
 			var i
 			var new_angle = missile_angle
