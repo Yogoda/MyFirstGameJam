@@ -30,13 +30,20 @@ const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
 
 func _ready():
 	set_process(true)
+	set_fixed_process(true)
 	var i = randi()%2
 	if i == 0:
 		left_direction = true
 	else:
 		right_direction = true
 	
+func _fixed_process(delta):
+
+	if death == false:
+		rotate(0.1)
+	
 func _process(delta):
+	
 	if ini == true:
 		if fire_mode == 2:
 			fire1_rate = 0.3
