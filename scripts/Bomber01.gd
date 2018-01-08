@@ -24,6 +24,10 @@ var fire1_rate = 0.8
 const FIRE1_SHIFT = 20
 var fire1_alarm = 0
 const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
+const SHIP0_INSTANCE = preload("res://instance/Ships/Ship1.tscn")
+const SHIP1_INSTANCE = preload("res://instance/Ships/Ship2.tscn")
+const SHIP2_INSTANCE = preload("res://instance/Ships/Ship4.tscn")
+const SHIP3_INSTANCE = preload("res://instance/Ships/Ship5.tscn")
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -39,15 +43,25 @@ func _ready():
 	
 func _fixed_process(delta):
 
-	if death == false:
+	if death == false and fire_mode == 2 or fire_mode == 3:
 		rotate(0.1)
 	
 func _process(delta):
 	
 	if ini == true:
+		if fire_mode == 0:
+			var Model = SHIP0_INSTANCE.instance()
+			get_node("25D Model").add_child(Model)
+		if fire_mode == 1:
+			var Model = SHIP1_INSTANCE.instance()
+			get_node("25D Model").add_child(Model)
 		if fire_mode == 2:
+			var Model = SHIP2_INSTANCE.instance()
+			get_node("25D Model").add_child(Model)	
 			fire1_rate = 0.3
 		if fire_mode == 3:
+			var Model = SHIP3_INSTANCE.instance()
+			get_node("25D Model").add_child(Model)	
 			fire1_rate = 0.4
 		ini = false
 	#update alarms
