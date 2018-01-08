@@ -165,13 +165,11 @@ func _process(delta):
 		elif fire_mode == 2:
 			#spawns one missile to each sides at front at a 90° angle
 			var i
-			for i in range(4):
+			for i in range(2):
 				if i == 0:
 					missile_angle = 335
 				elif i == 1:
 					missile_angle = 25
-				else:
-					missile_angle = 0
 				var missile = MISSILE_INSTANCE.instance()
 				get_tree().get_root().add_child(missile)
 				var missile_pos = missile.get_pos()
@@ -182,14 +180,19 @@ func _process(delta):
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
 			
 		elif fire_mode == 3:
-			#spawn one missile rotating around axis
+			#spawn two missile rotating around axis
+			var i
+			var new_angle = missile_angle
+			for i in range(2):
+				if i == 1:
+					new_angle = missile_angle + 180
 				var missile = MISSILE_INSTANCE.instance()
 				get_tree().get_root().add_child(missile)
 				var missile_pos = missile.get_pos()
 				missile_pos.x = ship_pos.x
 				missile_pos.y = ship_pos.y
 				missile.set_pos(missile_pos)
-				var norm_vector = Vector2(sin(deg2rad(missile_angle)),cos(deg2rad(missile_angle)))
+				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
 		elif fire_mode == 4:
 			#rotating missiles from 4 directions - rotating. Hell yeah !!

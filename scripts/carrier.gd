@@ -7,7 +7,7 @@ var overmind
 const BOMBER01_PATH = "res://instance/Bomber01.tscn"
 var ship_type = "Bomber01"
 var ship_level = 0
-var ship_max = 6
+var ship_max = 8
 var ship_num = 0
 var ship_destroyed = 0
 var ship_sim_max = 4 #number of spawner that are allowed simultaneously

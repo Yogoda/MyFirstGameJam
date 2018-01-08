@@ -1,6 +1,6 @@
 extends Node2D
 
-const MAX_LEVEL = 5 #number of game levels
+const MAX_LEVEL = 8 #number of game levels
 var current_level = 1
 var level_status = "starting"
 const CARRIER_INSTANCE = preload("res://instance/Carrier.tscn")
@@ -82,13 +82,13 @@ func _process(delta):
 				level_spawner_sim_max = 3
 				ship_level = 3
 			if current_level == 7:
-				level_spawner_max = 4
-				level_spawner_sim_max = 2
+				level_spawner_max = 6
+				level_spawner_sim_max = 3
 				ship_level = 4
 			if current_level == 8:
 				level_spawner_max = 6
 				level_spawner_sim_max = 3
-				ship_level = 4
+				ship_level = 5
 				
 		elif level_status == "ending":
 			if current_level < MAX_LEVEL:
