@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var ship = get_node("Model")
+var ship
 onready var camera = get_node("/root/World/Camera")
 
 var speed = 4
@@ -16,9 +16,9 @@ func set_ship_position():
 	ship.set_rotation(Vector3(0,get_parent().get_rot(),0))
 
 func _ready():
-	
+
 	set_process(true)
 
 func _process(delta):
-
+	ship = get_child(0)
 	set_ship_position()

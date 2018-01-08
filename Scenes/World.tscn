@@ -126,5 +126,37 @@ transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
 
+[node name="MeshInstance" parent="Model 2"]
+
+material/0 = null
+
+[node name="MeshInstance3" parent="Model 2"]
+
+material/0 = null
+
+[node name="MeshInstance4" parent="Model 2"]
+
+material/0 = null
+
+[node name="RigidBody 2" parent="Model 2"]
+
+material/0 = null
+
+[node name="RigidBody 3" parent="Model 2"]
+
+material/0 = null
+
+[node name="MeshInstance 2" parent="Model 2"]
+
+material/0 = null
+
+[node name="MeshInstance 3" parent="Model 2"]
+
+material/0 = null
+
+[node name="MeshInstance 4" parent="Model 2"]
+
+material/0 = null
+
 
 [editable path="Model 2"]
