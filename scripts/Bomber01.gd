@@ -8,6 +8,7 @@ const KILL_SCORE = 250
 const X_MARGIN = 40 #edge limits
 const MISSILE_SPEED = 150
 const POWER_UP_DROP_RATE = 6
+const SO_SHOOT_LVL = 0.3
 var ini = true
 var carrier_informed = false
 var up_direction = false
@@ -130,7 +131,18 @@ func _process(delta):
 			
 		if hp < 1 and death == false:
 			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
-			var i = randi()%POWER_UP_DROP_RATE
+			#sound of explosion
+			var i = randi()%4
+			if i == 0:
+				get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion")
+			elif i == 1:
+				get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion3")
+			elif i == 2:
+				get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion4")
+			else:
+				get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion5")
+				
+			i = randi()%POWER_UP_DROP_RATE
 			if i == 0:
 				#create a power up
 				var power_up = POWER_UP_INSTANCE.instance()
@@ -153,6 +165,10 @@ func _process(delta):
 			missile_pos.y = ship_pos.y + FIRE1_SHIFT
 			missile.set_pos(missile_pos)
 			missile.velocity = (Vector2(0,MISSILE_SPEED))
+			if is_visible():
+				var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
+				var so_id = so_player.play("Laser_Shoot2")
+				so_player.set_volume(so_id,SO_SHOOT_LVL)
 		elif fire_mode == 1:
 			#spawn one missile to each sides
 			var i
@@ -180,6 +196,10 @@ func _process(delta):
 					missile_pos.y = ship_pos.y 
 					missile.set_pos(missile_pos)
 					missile.velocity = (Vector2(MISSILE_SPEED,0))
+				if is_visible():
+					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
+					var so_id = so_player.play("Laser_Shoot9")
+					so_player.set_volume(so_id,SO_SHOOT_LVL)
 		elif fire_mode == 2:
 			#spawns one missile to each sides at front at a 90° angle
 			var i
@@ -196,7 +216,10 @@ func _process(delta):
 				missile.set_pos(missile_pos)
 				var norm_vector = Vector2(sin(deg2rad(missile_angle)),cos(deg2rad(missile_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-			
+				if is_visible():
+					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
+					var so_id = so_player.play("Laser_Shoot7")
+					so_player.set_volume(so_id,SO_SHOOT_LVL)
 		elif fire_mode == 3:
 			#spawn two missile rotating around axis
 			var i
@@ -212,6 +235,10 @@ func _process(delta):
 				missile.set_pos(missile_pos)
 				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+				if is_visible():
+					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
+					var so_id = so_player.play("Laser_Shoot6")
+					so_player.set_volume(so_id,SO_SHOOT_LVL)
 		elif fire_mode == 4:
 			#rotating missiles from 4 directions - rotating. Hell yeah !!
 			var i
@@ -226,4 +253,8 @@ func _process(delta):
 				new_angle += 90
 				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+				if is_visible():
+					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
+					var so_id = so_player.play("Laser_Shoot3")
+					so_player.set_volume(so_id,SO_SHOOT_LVL)
 				

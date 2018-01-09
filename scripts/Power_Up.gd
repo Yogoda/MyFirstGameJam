@@ -38,4 +38,5 @@ func _on_area_enter(other):
 	if other.is_in_group("player"):
 		if other.structure_points < other.STRUCTURE_POINTS_MAX:
 			other.structure_points += 1
+			get_tree().get_root().get_node("World").get_node("SoPlayerPowerUp").play("Powerup")
 			queue_free()

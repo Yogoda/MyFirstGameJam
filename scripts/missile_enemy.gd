@@ -42,5 +42,6 @@ func _on_area_enter(other):
 				other.structure_points = 3
 			else:
 				other.structure_points -= 1
+			get_tree().get_root().get_node("World").get_node("SoPlayerHit").play("Hit_Hurt4")
 			queue_free()
 		

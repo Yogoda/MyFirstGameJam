@@ -151,6 +151,8 @@ func _process(delta):
 				missile_pos.x = player_pos.x
 				missile_pos.y = player_pos.y - FIRE1_Y_SHIFT
 				missile.set_pos(missile_pos)
+				get_tree().get_root().get_node("World").get_node("SoPlayerShoot").play("Laser_Shoot1")
+
 			if structure_points > 3 and fire2_alarm <0:
 				fire2_alarm = FIRE2_RATE
 				#secondary fire mode enabled !
@@ -172,6 +174,10 @@ func _process(delta):
 					missile.set_pos(missile_pos)
 					var norm_vector = Vector2(sin(deg2rad(missile_angle)),-cos(deg2rad(missile_angle)))
 					missile.velocity = (Vector2(norm_vector.x*missile_speed,norm_vector.y*missile_speed))
+					#play sound
+					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerShoot")
+					var so_id = so_player.play("Laser_Shoot4")
+					so_player.set_volume(so_id,0.5)
 			if structure_points > 4 and fire3_alarm <0:
 				fire3_alarm = FIRE3_RATE
 				#tertiary fire mode enabled !!!!
@@ -203,11 +209,16 @@ func _process(delta):
 						missile.amp_up= true
 					else:
 						missile.amp_up= false
+					#play sound
+					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerShoot")
+					var so_id = so_player.play("Laser_Shoot5")
+					so_player.set_volume(so_id,0.5)
 	
 	if structure_points < 1 and death == false:
 		up_direction = false
 		down_direction = false
 		left_direction = false
 		right_direction = false
+		get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion2")
 		death = true
 		

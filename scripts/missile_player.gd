@@ -57,4 +57,13 @@ func _on_area_enter(other):
 		if other.death == false:
 			other.hp -= 1
 			get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE
+			#play sound !
+			var i = randi()%3
+			if i == 0:
+				get_tree().get_root().get_node("World").get_node("SoPlayerHit").play("Hit_Hurt")
+			elif i == 1:
+				get_tree().get_root().get_node("World").get_node("SoPlayerHit").play("Hit_Hurt2")
+			else:
+				get_tree().get_root().get_node("World").get_node("SoPlayerHit").play("Hit_Hurt3")
+				
 			queue_free()
