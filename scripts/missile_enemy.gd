@@ -42,6 +42,8 @@ func _on_area_enter(other):
 				other.structure_points = 3
 			else:
 				other.structure_points -= 1
+				
+			other.get_node("25D Model/Model").blink(4)
 			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerHit")
 			var so_id = so_player.play("Hit_Hurt4")
 			so_player.set_volume(so_id,so_level)

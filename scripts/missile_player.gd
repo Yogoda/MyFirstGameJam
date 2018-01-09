@@ -58,6 +58,7 @@ func _on_area_enter(other):
 	if other.is_in_group("enemy"):
 		if other.death == false:
 			other.hp -= 1
+			other.get_node("25D Model/Model").blink(1)
 			get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE
 			#play sound !
 			var i = randi()%3
