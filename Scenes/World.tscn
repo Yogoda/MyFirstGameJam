@@ -382,7 +382,7 @@ default/chorus_send = 0.0
 
 [node name="SoPlayerEnemyShoot" type="SamplePlayer" parent="."]
 
-config/polyphony = 1
+config/polyphony = 10
 config/samples = SubResource( 6 )
 default/volume_db = 0.0
 default/pitch_scale = 1.0

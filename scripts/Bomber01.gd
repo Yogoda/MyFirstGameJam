@@ -25,6 +25,7 @@ var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is two 
 var fire1_rate = 0.8
 const FIRE1_SHIFT = 20
 var fire1_alarm = 0
+var so_laser = "Laser_Shoot2"
 const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
 const SHIP0_INSTANCE = preload("res://instance/Ships/Ship1.tscn")
 const SHIP1_INSTANCE = preload("res://instance/Ships/Ship2.tscn")
@@ -57,11 +58,13 @@ func _process(delta):
 			var Model = SHIP0_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
 			hp = 5
+			so_laser = "Laser_Shoot2"
 			
 		if fire_mode == 1:
 			var Model = SHIP1_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
 			hp = 6
+			so_laser = "Laser_Shoot9"
 			
 		if fire_mode == 2:
 			var Model = SHIP2_INSTANCE.instance()
@@ -69,18 +72,22 @@ func _process(delta):
 			left_direction = false
 			right_direction = false
 			hp = 10
+			so_laser = "Laser_Shoot7"
 			
 		if fire_mode == 3:
 			var Model = SHIP3_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
 			fire1_rate = 0.4
 			hp = 8
+			so_laser = "Laser_Shoot6"
 			
 		if fire_mode == 4:
 			var Model = SHIP4_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)	
 			fire1_rate = 0.5
 			hp = 7
+			so_laser = "Laser_Shoot3"
+			
 		ini = false
 	#update alarms
 	fire1_alarm -= delta
@@ -165,10 +172,6 @@ func _process(delta):
 			missile_pos.y = ship_pos.y + FIRE1_SHIFT
 			missile.set_pos(missile_pos)
 			missile.velocity = (Vector2(0,MISSILE_SPEED))
-			if is_visible():
-				var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
-				var so_id = so_player.play("Laser_Shoot2")
-				so_player.set_volume(so_id,SO_SHOOT_LVL)
 		elif fire_mode == 1:
 			#spawn one missile to each sides
 			var i
@@ -196,10 +199,6 @@ func _process(delta):
 					missile_pos.y = ship_pos.y 
 					missile.set_pos(missile_pos)
 					missile.velocity = (Vector2(MISSILE_SPEED,0))
-				if is_visible():
-					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
-					var so_id = so_player.play("Laser_Shoot9")
-					so_player.set_volume(so_id,SO_SHOOT_LVL)
 		elif fire_mode == 2:
 			#spawns one missile to each sides at front at a 90° angle
 			var i
@@ -216,10 +215,6 @@ func _process(delta):
 				missile.set_pos(missile_pos)
 				var norm_vector = Vector2(sin(deg2rad(missile_angle)),cos(deg2rad(missile_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-				if is_visible():
-					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
-					var so_id = so_player.play("Laser_Shoot7")
-					so_player.set_volume(so_id,SO_SHOOT_LVL)
 		elif fire_mode == 3:
 			#spawn two missile rotating around axis
 			var i
@@ -235,10 +230,7 @@ func _process(delta):
 				missile.set_pos(missile_pos)
 				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-				if is_visible():
-					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
-					var so_id = so_player.play("Laser_Shoot6")
-					so_player.set_volume(so_id,SO_SHOOT_LVL)
+				
 		elif fire_mode == 4:
 			#rotating missiles from 4 directions - rotating. Hell yeah !!
 			var i
@@ -253,8 +245,11 @@ func _process(delta):
 				new_angle += 90
 				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-				if is_visible():
-					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
-					var so_id = so_player.play("Laser_Shoot3")
-					so_player.set_volume(so_id,SO_SHOOT_LVL)
+					
+		#play sound
+		ship_pos = get_pos()
+		if ship_pos.y > get_viewport_rect().pos.y and ship_pos.y < get_viewport_rect().end.y :
+			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
+			var so_id = so_player.play(so_laser)
+			so_player.set_volume(so_id,SO_SHOOT_LVL)
 				
