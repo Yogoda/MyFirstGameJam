@@ -1,5 +1,6 @@
 extends Area2D
 
+var so_level = 0.5
 var speed = 500
 const SCREEN_MARGIN = 8
 var velocity = Vector2(0,-speed)
@@ -11,6 +12,7 @@ const MAX_AMPLITUDE  = 0.6
 var destroy = false
 
 func _ready():
+	so_level = get_tree().get_root().get_node("World").pub_sound_level
 	connect("area_enter",self,"_on_area_enter")
 	set_process(true)
 
@@ -59,11 +61,14 @@ func _on_area_enter(other):
 			get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE
 			#play sound !
 			var i = randi()%3
+			
+			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerHit")
+			var so_id = so_player.play("Hit_Hurt")
 			if i == 0:
-				get_tree().get_root().get_node("World").get_node("SoPlayerHit").play("Hit_Hurt")
+				so_id = so_player.play("Hit_Hurt")
 			elif i == 1:
-				get_tree().get_root().get_node("World").get_node("SoPlayerHit").play("Hit_Hurt2")
+				so_id = so_player.play("Hit_Hurt2")
 			else:
-				get_tree().get_root().get_node("World").get_node("SoPlayerHit").play("Hit_Hurt3")
-				
+				so_id = so_player.play("Hit_Hurt3")
+			so_player.set_volume(so_id,so_level)
 			queue_free()

@@ -21,6 +21,7 @@ const MISSILE_ANGLE_SPEED = 80
 var hp = 5
 var death = false
 var death_duration = 0.5
+var so_level = 0.5
 var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is two missiles to the diagonals, 3 is 1 missile rotating around center, 4 is 4 missiles rotating around center
 var fire1_rate = 0.8
 const FIRE1_SHIFT = 20
@@ -54,6 +55,7 @@ func _fixed_process(delta):
 func _process(delta):
 	
 	if ini == true:
+		so_level = get_tree().get_root().get_node("World").pub_sound_level
 		if fire_mode == 0:
 			var Model = SHIP0_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
@@ -140,15 +142,18 @@ func _process(delta):
 			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
 			#sound of explosion
 			var i = randi()%4
+			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerDeath")
+			var so_id = so_player.play("Explosion")
 			if i == 0:
-				get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion")
+				so_id = so_player.play("Explosion")
 			elif i == 1:
-				get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion3")
+				so_id = so_player.play("Explosion3")
 			elif i == 2:
-				get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion4")
+				so_id = so_player.play("Explosion4")
 			else:
-				get_tree().get_root().get_node("World").get_node("SoPlayerDeath").play("Explosion5")
-				
+				so_id = so_player.play("Explosion5")
+			so_player.set_volume(so_id,so_level)
+			
 			i = randi()%POWER_UP_DROP_RATE
 			if i == 0:
 				#create a power up
@@ -251,5 +256,5 @@ func _process(delta):
 		if ship_pos.y > get_viewport_rect().pos.y and ship_pos.y < get_viewport_rect().end.y :
 			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
 			var so_id = so_player.play(so_laser)
-			so_player.set_volume(so_id,SO_SHOOT_LVL)
+			so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)
 				
