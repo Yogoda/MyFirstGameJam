@@ -1,8 +1,6 @@
 extends ProgressBar
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var text = "!! BRICKS BLASTER READY !!"
 
 func _ready():
 	var position = get_pos()
@@ -12,4 +10,21 @@ func _ready():
 	position.x = get_viewport_rect().pos.x
 	position.y = get_viewport_rect().end.y - size.y
 	set_pos(position)
-	pass
+	
+	var label = get_children()
+	for child in get_children():
+		if child.get_type() == "Label":
+			child.set_pos(position)
+			child.set_size(size)
+	#initialization
+	set_process(true)
+
+func _process(delta):
+	if get_value() == get_max():
+		for child in get_children():
+			if child.get_type() == "Label":
+				child.set_text(text)
+	else:
+		for child in get_children():
+			if child.get_type() == "Label":
+				child.set_text("TEST TEXT")
