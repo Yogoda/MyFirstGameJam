@@ -1,30 +1,31 @@
-extends ProgressBar
+extends Control
 
 var text = "!! BRICKS BLASTER READY !!"
+var text2 = "Bricks Blaster warming ..."
+var ini = true
 
 func _ready():
-	var position = get_pos()
-	var size = get_size()
-	size.width = get_viewport_rect().end.x
-	set_size(size)
-	position.x = get_viewport_rect().pos.x
-	position.y = get_viewport_rect().end.y - size.y
-	set_pos(position)
-	
-	var label = get_children()
-	for child in get_children():
-		if child.get_type() == "Label":
-			child.set_pos(position)
-			child.set_size(size)
 	#initialization
 	set_process(true)
 
 func _process(delta):
-	if get_value() == get_max():
-		for child in get_children():
-			if child.get_type() == "Label":
-				child.set_text(text)
+	var prog_bar = get_node("ProgressBar")
+	var label = get_node("AltAttack_Label")
+	
+	if ini == true:
+		var position
+		var size
+		position = get_pos()
+		size = prog_bar.get_size()
+		size.width = get_viewport_rect().end.x
+		position.x = get_viewport_rect().pos.x
+		position.y = get_viewport_rect().end.y - size.height
+		set_pos(position)
+		prog_bar.set_size(size)
+		label.set_size(size)
+		ini = false
+		
+	if prog_bar.get_value() == prog_bar.get_max():
+		label.set_text(text)
 	else:
-		for child in get_children():
-			if child.get_type() == "Label":
-				child.set_text("TEST TEXT")
+		label.set_text(text2)

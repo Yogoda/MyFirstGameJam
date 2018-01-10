@@ -74,7 +74,7 @@ func _on_area_enter(other):
 			so_player.set_volume(so_id,so_level)
 			
 			#increase the alternate attack progress bar
-			var prog_bar = get_tree().get_root().get_node("World").get_node("AlternateAttack")
+			var prog_bar = get_tree().get_root().get_node("World").get_node("AlternateAttack").get_node("ProgressBar")
 			var prog_bar_value = prog_bar.get_value()
 			prog_bar_value += prog_bar.get_step()
 			prog_bar.set_value(prog_bar_value)

@@ -236,7 +236,7 @@ func _process(delta):
 					so_player.set_volume(so_id,0.5*so_level)
 	#Alternative attack
 	if alt_attack == true:
-		var alt_bar = get_tree().get_root().get_node("World").get_node("AlternateAttack")
+		var alt_bar = get_tree().get_root().get_node("World").get_node("AlternateAttack").get_node("ProgressBar")
 		if alt_bar.get_value() ==alt_bar.get_max():
 			var child
 			for child in get_tree().get_root().get_children():
