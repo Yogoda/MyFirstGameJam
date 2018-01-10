@@ -7,6 +7,12 @@ extends Button
 func _ready():
 	
 	connect("pressed", self, "start_game")
+	set_process_input(true)
+	
+func _input(event):
+	
+	if event.is_action("ui_accept"):
+		start_game()
 	
 func start_game():
 	
