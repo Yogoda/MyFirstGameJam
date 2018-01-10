@@ -72,4 +72,10 @@ func _on_area_enter(other):
 			else:
 				so_id = so_player.play("Hit_Hurt3")
 			so_player.set_volume(so_id,so_level)
+			
+			#increase the alternate attack progress bar
+			var prog_bar = get_tree().get_root().get_node("World").get_node("AlternateAttack")
+			var prog_bar_value = prog_bar.get_value()
+			prog_bar_value += prog_bar.get_step()
+			prog_bar.set_value(prog_bar_value)
 			queue_free()

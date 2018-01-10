@@ -3,6 +3,7 @@ extends Node2D
 const MAX_LEVEL = 5 #number of game levels
 var current_level = 1
 var level_status = "starting"
+var end_game = false
 const CARRIER_INSTANCE = preload("res://instance/Carrier.tscn")
 const PLAYER_INSTANCE = preload("res://instance/Player.tscn")
 const GAME_OVER_INSTANCE = preload("res://instance/Game_over.tscn")
@@ -44,10 +45,11 @@ func _process(delta):
 				var player_ship = PLAYER_INSTANCE.instance()
 				get_tree().get_root().add_child(player_ship)
 			else:
-				if victory == false:
+				if victory == false and end_game == false:
 					game_over = true
 					var game_over_inst = GAME_OVER_INSTANCE.instance()
 					get_tree().get_root().add_child(game_over_inst)
+					end_game = true
 				
 			
 	if alarm_0 < 0:
@@ -118,6 +120,8 @@ func _process(delta):
 						get_tree().get_root().add_child(stage_cleared)
 					else:
 						#VICTORY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-						var game_victory = VICTORY_INSTANCE.instance()
-						get_tree().get_root().add_child(game_victory)
-						victory = true
+						if end_game == false:
+							var game_victory = VICTORY_INSTANCE.instance()
+							get_tree().get_root().add_child(game_victory)
+							victory = true
+							end_game = true

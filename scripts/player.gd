@@ -8,6 +8,7 @@ var up_direction = false
 var down_direction = false
 var left_direction = false
 var right_direction = false
+var alt_attack = false
 var is_shooting = false
 const SCREEN_MARGIN = 20
 var position_initialize = true
@@ -18,6 +19,9 @@ var structure_points = 3
 const STRUCTURE_POINTS_MAX = 5 #max level
 var lives = 3
 var invicible = true
+var hit_invicible = false
+var invici_counter = -1
+const INVICI_COUNT = 0.5
 const FIRE1_RATE = 0.22
 const FIRE1_Y_SHIFT = 20
 const FIRE2_RATE = 0.80
@@ -71,6 +75,11 @@ func _input(event):
 			is_shooting = true
 		if event.is_action_released("ui_accept"):
 			is_shooting = false
+			
+		if event.is_action("ui_select"):
+			alt_attack = true
+		if event.is_action_released("ui_select"):
+			alt_attack = false
 				
 func _process(delta):
 	#update alarms
@@ -85,6 +94,11 @@ func _process(delta):
 	fire3_alarm -= delta
 	if fire3_alarm < 0:
 		fire3_alarm = -1
+		
+	invici_counter -= delta
+	if invici_counter <0:
+		invici_counter = -1
+		hit_invicible = false
 	
 	if death == true:
 		death_duration -= delta
@@ -138,6 +152,9 @@ func _process(delta):
 				up_direction = false
 				player_control = true
 				invicible = false
+				#temporary invicibility "wow that's a lot of i's! but I think indivisibility beats it :P
+				hit_invicible = true
+				invici_counter = INVICI_COUNT
 				
 	set_pos(player_pos)
 	
@@ -217,7 +234,21 @@ func _process(delta):
 					var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerShoot")
 					var so_id = so_player.play("Laser_Shoot5")
 					so_player.set_volume(so_id,0.5*so_level)
-	
+	#Alternative attack
+	if alt_attack == true:
+		var alt_bar = get_tree().get_root().get_node("World").get_node("AlternateAttack")
+		if alt_bar.get_value() ==alt_bar.get_max():
+			var child
+			for child in get_tree().get_root().get_children():
+				if child.is_in_group("missile_enemy"):
+					#destroy enemy missiles
+					child.queue_free()
+			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEvents")
+			var so_id = so_player.play("AltAttack")
+			so_player.set_volume(so_id,so_level)
+			alt_bar.set_value(0)
+			
+			
 	if structure_points < 1 and death == false:
 		up_direction = false
 		down_direction = false

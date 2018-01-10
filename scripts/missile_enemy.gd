@@ -37,15 +37,20 @@ func _process(delta):
 func _on_area_enter(other):
 
 	if other.is_in_group("player"):
-		if other.invicible == false:
+		if other.invicible == false and other.hit_invicible == false:
 			if other.structure_points > 3:#lose all power ups
 				other.structure_points = 3
 			else:
 				other.structure_points -= 1
+			#temporary invicibility if hit
+			other.hit_invicible = true
+			other.invici_counter = other.INVICI_COUNT
 				
 			other.get_node("25D Model/Model").blink(4)
 			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerHit")
 			var so_id = so_player.play("Hit_Hurt4")
 			so_player.set_volume(so_id,so_level)
+			queue_free()
+		elif other.hit_invicible == true:
 			queue_free()
 		
