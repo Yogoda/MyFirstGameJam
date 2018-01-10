@@ -6,6 +6,8 @@ onready var camera = get_node("/root/World/Camera")
 var speed = 4
 var camDist = 100;
 
+export var setRotation = true
+
 func set_ship_position():
 
 	ship.set_hidden(false)
@@ -13,7 +15,9 @@ func set_ship_position():
 	var ray_direction = camera.project_ray_normal(get_parent().get_pos())
 	
 	ship.set_translation(ray_origin + ray_direction * camDist)
-	ship.set_rotation(Vector3(0,get_parent().get_rot(),0))
+	
+	if setRotation:
+		ship.set_rotation(Vector3(0,get_parent().get_rot(),0))
 
 func _ready():
 
