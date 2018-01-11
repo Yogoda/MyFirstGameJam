@@ -255,6 +255,8 @@ func _process(delta):
 		ship_pos = get_pos()
 		if ship_pos.y > get_viewport_rect().pos.y and ship_pos.y < get_viewport_rect().end.y :
 			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
-#			var so_id = so_player.play(so_laser)
-#			so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)
-				
+			
+			so_player = get_node("Sounds")
+
+			var so_id = so_player.play(so_laser)
+			so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)
