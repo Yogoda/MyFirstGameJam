@@ -85,7 +85,7 @@ func _process(delta):
 			
 		if fire_mode == 4:
 			var Model = SHIP4_INSTANCE.instance()
-			get_node("25D Model").add_child(Model)	
+			get_node("25D Model").add_child(Model)
 			fire1_rate = 0.5
 			hp = 7
 			so_laser = "Laser_Shoot3"
@@ -142,7 +142,7 @@ func _process(delta):
 			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
 			#sound of explosion
 			var i = randi()%4
-			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerDeath")
+			var so_player = get_node("SoPlayerDeath")
 			var so_id = so_player.play("Explosion")
 			if i == 0:
 				so_id = so_player.play("Explosion")
@@ -196,12 +196,12 @@ func _process(delta):
 					missile.velocity = (Vector2(0,-MISSILE_SPEED))
 				if i == 2: #missile goes left
 					missile_pos.x = ship_pos.x - FIRE1_SHIFT
-					missile_pos.y = ship_pos.y 
+					missile_pos.y = ship_pos.y
 					missile.set_pos(missile_pos)
 					missile.velocity = (Vector2(-MISSILE_SPEED,0))
 				if i == 3: #missile goes right
 					missile_pos.x = ship_pos.x + FIRE1_SHIFT
-					missile_pos.y = ship_pos.y 
+					missile_pos.y = ship_pos.y
 					missile.set_pos(missile_pos)
 					missile.velocity = (Vector2(MISSILE_SPEED,0))
 		elif fire_mode == 2:
@@ -254,9 +254,7 @@ func _process(delta):
 		#play sound
 		ship_pos = get_pos()
 		if ship_pos.y > get_viewport_rect().pos.y and ship_pos.y < get_viewport_rect().end.y :
-			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEnemyShoot")
 			
-			so_player = get_node("Sounds")
-
+			var so_player = get_node("Sounds")
 			var so_id = so_player.play(so_laser)
 			so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)

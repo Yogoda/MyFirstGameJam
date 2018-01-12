@@ -8,14 +8,35 @@ var mad_dog_mode = false
 var amplitude = 0
 var amp_up = false
 const MAX_AMPLITUDE  = 0.6
+const EXPLOSION_INSTANCE = preload("res://instance/Explosion.tscn")
+
+const MISSILE_TYPE_1 = 1
+const MISSILE_TYPE_2 = 2
+const MISSILE_TYPE_3 = 3
 
 var destroy = false
+
+func play_sound(missile_type):
+
+	var so_player = get_node("SoPlayerShoot")
+	var so_id 
+	
+	if missile_type == MISSILE_TYPE_1:
+		so_id = so_player.play("Laser_Shoot1")
+		so_player.set_volume(so_id,so_level)
+	elif missile_type == MISSILE_TYPE_2:
+		so_id = so_player.play("Laser_Shoot4")
+		so_player.set_volume(so_id,0.5*so_level)
+	elif missile_type == MISSILE_TYPE_2:
+		so_id = so_player.play("Laser_Shoot5")
+		so_player.set_volume(so_id,0.5*so_level)
+		
 
 func _ready():
 	so_level = get_tree().get_root().get_node("World").pub_sound_level
 	connect("area_enter",self,"_on_area_enter")
 	set_process(true)
-
+	
 func _process(delta):
 	if mad_dog_mode == true:
 		if amp_up == false:
@@ -60,18 +81,11 @@ func _on_area_enter(other):
 			other.hp -= 1
 			other.get_node("25D Model/Model").blink(1)
 			get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE
-			#play sound !
-			var i = randi()%3
 			
-			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerHit")
-			var so_id = so_player.play("Hit_Hurt")
-			if i == 0:
-				so_id = so_player.play("Hit_Hurt")
-			elif i == 1:
-				so_id = so_player.play("Hit_Hurt2")
-			else:
-				so_id = so_player.play("Hit_Hurt3")
-			so_player.set_volume(so_id,so_level)
+			#create explosion
+			var explosion = EXPLOSION_INSTANCE.instance()
+			get_tree().get_root().add_child(explosion)
+			explosion.set_pos(get_pos())
 			
 			#increase the alternate attack progress bar
 			var prog_bar = get_tree().get_root().get_node("World").get_node("AlternateAttack").get_node("ProgressBar")

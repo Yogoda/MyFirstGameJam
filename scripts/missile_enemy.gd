@@ -5,11 +5,12 @@ const SCREEN_MARGIN = 20
 var so_level = 0.5
 var destroy = false
 var velocity = Vector2(0,SPEED)
+const EXPLOSION_INSTANCE = preload("res://instance/Explosion.tscn")
 
 func _ready():
 	connect("area_enter",self,"_on_area_enter")
 	set_process(true)
-	so_level = get_tree().get_root().get_node("World").pub_sound_level
+	
 func _process(delta):
 
 	#step events
@@ -47,9 +48,12 @@ func _on_area_enter(other):
 			other.invici_counter = other.INVICI_COUNT
 				
 			other.get_node("25D Model/Model").blink(4)
-			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerHit")
-			var so_id = so_player.play("Hit_Hurt4")
-			so_player.set_volume(so_id,so_level)
+			
+			#create explosion
+			var explosion = EXPLOSION_INSTANCE.instance()
+			get_tree().get_root().add_child(explosion)
+			explosion.set_pos(get_pos())
+
 			queue_free()
 		elif other.hit_invicible == true:
 			queue_free()

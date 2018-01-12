@@ -1,8 +1,5 @@
 extends Spatial
 
-var explForce = 0.1
-var rotSpeed = 4;
-
 func _init():
 
 	set_hidden(true)
