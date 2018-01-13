@@ -33,7 +33,7 @@ const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
 const SHIP0_INSTANCE = preload("res://instance/Ships/Ship1.tscn")
 const SHIP1_INSTANCE = preload("res://instance/Ships/Ship2.tscn")
 const SHIP2_INSTANCE = preload("res://instance/Ships/Ship4.tscn")
-const SHIP3_INSTANCE = preload("res://instance/Ships/Ship5.tscn")
+const SHIP3_INSTANCE = preload("res://instance/Ships/Ship7.tscn")
 const SHIP4_INSTANCE = preload("res://instance/Ships/Ship8.tscn")
 const POWER_UP_INSTANCE = preload("res://instance/Power_Up.tscn")
 # class member variables go here, for example:
