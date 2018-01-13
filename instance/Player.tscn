@@ -61,6 +61,8 @@ visibility/visible = false
 
 [node name="3" parent="25D Model/Models" instance=ExtResource( 7 )]
 
+visibility/visible = false
+
 [node name="4" parent="25D Model/Models" instance=ExtResource( 8 )]
 
 visibility/visible = false

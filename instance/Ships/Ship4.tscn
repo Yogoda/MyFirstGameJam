@@ -6,10 +6,11 @@
 [ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://instance/Blocks/Materials/green.tres" type="Material" id=5]
 [ext_resource path="res://instance/Blocks/block_4x1.tscn" type="PackedScene" id=6]
-[ext_resource path="res://instance/Blocks/Materials/yellow.tres" type="Material" id=7]
+[ext_resource path="res://instance/Blocks/yellow.tres" type="Material" id=7]
 [ext_resource path="res://instance/Blocks/block_1x2.tscn" type="PackedScene" id=8]
 [ext_resource path="res://instance/Blocks/block_2x2o.tscn" type="PackedScene" id=9]
 [ext_resource path="res://instance/Blocks/block_1x2o.tscn" type="PackedScene" id=10]
+
 
 [node name="Model" type="Spatial"]
 

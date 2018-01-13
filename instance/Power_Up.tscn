@@ -1,14 +1,17 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://scripts/Power_Up.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/power_up.png" type="Texture" id=2]
 [ext_resource path="res://instance/25D Model.tscn" type="PackedScene" id=3]
 [ext_resource path="res://missile_3d_object.gd" type="Script" id=4]
-[ext_resource path="res://instance/Blocks/block_4x2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://instance/Blocks/block_3x2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://instance/Blocks/Materials/blue.tres" type="Material" id=6]
-[ext_resource path="res://instance/Blocks/Materials/yellow.tres" type="Material" id=7]
-[ext_resource path="res://instance/Blocks/Materials/white.tres" type="Material" id=8]
-[ext_resource path="res://instance/Blocks/Materials/black.tres" type="Material" id=9]
+[ext_resource path="res://instance/Blocks/block_4x1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://instance/Blocks/Materials/yellow.tres" type="Material" id=8]
+[ext_resource path="res://instance/Blocks/block_1x2o.tscn" type="PackedScene" id=9]
+[ext_resource path="res://instance/Blocks/Materials/grey.tres" type="Material" id=10]
+[ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://instance/Blocks/Materials/white.tres" type="Material" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -49,24 +52,39 @@ set_visiblity = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 4 )
 
-[node name="MeshInstance" parent="25D Model/Spatial" instance=ExtResource( 5 )]
+[node name="MeshInstance 2" parent="25D Model/Spatial" instance=ExtResource( 5 )]
 
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.2, 0 )
 material/0 = ExtResource( 6 )
 
-[node name="MeshInstance2" parent="25D Model/Spatial" instance=ExtResource( 5 )]
+[node name="MeshInstance 3" parent="25D Model/Spatial" instance=ExtResource( 5 )]
 
-transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.37114e-08, 1.2, 1 )
-material/0 = ExtResource( 7 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.2, 0 )
+material/0 = ExtResource( 6 )
 
-[node name="MeshInstance1" parent="25D Model/Spatial" instance=ExtResource( 5 )]
+[node name="MeshInstance" parent="25D Model/Spatial" instance=ExtResource( 7 )]
 
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0 )
+transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1.2, -1 )
 material/0 = ExtResource( 8 )
 
-[node name="MeshInstance2 2" parent="25D Model/Spatial" instance=ExtResource( 5 )]
+[node name="MeshInstance1" parent="25D Model/Spatial" instance=ExtResource( 7 )]
 
-transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.37114e-08, 1.2, -1 )
-material/0 = ExtResource( 9 )
+transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 2 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance 4" parent="25D Model/Spatial" instance=ExtResource( 9 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+material/0 = ExtResource( 10 )
+
+[node name="MeshInstance5" parent="25D Model/Spatial" instance=ExtResource( 9 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1 )
+material/0 = ExtResource( 10 )
+
+[node name="MeshInstance 5" parent="25D Model/Spatial" instance=ExtResource( 11 )]
+
+transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 1 )
+material/0 = ExtResource( 12 )
 
 
