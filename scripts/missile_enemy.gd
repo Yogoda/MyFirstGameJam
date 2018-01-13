@@ -38,23 +38,13 @@ func _process(delta):
 func _on_area_enter(other):
 
 	if other.is_in_group("player"):
-		if other.invicible == false and other.hit_invicible == false:
-			if other.structure_points > 3:#lose all power ups
-				other.structure_points = 3
-			else:
-				other.structure_points -= 1
-			#temporary invicibility if hit
-			other.hit_invicible = true
-			other.invici_counter = other.INVICI_COUNT
-				
-			other.get_node("25D Model/Model").blink(4)
-			
-			#create explosion
-			var explosion = EXPLOSION_INSTANCE.instance()
-			get_tree().get_root().add_child(explosion)
-			explosion.set_pos(get_pos())
+		
+		other.damage(1)
 
-			queue_free()
-		elif other.hit_invicible == true:
-			queue_free()
+		#create explosion
+		var explosion = EXPLOSION_INSTANCE.instance()
+		get_tree().get_root().add_child(explosion)
+		explosion.set_pos(get_pos())
+
+		queue_free()
 		

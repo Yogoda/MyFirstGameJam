@@ -30,7 +30,7 @@ const FIRE1_SHIFT = 20
 var fire1_alarm = 0
 var so_laser = "Laser_Shoot2"
 const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
-const SHIP0_INSTANCE = preload("res://instance/Ships/Ship7.tscn")
+const SHIP0_INSTANCE = preload("res://instance/Ships/Ship1.tscn")
 const SHIP1_INSTANCE = preload("res://instance/Ships/Ship2.tscn")
 const SHIP2_INSTANCE = preload("res://instance/Ships/Ship4.tscn")
 const SHIP3_INSTANCE = preload("res://instance/Ships/Ship7.tscn")
@@ -147,6 +147,7 @@ func _process(delta):
 			if player_ship != null:
 				if player_ship.structure_points < player_ship.STRUCTURE_POINTS_MAX:
 					i = randi()%POWER_UP_DROP_RATE
+					i = 0
 					if i == 0:
 						#create a power up
 						var power_up = POWER_UP_INSTANCE.instance()

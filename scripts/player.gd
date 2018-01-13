@@ -35,6 +35,44 @@ var death = false
 var death_duration = 0.5
 const MISSILE_INSTANCE = preload("res://instance/missile_player.tscn")
 
+var current_model
+
+func update_model():
+	
+	if current_model != null:
+		current_model.set_hidden(true)
+		
+	current_model = get_node("25D Model/Models/" + String(structure_points))
+	current_model.set_hidden(false)
+
+func upgrade(amnt):
+	
+	if structure_points < STRUCTURE_POINTS_MAX:
+		structure_points += amnt
+		update_model()
+		return amnt
+	
+	return 0
+
+func damage(dmg):
+	
+	if invicible == false and hit_invicible == false:
+		
+		if structure_points > 3:#lose all power ups
+			structure_points = 3
+		else:
+			structure_points -= dmg
+		#temporary invicibility if hit
+		hit_invicible = true
+		invici_counter = INVICI_COUNT
+
+		current_model.blink(4)
+		update_model()
+		
+		return dmg
+	
+	return 0
+
 func _ready():
 	#initialize player position
 	var player_pos = get_pos()
@@ -43,6 +81,8 @@ func _ready():
 	set_pos(player_pos)
 	up_direction = true
 	so_level = get_tree().get_root().get_node("World").pub_sound_level
+	
+	update_model()
 	
 	#initialization
 	set_process(true)
@@ -102,7 +142,7 @@ func _process(delta):
 	
 	if death == true:
 		death_duration -= delta
-		get_node("25D Model/Model").explode()
+		current_model.explode()
 		if death_duration < 0:
 			#communicate death to the overmind
 			var overmind = get_tree().get_root().get_node("World").get_node("Overmind")

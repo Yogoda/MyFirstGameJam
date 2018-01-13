@@ -41,6 +41,7 @@ texture = ExtResource( 2 )
 
 visibility/visible = true
 setRotation = false
+set_visiblity = true
 
 [node name="Spatial" type="Spatial" parent="25D Model"]
 
