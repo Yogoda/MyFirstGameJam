@@ -1,7 +1,7 @@
 extends Area2D
 
 const SHIP_Y_POS_MARGIN = 200 #final y position margin before the ship is destroyed
-const VERTICAL_SPEED = 60
+var vertical_speed = 60
 const HORIZONTAL_SPEED = 50
 const HIT_SCORE = 50
 const KILL_SCORE = 250
@@ -9,6 +9,7 @@ const X_MARGIN = 40 #edge limits
 const MISSILE_SPEED = 150
 const POWER_UP_DROP_RATE = 6
 const SO_SHOOT_LVL = 0.3
+var missle_1st_wave = false
 var ini = true
 var carrier_informed = false
 var up_direction = false
@@ -90,6 +91,16 @@ func _process(delta):
 			hp = 7
 			so_laser = "Laser_Shoot3"
 			
+		if fire_mode == 5:
+			var Model = SHIP4_INSTANCE.instance()
+			get_node("25D Model").add_child(Model)
+			left_direction = false
+			right_direction = false
+			vertical_speed = 40
+			fire1_rate = 2.0
+			hp = 14
+			so_laser = "Blip_Bomb"
+			
 		ini = false
 	#update alarms
 	fire1_alarm -= delta
@@ -123,9 +134,9 @@ func _process(delta):
 	if right_direction == true:
 		ship_pos.x += HORIZONTAL_SPEED * delta
 	if up_direction == true:
-		ship_pos.y -= VERTICAL_SPEED * delta
+		ship_pos.y -= vertical_speed * delta
 	if down_direction == true:
-		ship_pos.y += VERTICAL_SPEED * delta
+		ship_pos.y += vertical_speed * delta
 
 	set_pos(ship_pos) #apply new position
 	
@@ -163,7 +174,7 @@ func _process(delta):
 				power_up_pos.x = ship_pos.x
 				power_up_pos.y = ship_pos.y
 				power_up.set_pos(power_up_pos)
-				power_up.speed = VERTICAL_SPEED
+				power_up.speed = vertical_speed
 			death = true
 		
 		#shooting
@@ -250,11 +261,44 @@ func _process(delta):
 				new_angle += 90
 				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-					
+		elif fire_mode == 5:
+			#suicide bombers
+			if get_pos().y > get_viewport_rect().end.y - 100:
+				if missle_1st_wave == false:
+					missle_1st_wave = true
+					var new_angle = 0
+					for i in range(12):
+						fire1_rate = 0.3
+						fire1_alarm = fire1_rate
+						new_angle = new_angle + 30
+						var missile = MISSILE_INSTANCE.instance()
+						get_tree().get_root().add_child(missile)
+						var missile_pos = missile.get_pos()
+						missile_pos.x = ship_pos.x
+						missile_pos.y = ship_pos.y
+						missile.set_pos(missile_pos)
+						var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
+						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+				else:
+					var new_angle = 15
+					for i in range(12):
+						new_angle = new_angle + 30
+						var missile = MISSILE_INSTANCE.instance()
+						get_tree().get_root().add_child(missile)
+						var missile_pos = missile.get_pos()
+						missile_pos.x = ship_pos.x
+						missile_pos.y = ship_pos.y
+						missile.set_pos(missile_pos)
+						var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
+						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+						#ship is destroyed
+						hp = 0
 		#play sound
 		ship_pos = get_pos()
 		if ship_pos.y > get_viewport_rect().pos.y and ship_pos.y < get_viewport_rect().end.y :
-			
-			var so_player = get_node("Sounds")
-			var so_id = so_player.play(so_laser)
-			so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)
+			if missle_1st_wave == true:
+				pass
+			else:
+				var so_player = get_node("Sounds")
+				var so_id = so_player.play(so_laser)
+				so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)
