@@ -139,8 +139,8 @@ func _process(delta):
 	if player_control == true:
 		if player_pos.x + SCREEN_MARGIN > get_viewport_rect().end.x:
 			player_pos.x = get_viewport_rect().end.x - SCREEN_MARGIN 
-		if player_pos.y + SCREEN_MARGIN > get_viewport_rect().end.y:
-			player_pos.y = get_viewport_rect().end.y - SCREEN_MARGIN
+		if player_pos.y + SCREEN_MARGIN +30 > get_viewport_rect().end.y:
+			player_pos.y = get_viewport_rect().end.y - SCREEN_MARGIN -30
 		if player_pos.x < get_viewport_rect().pos.x + SCREEN_MARGIN:
 			player_pos.x = get_viewport_rect().pos.x + SCREEN_MARGIN
 		if player_pos.y < get_viewport_rect().pos.y + SCREEN_MARGIN:
