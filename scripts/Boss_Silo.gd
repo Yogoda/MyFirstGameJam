@@ -7,7 +7,9 @@ const DELAY = 12
 const VARIANCE = 5
 var alarm_0 = 7 + randi()%VARIANCE
 var hp = 100
+var death = false
 const SHIP_PATH = "res://instance/Bomber01.tscn"
+const HIT_SCORE = 100
 
 func _ready():
 	set_process(true)
@@ -38,6 +40,6 @@ func _process(delta):
 		ship.set_pos(ship_pos)
 		
 	if hp < 0 and death == false:
-		moththership.ship_destroyed += 1
+		mothership.ship_destroyed += 1
 		queue_free()
 		death = true

@@ -24,6 +24,10 @@ func set_ship_position():
 		if setRotation:
 			child.set_rotation(Vector3(0,get_parent().get_rot(),0))
 
+func blink(nr):
+	for child in get_children():
+		child.blink(nr)
+
 func _ready():
 
 	set_process(true)
