@@ -6,7 +6,7 @@ var alarm_0 = 0
 var overmind
 const BOMBER01_PATH = "res://instance/Bomber01.tscn"
 const EXPLOBOM_DROP_RATE = 20
-const X_MARGIN
+const X_MARGIN = 50
 var ship_type = "Bomber01"
 var ship_level = 0
 var ship_max = 8
