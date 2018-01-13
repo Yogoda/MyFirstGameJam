@@ -20,6 +20,3 @@ func _ready():
 func _fixed_process(delta):
 	
 	rotate(rotation, rotationSpeed)
-#	rotate_x(rotationSpeed);
-#	rotate_y(rotationSpeed);
-#	rotate_z(0.01);
