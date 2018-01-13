@@ -4,6 +4,7 @@ const MAX_LEVEL = 5 #number of game levels
 var current_level = 1
 var level_status = "starting"
 var end_game = false
+const MOTHERSHIP_INSTANCE = preload("res://instance/Mothership.tscn")
 const CARRIER_INSTANCE = preload("res://instance/Carrier.tscn")
 const PLAYER_INSTANCE = preload("res://instance/Player.tscn")
 const GAME_OVER_INSTANCE = preload("res://instance/Game_over.tscn")
@@ -59,38 +60,43 @@ func _process(delta):
 			level_spawner_num = 0
 			level_spawner_destroyed = 0
 			level_status = "ongoing"
-			if current_level == 1:
-				level_spawner_max = 4
-				level_spawner_sim_max = 2
+			if current_level == MAX_LEVEL:
+				level_spawner_max = 1
+				level_spawner_sim_max = 1
 				ship_level = 1
-			if current_level == 2:
-				level_spawner_max = 4
-				level_spawner_sim_max = 2
-				ship_level = 2
-			if current_level == 3:
-				level_spawner_max = 4
-				level_spawner_sim_max = 2
-				ship_level = 3
-			if current_level == 4:
-				level_spawner_max = 4
-				level_spawner_sim_max = 2
-				ship_level = 4
-			if current_level == 5:
-				level_spawner_max = 4
-				level_spawner_sim_max = 2
-				ship_level = 5
-			if current_level == 6:
-				level_spawner_max = 6
-				level_spawner_sim_max = 3
-				ship_level = 3
-			if current_level == 7:
-				level_spawner_max = 6
-				level_spawner_sim_max = 3
-				ship_level = 4
-			if current_level == 8:
-				level_spawner_max = 6
-				level_spawner_sim_max = 3
-				ship_level = 5
+			else:
+				if current_level == 1:
+					level_spawner_max = 4
+					level_spawner_sim_max = 2
+					ship_level = 1
+				if current_level == 2:
+					level_spawner_max = 4
+					level_spawner_sim_max = 2
+					ship_level = 2
+				if current_level == 3:
+					level_spawner_max = 4
+					level_spawner_sim_max = 2
+					ship_level = 3
+				if current_level == 4:
+					level_spawner_max = 4
+					level_spawner_sim_max = 2
+					ship_level = 4
+				if current_level == 5:
+					level_spawner_max = 4
+					level_spawner_sim_max = 2
+					ship_level = 5
+				if current_level == 6:
+					level_spawner_max = 6
+					level_spawner_sim_max = 3
+					ship_level = 3
+				if current_level == 7:
+					level_spawner_max = 6
+					level_spawner_sim_max = 3
+					ship_level = 4
+				if current_level == 8:
+					level_spawner_max = 6
+					level_spawner_sim_max = 3
+					ship_level = 5
 				
 		elif level_status == "ending":
 			if current_level < MAX_LEVEL:
@@ -101,13 +107,20 @@ func _process(delta):
 		elif level_status == "ongoing":
 			alarm_0 = ONGOING_DELAY
 			if level_spawner_num < level_spawner_max:
-				if level_spawner_num - level_spawner_destroyed < level_spawner_sim_max: #spawn a new carrier !!!
+				if current_level == MAX_LEVEL: #BOSS
 					level_spawner_num += 1
-					var carrier = CARRIER_INSTANCE.instance()
-					get_tree().get_root().add_child(carrier)
-					carrier.overmind = self
-					carrier.ship_type = "Bomber01"
-					carrier.ship_level = ship_level
+					var mothership = MOTHERSHIP_INSTANCE.instance()
+					get_tree().get_root().add_child(mothership)
+					mothership.overmind = self
+					pass
+				else:
+					if level_spawner_num - level_spawner_destroyed < level_spawner_sim_max: #spawn a new carrier !!!
+						level_spawner_num += 1
+						var carrier = CARRIER_INSTANCE.instance()
+						get_tree().get_root().add_child(carrier)
+						carrier.overmind = self
+						carrier.ship_type = "Bomber01"
+						carrier.ship_level = ship_level
 
 			elif level_spawner_destroyed == level_spawner_max:
 				level_status = "ending"

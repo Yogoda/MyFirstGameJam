@@ -7,14 +7,17 @@ var init = true
 
 
 func _ready():
-	
+	var label = get_node("Label")
 	var position = get_pos()
+	var size = label.get_size()
+	size.width = get_viewport_rect().end.x
+	position.x = get_viewport_rect().pos.x
 	position.y = round(get_viewport_rect().end.y/3)
-	position.x = round(get_viewport_rect().end.x /2) - X_SHIFT
+	label.set_size(size)
+	set_pos(position)
 	#sound
 	so_level = get_tree().get_root().get_node("World").pub_sound_level
-	
-	set_pos(position)
+
 	set_process(true)
 	
 func _process(delta):

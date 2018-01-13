@@ -17,6 +17,7 @@ margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 14.0
 text = "VICTORY!"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

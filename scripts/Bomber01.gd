@@ -1,6 +1,7 @@
 extends Area2D
 
 const SHIP_Y_POS_MARGIN = 200 #final y position margin before the ship is destroyed
+var activated = true
 var vertical_speed = 60
 const HORIZONTAL_SPEED = 50
 const HIT_SCORE = 50
@@ -116,32 +117,9 @@ func _process(delta):
 		get_node("25D Model/Model").explode()
 		if death_duration < 0:
 			queue_free()
-		
-	#step events
-	var ship_pos = get_pos()
-	
-	#change direction if close to an edge
-	if ship_pos.x < get_viewport_rect().pos.x + X_MARGIN:
-		left_direction = false
-		right_direction = true
-	if ship_pos.x > get_viewport_rect().end.x - X_MARGIN:
-		right_direction = false
-		left_direction = true
-	
-	#movement
-	if left_direction == true:
-		ship_pos.x -= HORIZONTAL_SPEED * delta
-	if right_direction == true:
-		ship_pos.x += HORIZONTAL_SPEED * delta
-	if up_direction == true:
-		ship_pos.y -= vertical_speed * delta
-	if down_direction == true:
-		ship_pos.y += vertical_speed * delta
-
-	set_pos(ship_pos) #apply new position
 	
 	#check if out of screen
-	ship_pos = get_pos()
+	var ship_pos = get_pos()
 	
 	if ship_pos.y > get_viewport_rect().end.y + SHIP_Y_POS_MARGIN or hp < 1:
 		#inform carrier
@@ -180,129 +158,152 @@ func _process(delta):
 						power_up.speed = vertical_speed
 			
 			death = true
+			
+	if activated == true:
+		#step events
+		var ship_pos = get_pos()
 		
-		#shooting
-	if fire1_alarm < 0 and death == false:
-		fire1_alarm = fire1_rate
-		if fire_mode == 0:
-			var missile = MISSILE_INSTANCE.instance()
-			get_tree().get_root().add_child(missile)
-			var missile_pos = missile.get_pos()
-			missile_pos.x = ship_pos.x
-			missile_pos.y = ship_pos.y + FIRE1_SHIFT
-			missile.set_pos(missile_pos)
-			missile.velocity = (Vector2(0,MISSILE_SPEED))
-		elif fire_mode == 1:
-			#spawn one missile to each sides
-			var i
-			for i in range(4):
-				var missile = MISSILE_INSTANCE.instance()
-				get_tree().get_root().add_child(missile)
-				var missile_pos = missile.get_pos()
-				if i == 0: #missile goes down
-					missile_pos.x = ship_pos.x
-					missile_pos.y = ship_pos.y + FIRE1_SHIFT
-					missile.set_pos(missile_pos)
-					missile.velocity = (Vector2(0,MISSILE_SPEED))
-				if i == 1: #missile goes up
-					missile_pos.x = ship_pos.x
-					missile_pos.y = ship_pos.y - FIRE1_SHIFT
-					missile.set_pos(missile_pos)
-					missile.velocity = (Vector2(0,-MISSILE_SPEED))
-				if i == 2: #missile goes left
-					missile_pos.x = ship_pos.x - FIRE1_SHIFT
-					missile_pos.y = ship_pos.y
-					missile.set_pos(missile_pos)
-					missile.velocity = (Vector2(-MISSILE_SPEED,0))
-				if i == 3: #missile goes right
-					missile_pos.x = ship_pos.x + FIRE1_SHIFT
-					missile_pos.y = ship_pos.y
-					missile.set_pos(missile_pos)
-					missile.velocity = (Vector2(MISSILE_SPEED,0))
-		elif fire_mode == 2:
-			#spawns one missile to each sides at front at a 90° angle
-			var i
-			for i in range(2):
-				if i == 0:
-					missile_angle = 335
-				elif i == 1:
-					missile_angle = 25
+		#change direction if close to an edge
+		if ship_pos.x < get_viewport_rect().pos.x + X_MARGIN:
+			left_direction = false
+			right_direction = true
+		if ship_pos.x > get_viewport_rect().end.x - X_MARGIN:
+			right_direction = false
+			left_direction = true
+		
+		#movement
+		if left_direction == true:
+			ship_pos.x -= HORIZONTAL_SPEED * delta
+		if right_direction == true:
+			ship_pos.x += HORIZONTAL_SPEED * delta
+		if up_direction == true:
+			ship_pos.y -= vertical_speed * delta
+		if down_direction == true:
+			ship_pos.y += vertical_speed * delta
+		
+		set_pos(ship_pos) #apply new position
+			#shooting
+		if fire1_alarm < 0 and death == false:
+			fire1_alarm = fire1_rate
+			if fire_mode == 0:
 				var missile = MISSILE_INSTANCE.instance()
 				get_tree().get_root().add_child(missile)
 				var missile_pos = missile.get_pos()
 				missile_pos.x = ship_pos.x
-				missile_pos.y = ship_pos.y
+				missile_pos.y = ship_pos.y + FIRE1_SHIFT
 				missile.set_pos(missile_pos)
-				var norm_vector = Vector2(sin(deg2rad(missile_angle)),cos(deg2rad(missile_angle)))
-				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-		elif fire_mode == 3:
-			#spawn two missile rotating around axis
-			var i
-			var new_angle = missile_angle
-			for i in range(2):
-				if i == 1:
-					new_angle = missile_angle + 180
-				var missile = MISSILE_INSTANCE.instance()
-				get_tree().get_root().add_child(missile)
-				var missile_pos = missile.get_pos()
-				missile_pos.x = ship_pos.x
-				missile_pos.y = ship_pos.y
-				missile.set_pos(missile_pos)
-				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
-				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-				
-		elif fire_mode == 4:
-			#rotating missiles from 4 directions - rotating. Hell yeah !!
-			var i
-			var new_angle = missile_angle
-			for i in range(4):
-				var missile = MISSILE_INSTANCE.instance()
-				get_tree().get_root().add_child(missile)
-				var missile_pos = missile.get_pos()
-				missile_pos.x = ship_pos.x
-				missile_pos.y = ship_pos.y
-				missile.set_pos(missile_pos)
-				new_angle += 90
-				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
-				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-		elif fire_mode == 10:
-			#suicide bombers
-			if get_pos().y > get_viewport_rect().end.y - 100:
-				if missle_1st_wave == false:
-					missle_1st_wave = true
-					var new_angle = 0
-					for i in range(12):
-						fire1_rate = 0.3
-						fire1_alarm = fire1_rate
-						new_angle = new_angle + 30
-						var missile = MISSILE_INSTANCE.instance()
-						get_tree().get_root().add_child(missile)
-						var missile_pos = missile.get_pos()
+				missile.velocity = (Vector2(0,MISSILE_SPEED))
+			elif fire_mode == 1:
+				#spawn one missile to each sides
+				var i
+				for i in range(4):
+					var missile = MISSILE_INSTANCE.instance()
+					get_tree().get_root().add_child(missile)
+					var missile_pos = missile.get_pos()
+					if i == 0: #missile goes down
 						missile_pos.x = ship_pos.x
+						missile_pos.y = ship_pos.y + FIRE1_SHIFT
+						missile.set_pos(missile_pos)
+						missile.velocity = (Vector2(0,MISSILE_SPEED))
+					if i == 1: #missile goes up
+						missile_pos.x = ship_pos.x
+						missile_pos.y = ship_pos.y - FIRE1_SHIFT
+						missile.set_pos(missile_pos)
+						missile.velocity = (Vector2(0,-MISSILE_SPEED))
+					if i == 2: #missile goes left
+						missile_pos.x = ship_pos.x - FIRE1_SHIFT
 						missile_pos.y = ship_pos.y
 						missile.set_pos(missile_pos)
-						var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
-						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+						missile.velocity = (Vector2(-MISSILE_SPEED,0))
+					if i == 3: #missile goes right
+						missile_pos.x = ship_pos.x + FIRE1_SHIFT
+						missile_pos.y = ship_pos.y
+						missile.set_pos(missile_pos)
+						missile.velocity = (Vector2(MISSILE_SPEED,0))
+			elif fire_mode == 2:
+				#spawns one missile to each sides at front at a 90° angle
+				var i
+				for i in range(2):
+					if i == 0:
+						missile_angle = 335
+					elif i == 1:
+						missile_angle = 25
+					var missile = MISSILE_INSTANCE.instance()
+					get_tree().get_root().add_child(missile)
+					var missile_pos = missile.get_pos()
+					missile_pos.x = ship_pos.x
+					missile_pos.y = ship_pos.y
+					missile.set_pos(missile_pos)
+					var norm_vector = Vector2(sin(deg2rad(missile_angle)),cos(deg2rad(missile_angle)))
+					missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+			elif fire_mode == 3:
+				#spawn two missile rotating around axis
+				var i
+				var new_angle = missile_angle
+				for i in range(2):
+					if i == 1:
+						new_angle = missile_angle + 180
+					var missile = MISSILE_INSTANCE.instance()
+					get_tree().get_root().add_child(missile)
+					var missile_pos = missile.get_pos()
+					missile_pos.x = ship_pos.x
+					missile_pos.y = ship_pos.y
+					missile.set_pos(missile_pos)
+					var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
+					missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+					
+			elif fire_mode == 4:
+				#rotating missiles from 4 directions - rotating. Hell yeah !!
+				var i
+				var new_angle = missile_angle
+				for i in range(4):
+					var missile = MISSILE_INSTANCE.instance()
+					get_tree().get_root().add_child(missile)
+					var missile_pos = missile.get_pos()
+					missile_pos.x = ship_pos.x
+					missile_pos.y = ship_pos.y
+					missile.set_pos(missile_pos)
+					new_angle += 90
+					var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
+					missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+			elif fire_mode == 10:
+				#suicide bombers
+				if get_pos().y > get_viewport_rect().end.y - 100:
+					if missle_1st_wave == false:
+						missle_1st_wave = true
+						var new_angle = 0
+						for i in range(12):
+							fire1_rate = 0.3
+							fire1_alarm = fire1_rate
+							new_angle = new_angle + 30
+							var missile = MISSILE_INSTANCE.instance()
+							get_tree().get_root().add_child(missile)
+							var missile_pos = missile.get_pos()
+							missile_pos.x = ship_pos.x
+							missile_pos.y = ship_pos.y
+							missile.set_pos(missile_pos)
+							var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
+							missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+					else:
+						var new_angle = 15
+						for i in range(12):
+							new_angle = new_angle + 30
+							var missile = MISSILE_INSTANCE.instance()
+							get_tree().get_root().add_child(missile)
+							var missile_pos = missile.get_pos()
+							missile_pos.x = ship_pos.x
+							missile_pos.y = ship_pos.y
+							missile.set_pos(missile_pos)
+							var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
+							missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+							#ship is destroyed
+							hp = 0
+			#play sound
+			ship_pos = get_pos()
+			if ship_pos.y > get_viewport_rect().pos.y and ship_pos.y < get_viewport_rect().end.y :
+				if missle_1st_wave == true:
+					pass
 				else:
-					var new_angle = 15
-					for i in range(12):
-						new_angle = new_angle + 30
-						var missile = MISSILE_INSTANCE.instance()
-						get_tree().get_root().add_child(missile)
-						var missile_pos = missile.get_pos()
-						missile_pos.x = ship_pos.x
-						missile_pos.y = ship_pos.y
-						missile.set_pos(missile_pos)
-						var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
-						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-						#ship is destroyed
-						hp = 0
-		#play sound
-		ship_pos = get_pos()
-		if ship_pos.y > get_viewport_rect().pos.y and ship_pos.y < get_viewport_rect().end.y :
-			if missle_1st_wave == true:
-				pass
-			else:
-				var so_player = get_node("Sounds")
-				var so_id = so_player.play(so_laser)
-				so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)
+					var so_player = get_node("Sounds")
+					var so_id = so_player.play(so_laser)
+					so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)
