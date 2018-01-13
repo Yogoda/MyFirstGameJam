@@ -6,6 +6,7 @@ var alarm_0 = 0
 var overmind
 const BOMBER01_PATH = "res://instance/Bomber01.tscn"
 const EXPLOBOM_DROP_RATE = 20
+const X_MARGIN
 var ship_type = "Bomber01"
 var ship_level = 0
 var ship_max = 8
@@ -42,7 +43,7 @@ func _process(delta):
 				
 				var ship_pos = ship.get_pos()
 				ship_num += 1
-				ship_pos.x = round(rand_range(get_viewport_rect().pos.x,get_viewport_rect().end.x))
+				ship_pos.x = round(rand_range(get_viewport_rect().pos.x+X_MARGIN,get_viewport_rect().end.x-X_MARGIN))
 				ship_pos.y = get_viewport_rect().pos.y - SHIP_Y_POS_INI
 				
 				ship.set_pos(ship_pos)

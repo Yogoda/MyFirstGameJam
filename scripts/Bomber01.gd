@@ -165,16 +165,20 @@ func _process(delta):
 				so_id = so_player.play("Explosion5")
 			so_player.set_volume(so_id,so_level)
 			
-			i = randi()%POWER_UP_DROP_RATE
-			if i == 0:
-				#create a power up
-				var power_up = POWER_UP_INSTANCE.instance()
-				get_tree().get_root().add_child(power_up)
-				var power_up_pos = power_up.get_pos()
-				power_up_pos.x = ship_pos.x
-				power_up_pos.y = ship_pos.y
-				power_up.set_pos(power_up_pos)
-				power_up.speed = vertical_speed
+			var player_ship = get_tree().get_root().get_node("Player")
+			if player_ship != null:
+				if player_ship.structure_points < player_ship.STRUCTURE_POINTS_MAX:
+					i = randi()%POWER_UP_DROP_RATE
+					if i == 0:
+						#create a power up
+						var power_up = POWER_UP_INSTANCE.instance()
+						get_tree().get_root().add_child(power_up)
+						var power_up_pos = power_up.get_pos()
+						power_up_pos.x = ship_pos.x
+						power_up_pos.y = ship_pos.y
+						power_up.set_pos(power_up_pos)
+						power_up.speed = vertical_speed
+			
 			death = true
 		
 		#shooting
