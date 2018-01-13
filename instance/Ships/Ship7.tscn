@@ -8,9 +8,9 @@
 [ext_resource path="res://instance/Blocks/block_2x2o.tscn" type="PackedScene" id=6]
 [ext_resource path="res://instance/Blocks/Materials/black.tres" type="Material" id=7]
 [ext_resource path="res://instance/Blocks/Materials/yellow.tres" type="Material" id=8]
-[ext_resource path="res://scripts/Rotator.gd" type="Script" id=9]
-[ext_resource path="res://instance/Blocks/block_1x1r.tscn" type="PackedScene" id=10]
-[ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://instance/Blocks/block_1x1r.tscn" type="PackedScene" id=9]
+[ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://instance/Blocks/Materials/grey.tres" type="Material" id=11]
 
 [node name="Model" type="Spatial"]
 
@@ -48,36 +48,39 @@ material/0 = ExtResource( 8 )
 [node name="Rotator" type="Spatial" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-script/script = ExtResource( 9 )
-rotation_speed = 15
+script/script = ExtResource( 1 )
+hide = false
+rotate = true
+rotation_speed = 10.0
 
-[node name="MeshInstance 6" parent="Rotator" instance=ExtResource( 10 )]
+[node name="MeshInstance 6" parent="Rotator" instance=ExtResource( 9 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.4, 0.5 )
+material/0 = ExtResource( 7 )
 
 [node name="MeshInstance 7" parent="Rotator" instance=ExtResource( 5 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0 )
 material/0 = ExtResource( 7 )
 
-[node name="MeshInstance 8" parent="Rotator" instance=ExtResource( 11 )]
+[node name="MeshInstance 8" parent="Rotator" instance=ExtResource( 10 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8, -3 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 11 )
 
-[node name="MeshInstance9" parent="Rotator" instance=ExtResource( 11 )]
+[node name="MeshInstance9" parent="Rotator" instance=ExtResource( 10 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.8, 3 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 11 )
 
-[node name="MeshInstance10" parent="Rotator" instance=ExtResource( 11 )]
+[node name="MeshInstance10" parent="Rotator" instance=ExtResource( 10 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 4.8, 1 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 11 )
 
-[node name="MeshInstance11" parent="Rotator" instance=ExtResource( 11 )]
+[node name="MeshInstance11" parent="Rotator" instance=ExtResource( 10 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 4.8, 0 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 11 )
 
 
