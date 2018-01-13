@@ -7,6 +7,7 @@ var velocity = Vector2(0,-speed)
 var mad_dog_mode = false
 var amplitude = 0
 var amp_up = false
+
 const MAX_AMPLITUDE  = 0.6
 const EXPLOSION_INSTANCE = preload("res://instance/Explosion.tscn")
 
@@ -77,7 +78,7 @@ func _process(delta):
 
 func _on_area_enter(other):
 	if other.is_in_group("enemy"):
-		if other.death == false:
+		if other.death == false and other.activated == true:
 			other.hp -= 1
 			other.get_node("25D Model/Model").blink(1)
 			get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE

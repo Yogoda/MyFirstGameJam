@@ -9,6 +9,7 @@ const X_MARGIN = 40 #edge limits
 const MISSILE_SPEED = 150
 const POWER_UP_DROP_RATE = 6
 const SO_SHOOT_LVL = 0.3
+var activated = true
 var missle_1st_wave = false
 var ini = true
 var carrier_informed = false

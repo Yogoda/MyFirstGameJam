@@ -76,28 +76,6 @@ func _process(delta):
 			m_ship_silo.set_pos(position)
 			m_ship_silo.mothership = self
 			m_ship_silo.y_shift = 2*y_shift
-#		var i
-#		var xpos_ini = 0
-#		var x_shift = 40
-#		var ship_stage = 0
-#		xpos_ini = x_shift
-#		for i in range(8):
-#			var ship = ship_instance.instance()
-#			get_tree().get_root().add_child(ship)
-#			ship.fire_mode = 10
-#			ship.activated = false
-#			ship.carrier = self
-#			var ship_pos = ship.get_pos()
-#			ship_pos.y = get_pos().y
-#			if i%2 == 0:
-#				xpos_ini += x_shift
-#				ship_stage += 1
-#				ship_pos.x = get_pos().x + xpos_ini
-#			else:
-#				ship_pos.x = get_pos().x - xpos_ini
-#			ship.carrier_y_shift = round(xpos_ini/2)
-#			ship.boss_stage = ship_stage
-#			ship.set_pos(ship_pos)
 	
 	if down_direction == true:
 		var position = get_pos()
@@ -107,6 +85,9 @@ func _process(delta):
 			alarm_0 = 1.0
 		else:
 			set_pos(position)
+			if current_stage == 0:
+				current_stage = 1
+
 #	else:
 #		if alarm_0 <0:
 #			if current_stage < stage_max:
