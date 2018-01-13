@@ -29,10 +29,10 @@ const FIRE1_SHIFT = 20
 var fire1_alarm = 0
 var so_laser = "Laser_Shoot2"
 const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
-const SHIP0_INSTANCE = preload("res://instance/Ships/Ship7.tscn")
+const SHIP0_INSTANCE = preload("res://instance/Ships/Ship1.tscn")
 const SHIP1_INSTANCE = preload("res://instance/Ships/Ship2.tscn")
 const SHIP2_INSTANCE = preload("res://instance/Ships/Ship4.tscn")
-const SHIP3_INSTANCE = preload("res://instance/Ships/Ship5.tscn")
+const SHIP3_INSTANCE = preload("res://instance/Ships/Ship7.tscn")
 const SHIP4_INSTANCE = preload("res://instance/Ships/Ship6.tscn")
 const POWER_UP_INSTANCE = preload("res://instance/Power_Up.tscn")
 # class member variables go here, for example:
@@ -50,7 +50,7 @@ func _ready():
 	
 func _fixed_process(delta):
 
-	if death == false and (fire_mode == 3 or fire_mode == 4):
+	if death == false and (fire_mode == 4):
 		rotate(0.1)
 	
 func _process(delta):
