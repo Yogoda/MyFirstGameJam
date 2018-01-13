@@ -1,6 +1,6 @@
 extends Node2D
 
-const MAX_LEVEL = 5 #number of game levels
+const MAX_LEVEL = 1 #number of game levels
 var current_level = 1
 var level_status = "starting"
 var end_game = false
@@ -112,6 +112,10 @@ func _process(delta):
 					var mothership = MOTHERSHIP_INSTANCE.instance()
 					get_tree().get_root().add_child(mothership)
 					mothership.overmind = self
+					var mothership_pos = mothership.get_pos()
+					mothership_pos.x = round(get_viewport_rect().end.x /2)
+					mothership_pos.y = -100
+					mothership.set_pos(mothership_pos)
 					pass
 				else:
 					if level_spawner_num - level_spawner_destroyed < level_spawner_sim_max: #spawn a new carrier !!!
