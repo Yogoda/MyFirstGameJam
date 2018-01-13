@@ -30,11 +30,12 @@ func _process(delta):
 				var ship = ship_instance.instance()
 				get_tree().get_root().add_child(ship)
 				ship.carrier = self
-				if ship_level != 0:
-					var new_ship_level = randi()%ship_level#ship_num%ship_level
-					ship.fire_mode = new_ship_level
-				else:
-					ship.fire_mode = 0
+				ship.fire_mode = 5
+#				if ship_level != 0:
+#					var new_ship_level = randi()%ship_level#ship_num%ship_level
+#					ship.fire_mode = new_ship_level
+#				else:
+#					ship.fire_mode = 0
 				var ship_pos = ship.get_pos()
 				ship_num += 1
 				ship_pos.x = round(rand_range(get_viewport_rect().pos.x,get_viewport_rect().end.x))
