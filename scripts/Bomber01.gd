@@ -2,6 +2,7 @@ extends Area2D
 
 const SHIP_Y_POS_MARGIN = 200 #final y position margin before the ship is destroyede
 var vertical_speed = 60
+var is_scoring = true
 const HORIZONTAL_SPEED = 50
 const HIT_SCORE = 50
 const KILL_SCORE = 250
@@ -17,6 +18,7 @@ var up_direction = false
 var down_direction = true
 var left_direction = false
 var right_direction = false
+var boss_fight = false
 var carrier
 var carrier_y_shift = 0
 var missile_angle = randi()%360
@@ -125,12 +127,14 @@ func _process(delta):
 	
 	if ship_pos.y > get_viewport_rect().end.y + SHIP_Y_POS_MARGIN or hp < 1:
 		#inform carrier
-		if carrier_informed == false:
-			carrier.ship_destroyed += 1
-			carrier_informed = true
+		if boss_fight == false:
+			if carrier_informed == false:
+				carrier.ship_destroyed += 1
+				carrier_informed = true
 			
 		if hp < 1 and death == false:
-			get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
+			if is_scoring == true:
+				get_tree().get_root().get_node("World").get_node("Score").score += KILL_SCORE
 			#sound of explosion
 			var i = randi()%4
 			var so_player = get_node("SoPlayerDeath")

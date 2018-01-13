@@ -6,9 +6,10 @@ var ship_destroyed = 0
 const DELAY = 14
 const VARIANCE = 4
 var alarm_0 = 12 + randi()%VARIANCE
-var hp = 100
+var hp = 45
 var death = false
 const SHIP_PATH = "res://instance/Bomber01.tscn"
+var is_scoring = true
 const HIT_SCORE = 100
 
 func _ready():
@@ -34,6 +35,8 @@ func _process(delta):
 		get_tree().get_root().add_child(ship)
 		ship.fire_mode = 4
 		ship.carrier = self
+		ship.is_scoring = false
+		ship.boss_fight = true
 		var ship_pos = ship.get_pos()
 		ship_pos.x = get_pos().x
 		ship_pos.y = get_pos().y+30

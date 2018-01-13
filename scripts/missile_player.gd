@@ -81,7 +81,8 @@ func _on_area_enter(other):
 		if other.death == false and other.activated == true:
 			other.hp -= 1
 			other.get_node("25D Model").blink(1)
-			get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE
+			if other.is_scoring == true:
+				get_tree().get_root().get_node("World").get_node("Score").score += other.HIT_SCORE
 			
 			#create explosion
 			var explosion = EXPLOSION_INSTANCE.instance()

@@ -87,6 +87,14 @@ func _process(delta):
 			set_pos(position)
 			if current_stage == 0:
 				current_stage = 1
+	
+	if current_stage == 1 and ship_destroyed > 1:
+		current_stage = 2
+	if current_stage == 2 and ship_destroyed > 4:
+		current_stage = 3
+	if current_stage == 3 and ship_destroyed > 5:
+		overmind.level_spawner_destroyed += 1
+		queue_free()
 
 #	else:
 #		if alarm_0 <0:
