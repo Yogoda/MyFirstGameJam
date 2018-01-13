@@ -35,6 +35,12 @@ var death = false
 var death_duration = 0.5
 const MISSILE_INSTANCE = preload("res://instance/missile_player.tscn")
 
+#const PLAYER_SHIP_1 = preload("res://instance/Ships/PlayerShip1.tscn")
+const PLAYER_SHIP_2 = preload("res://instance/Ships/PlayerShip2.tscn")
+const PLAYER_SHIP_3 = preload("res://instance/Ships/PlayerShip3.tscn")
+const PLAYER_SHIP_4 = preload("res://instance/Ships/PlayerShip4.tscn")
+const PLAYER_SHIP_5 = preload("res://instance/Ships/PlayerShip5.tscn")
+
 var current_model
 
 func update_model():

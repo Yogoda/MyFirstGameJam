@@ -7,9 +7,10 @@
 [ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://instance/Blocks/Materials/green.tres" type="Material" id=6]
 [ext_resource path="res://instance/Blocks/block_4x1.tscn" type="PackedScene" id=7]
-[ext_resource path="res://instance/Blocks/Materials/yellow.tres" type="Material" id=8]
+[ext_resource path="res://instance/Blocks/yellow.tres" type="Material" id=8]
 [ext_resource path="res://instance/Blocks/block_2x2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://instance/Blocks/block_2x2o.tscn" type="PackedScene" id=10]
+
 
 [node name="Model" type="Spatial"]
 

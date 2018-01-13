@@ -45,12 +45,12 @@ material/0 = ExtResource( 5 )
 
 [node name="MeshInstance 4" parent="." instance=ExtResource( 8 )]
 
-transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 1.2, 2 )
+transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 2.4, 2 )
 material/0 = ExtResource( 9 )
 
 [node name="MeshInstance5" parent="." instance=ExtResource( 8 )]
 
-transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 1.2, 2 )
+transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.4, 2 )
 material/0 = ExtResource( 9 )
 
 
