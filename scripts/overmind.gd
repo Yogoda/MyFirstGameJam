@@ -62,7 +62,7 @@ func _process(delta):
 			if current_level == 1:
 				level_spawner_max = 4
 				level_spawner_sim_max = 2
-				ship_level = 0
+				ship_level = 1
 			if current_level == 2:
 				level_spawner_max = 4
 				level_spawner_sim_max = 2

@@ -50,7 +50,7 @@ func _ready():
 	
 func _fixed_process(delta):
 
-	if death == false and (fire_mode == 3 or fire_mode == 4):
+	if death == false and (fire_mode == 4):
 		rotate(0.1)
 	
 func _process(delta):
