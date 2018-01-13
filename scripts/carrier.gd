@@ -5,6 +5,7 @@ var spawn_delay = 4
 var alarm_0 = 0
 var overmind
 const BOMBER01_PATH = "res://instance/Bomber01.tscn"
+const EXPLOBOM_DROP_RATE = 20
 var ship_type = "Bomber01"
 var ship_level = 0
 var ship_max = 8
@@ -30,12 +31,15 @@ func _process(delta):
 				var ship = ship_instance.instance()
 				get_tree().get_root().add_child(ship)
 				ship.carrier = self
-				ship.fire_mode = 5
-#				if ship_level != 0:
-#					var new_ship_level = randi()%ship_level#ship_num%ship_level
-#					ship.fire_mode = new_ship_level
-#				else:
-#					ship.fire_mode = 0
+				if ship_level != 0:
+					var new_ship_level = randi()%ship_level#ship_num%ship_level
+					ship.fire_mode = new_ship_level
+				else:
+					ship.fire_mode = 0
+				var i = randi()%EXPLOBOM_DROP_RATE-ship_level
+				if i == 0:
+					ship.fire_mode = 10 #EXPLOBOMBER!!!
+				
 				var ship_pos = ship.get_pos()
 				ship_num += 1
 				ship_pos.x = round(rand_range(get_viewport_rect().pos.x,get_viewport_rect().end.x))

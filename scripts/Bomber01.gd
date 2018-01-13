@@ -91,12 +91,12 @@ func _process(delta):
 			hp = 7
 			so_laser = "Laser_Shoot3"
 			
-		if fire_mode == 5:
+		if fire_mode == 10:
 			var Model = SHIP4_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
 			left_direction = false
 			right_direction = false
-			vertical_speed = 40
+			vertical_speed = 45
 			fire1_rate = 2.0
 			hp = 14
 			so_laser = "Blip_Bomb"
@@ -261,7 +261,7 @@ func _process(delta):
 				new_angle += 90
 				var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 				missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
-		elif fire_mode == 5:
+		elif fire_mode == 10:
 			#suicide bombers
 			if get_pos().y > get_viewport_rect().end.y - 100:
 				if missle_1st_wave == false:
