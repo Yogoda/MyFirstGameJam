@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://scripts/3D_ship.gd" type="Script" id=1]
 [ext_resource path="res://instance/Blocks/block_3x2.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scripts/Rotator.gd" type="Script" id=9]
 [ext_resource path="res://instance/Blocks/block_1x1r.tscn" type="PackedScene" id=10]
 [ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://instance/Blocks/Materials/grey.tres" type="Material" id=12]
 
 [node name="Model" type="Spatial"]
 
@@ -63,21 +64,21 @@ material/0 = ExtResource( 7 )
 [node name="MeshInstance 8" parent="Rotator" instance=ExtResource( 11 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8, -3 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 12 )
 
 [node name="MeshInstance9" parent="Rotator" instance=ExtResource( 11 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.8, 3 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 12 )
 
 [node name="MeshInstance10" parent="Rotator" instance=ExtResource( 11 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 4.8, 1 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 12 )
 
 [node name="MeshInstance11" parent="Rotator" instance=ExtResource( 11 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 4.8, 0 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 12 )
 
 
