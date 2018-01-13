@@ -7,12 +7,9 @@ func _init():
 func explode():
 
 	for child in get_children():
-		
-		if child.get_type() == "MeshInstance":
-			child.explode()
-			
+		child.explode()
+
 func blink(nb):
 	
 	for child in get_children():
-		if child.get_type() == "MeshInstance":
-			child.blink(nb)
+		child.blink(nb)
