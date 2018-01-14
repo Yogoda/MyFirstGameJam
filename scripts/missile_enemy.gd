@@ -39,12 +39,12 @@ func _on_area_enter(other):
 
 	if other.is_in_group("player"):
 		
-		other.damage(1)
+		if other.damage(1) > 0:
 
-		#create explosion
-		var explosion = EXPLOSION_INSTANCE.instance()
-		get_tree().get_root().add_child(explosion)
-		explosion.set_pos(get_pos())
+			#create explosion
+			var explosion = EXPLOSION_INSTANCE.instance()
+			get_tree().get_root().add_child(explosion)
+			explosion.set_pos(get_pos())
 
 		queue_free()
 		
