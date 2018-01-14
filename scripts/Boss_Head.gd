@@ -52,6 +52,10 @@ func _process(delta):
 				power_up_pos.y = position.y
 				power_up.set_pos(power_up_pos)
 				power_up.speed = power_up_speed
+		#sound of explosion
+		var so_player = get_node("SamplePlayer")
+		var so_id = so_player.play("Explosion6")
+		so_player.set_volume(so_id,get_tree().get_root().get_node("World").pub_sound_level)
 		death = true
 		
 	if death == true:
@@ -86,3 +90,7 @@ func _process(delta):
 				missile_angle -= MISSILE_ANGLE_SHIFT
 				if missile_angle <= -60:
 					angle_increase = true
+			#sound of laser
+			var so_player = get_node("LaserPlayer")
+			var so_id = so_player.play("Laser_Shoot10")
+			so_player.set_volume(so_id,get_tree().get_root().get_node("World").pub_sound_level)

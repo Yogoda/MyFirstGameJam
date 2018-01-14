@@ -6,6 +6,7 @@ var alarm_0 = 0
 var overmind
 const BOMBER01_PATH = "res://instance/Bomber01.tscn"
 const EXPLOBOM_DROP_RATE = 20
+const COPTER_DROP_RATE = 25
 const X_MARGIN = 50
 var ship_type = "Bomber01"
 var ship_level = 0
@@ -40,6 +41,9 @@ func _process(delta):
 				var i = randi()%EXPLOBOM_DROP_RATE-ship_level
 				if i == 0:
 					ship.fire_mode = 10 #EXPLOBOMBER!!!
+				i = randi()%COPTER_DROP_RATE
+				if i == 0:
+					ship.fire_mode = 3 #CHOPTER!!!
 				
 				var ship_pos = ship.get_pos()
 				ship_num += 1
