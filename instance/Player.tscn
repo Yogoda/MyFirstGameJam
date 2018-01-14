@@ -43,32 +43,34 @@ _update_shape_index = 0
 setRotation = true
 set_visiblity = true
 
-[node name="Models" type="Spatial" parent="25D Model"]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
-[node name="0" parent="25D Model/Models" instance=ExtResource( 4 )]
+[node name="0" parent="25D Model" instance=ExtResource( 4 )]
 
 visibility/visible = false
+enabled = false
 
-[node name="1" parent="25D Model/Models" instance=ExtResource( 5 )]
-
-visibility/visible = false
-
-[node name="2" parent="25D Model/Models" instance=ExtResource( 6 )]
+[node name="1" parent="25D Model" instance=ExtResource( 5 )]
 
 visibility/visible = false
+enabled = false
 
-[node name="3" parent="25D Model/Models" instance=ExtResource( 7 )]
-
-visibility/visible = false
-
-[node name="4" parent="25D Model/Models" instance=ExtResource( 8 )]
+[node name="2" parent="25D Model" instance=ExtResource( 6 )]
 
 visibility/visible = false
+enabled = false
 
-[node name="5" parent="25D Model/Models" instance=ExtResource( 9 )]
+[node name="3" parent="25D Model" instance=ExtResource( 7 )]
 
 visibility/visible = false
+enabled = true
+
+[node name="4" parent="25D Model" instance=ExtResource( 8 )]
+
+visibility/visible = false
+enabled = false
+
+[node name="5" parent="25D Model" instance=ExtResource( 9 )]
+
+visibility/visible = false
+enabled = false
 
 

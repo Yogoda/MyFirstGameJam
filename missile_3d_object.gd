@@ -6,6 +6,7 @@ extends Spatial
 
 var rotationSpeed = 0.03
 var scale = 1
+var enabled = true
 
 var rotation
 

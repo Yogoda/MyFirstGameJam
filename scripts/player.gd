@@ -47,9 +47,10 @@ func update_model():
 	
 	if current_model != null:
 		current_model.set_hidden(true)
+		current_model.enabled = false
 		
-	current_model = get_node("25D Model/Models/" + String(structure_points))
-	current_model.set_hidden(false)
+	current_model = get_node("25D Model/" + String(structure_points))
+	current_model.enabled = true
 
 func upgrade(amnt):
 	

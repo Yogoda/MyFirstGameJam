@@ -13,16 +13,18 @@ func set_ship_position():
 
 	for child in get_children():
 		
-		var ray_origin = camera.project_ray_origin(get_parent().get_pos())
-		var ray_direction = camera.project_ray_normal(get_parent().get_pos())
-		
-		child.set_translation(ray_origin + ray_direction * camDist)
-		
-		if set_visiblity:
-			child.set_hidden(false)
-		
-		if setRotation:
-			child.set_rotation(Vector3(0,get_parent().get_rot(),0))
+		if child.enabled:
+			
+			var ray_origin = camera.project_ray_origin(get_parent().get_pos())
+			var ray_direction = camera.project_ray_normal(get_parent().get_pos())
+			
+			child.set_translation(ray_origin + ray_direction * camDist)
+			
+			if set_visiblity:
+				child.set_hidden(false)
+			
+			if setRotation:
+				child.set_rotation(Vector3(0,get_parent().get_rot(),0))
 
 func blink(nr):
 	for child in get_children():

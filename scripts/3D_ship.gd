@@ -1,5 +1,6 @@
 extends Spatial
 
+export var enabled = true
 export var hide = true
 export var rotate = false
 export var rotation_speed = 15.0
