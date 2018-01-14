@@ -2,6 +2,7 @@ extends Area2D
 var active_check = false
 var mothership
 var activated = false
+var activation_delay = 1
 const HP_MAX = 70
 var hp = HP_MAX
 var death = false
@@ -30,6 +31,11 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
+	if active_check == true and activated == false:
+		activation_delay -= delta
+		if activation_delay < 0:
+			fire1_alarm = fire1_rate
+			activated = true
 		#alarms
 	fire1_alarm -= delta
 	if fire1_alarm < 0:
@@ -103,6 +109,10 @@ func _process(delta):
 				power_up_pos.y = position.y
 				power_up.set_pos(power_up_pos)
 				power_up.speed = power_up_speed
+		#sound of explosion
+		var so_player = get_node("SamplePlayer")
+		var so_id = so_player.play("Explosion6")
+		so_player.set_volume(so_id,get_tree().get_root().get_node("World").pub_sound_level)
 		death = true
 	
 	if death == true:
@@ -113,9 +123,7 @@ func _process(delta):
 			
 	if active_check == false:
 		if mothership.current_stage > 2:
-			fire1_alarm = 2*fire1_rate
 			active_check = true
-			activated = true
 	
 	if activated == true:
 		if fire1_alarm < 0:
@@ -134,6 +142,10 @@ func _process(delta):
 					missile.set_pos(missile_pos)
 					var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 					missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+				#sound of laser
+				var so_player = get_node("LaserPlayer")
+				var so_id = so_player.play("Laser_Shoot11")
+				so_player.set_volume(so_id,get_tree().get_root().get_node("World").pub_sound_level)
 					
 			elif attack_stage == 2:
 				var new_angle = 0
@@ -151,4 +163,8 @@ func _process(delta):
 					missile.set_pos(missile_pos)
 					var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 					missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
+				#sound of laser
+				var so_player = get_node("LaserPlayer")
+				var so_id = so_player.play("Laser_Shoot12")
+				so_player.set_volume(so_id,0.5*get_tree().get_root().get_node("World").pub_sound_level)
 				

@@ -31,6 +31,7 @@ var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is two 
 var fire1_rate = 0.8
 const FIRE1_SHIFT = 20
 var fire1_alarm = 0
+var can_drop = true
 var so_laser = "Laser_Shoot2"
 const MISSILE_INSTANCE = preload("res://instance/missile_enemy.tscn")
 const SHIP0_INSTANCE = preload("res://instance/Ships/Ship1.tscn")
@@ -153,8 +154,7 @@ func _process(delta):
 			if player_ship != null:
 				if player_ship.structure_points < player_ship.STRUCTURE_POINTS_MAX:
 					i = randi()%POWER_UP_DROP_RATE
-					i = 0
-					if i == 0:
+					if (i == 0 or fire_mode == 10) and can_drop == true: #bombs always drop a power up
 						#create a power up
 						var power_up = POWER_UP_INSTANCE.instance()
 						get_tree().get_root().add_child(power_up)
@@ -303,6 +303,7 @@ func _process(delta):
 						var norm_vector = Vector2(sin(deg2rad(new_angle)),cos(deg2rad(new_angle)))
 						missile.velocity = (Vector2(norm_vector.x*MISSILE_SPEED,norm_vector.y*MISSILE_SPEED))
 						#ship is destroyed
+						can_drop = false
 						hp = 0
 		#play sound
 		ship_pos = get_pos()
