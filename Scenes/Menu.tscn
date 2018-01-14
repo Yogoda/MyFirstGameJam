@@ -101,9 +101,6 @@ rotation_speed = 15.0
 [node name="Model 3" parent="Panel/Menu Model" instance=ExtResource( 7 )]
 
 transform/local = Transform( 0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 9, 2, -42 )
-hide = true
-rotate = false
-rotation_speed = 15.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 
