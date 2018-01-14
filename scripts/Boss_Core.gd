@@ -5,6 +5,7 @@ var activated = false
 const HP_MAX = 70
 var hp = HP_MAX
 var death = false
+var death_duration = 0.5
 var is_scoring = true
 const HIT_SCORE = 100
 var fire1_rate = 1.2
@@ -22,6 +23,8 @@ var angle_increase = true
 const MISSILE_ANGLE_SHIFT = 120
 const MISSILE_DIRECTION_CHANGE = 300
 var attack_stage = 1
+const POWER_UP_INSTANCE = preload("res://instance/Power_Up.tscn")
+var power_up_speed = 20
 
 func _ready():
 	set_process(true)
@@ -88,9 +91,25 @@ func _process(delta):
 			
 	if hp < 0 and death == false:
 		mothership.ship_destroyed += 1
-		queue_free()
+		if player_ship != null:
+			if player_ship.structure_points < player_ship.STRUCTURE_POINTS_MAX:
+				#create a power up
+				position = get_pos()
+				var power_up = POWER_UP_INSTANCE.instance()
+				get_tree().get_root().add_child(power_up)
+				var power_up_pos = power_up.get_pos()
+				power_up_pos.x = position.x
+				power_up_pos.y = position.y
+				power_up.set_pos(power_up_pos)
+				power_up.speed = power_up_speed
 		death = true
 	
+	if death == true:
+		death_duration -= delta
+		#get_node("25D Model/Model").explode()
+		if death_duration < 0:
+			queue_free()
+			
 	if active_check == false:
 		if mothership.current_stage > 2:
 			fire1_alarm = 2*fire1_rate
