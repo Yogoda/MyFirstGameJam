@@ -27,6 +27,11 @@ var level_spawner_destroyed = 0
 var level_spawner_sim_max = 0 #number of spawner that are allowed simultaneously
 
 func _ready():
+	#let's play the music !!
+	var main_stream = get_tree().get_root().get_node("World").get_node("StreamMain")
+	if main_stream.is_playing() == false:
+		main_stream.play()
+	main_stream.set_volume(get_tree().get_root().get_node("World").pub_music_level)
 	set_process(true)
 
 func _process(delta):
@@ -116,8 +121,24 @@ func _process(delta):
 					mothership_pos.x = round(get_viewport_rect().end.x /2)
 					mothership_pos.y = -100
 					mothership.set_pos(mothership_pos)
+					
+					#let's play the music !!
+					var main_stream = get_tree().get_root().get_node("World").get_node("StreamMain")
+					var boss_stream = get_tree().get_root().get_node("World").get_node("StreamBoss")
+					main_stream.stop()
+					boss_stream.play()
+					boss_stream.set_volume(get_tree().get_root().get_node("World").pub_music_level)
+					
 					pass
 				else:
+					#let's play the music !!
+					var main_stream = get_tree().get_root().get_node("World").get_node("StreamMain")
+					var boss_stream = get_tree().get_root().get_node("World").get_node("StreamBoss")
+					if main_stream.is_playing() == false:
+						main_stream.play()
+					boss_stream.stop()
+					main_stream.set_volume(get_tree().get_root().get_node("World").pub_music_level)
+					
 					if level_spawner_num - level_spawner_destroyed < level_spawner_sim_max: #spawn a new carrier !!!
 						level_spawner_num += 1
 						var carrier = CARRIER_INSTANCE.instance()
@@ -142,3 +163,9 @@ func _process(delta):
 							get_tree().get_root().add_child(game_victory)
 							victory = true
 							end_game = true
+							#let's play the music !!
+							var boss_stream = get_tree().get_root().get_node("World").get_node("StreamBoss")
+							var end_stream = get_tree().get_root().get_node("World").get_node("StreamEnd")
+							boss_stream.stop()
+							end_stream.play()
+							end_stream.set_volume(get_tree().get_root().get_node("World").pub_music_level)
