@@ -91,10 +91,11 @@ func _process(delta):
 			
 	if hp < 0 and death == false:
 		mothership.ship_destroyed += 1
+		var player_ship = get_tree().get_root().get_node("Player")
 		if player_ship != null:
 			if player_ship.structure_points < player_ship.STRUCTURE_POINTS_MAX:
 				#create a power up
-				position = get_pos()
+				var position = get_pos()
 				var power_up = POWER_UP_INSTANCE.instance()
 				get_tree().get_root().add_child(power_up)
 				var power_up_pos = power_up.get_pos()

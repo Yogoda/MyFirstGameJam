@@ -1,5 +1,8 @@
 extends Node2D
 
+var so_delay = 1.5
+var so_level = 0.5
+var entry_sound = true
 var overmind
 var vertical_speed = 30
 var vertical_limit = 60
@@ -26,12 +29,18 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
+	if entry_sound == true:
+		so_delay -= delta
+		if so_delay < 0:
+			so_delay = -1
+	
 	alarm_0 -= delta
 	if alarm_0 < 0:
 		alarm_0 = -1
 	
 	if ini == false:
 		ini = true
+		so_level = get_tree().get_root().get_node("World").pub_sound_level
 		#SPAWN MOTHERSHIP PARTS
 		var position = get_pos()
 		#CORE
@@ -76,6 +85,16 @@ func _process(delta):
 			m_ship_silo.set_pos(position)
 			m_ship_silo.mothership = self
 			m_ship_silo.y_shift = 2*y_shift
+			
+
+	if entry_sound == true:
+		if so_delay < 0:
+			#BOSS ENTRY SOUND
+			var i = randi()%4
+			var so_player = get_node("SoBossPlayer")
+			var so_id = so_player.play("BossEntry")
+			so_player.set_volume(so_id,so_level)
+			entry_sound = false
 	
 	if down_direction == true:
 		var position = get_pos()
@@ -95,47 +114,3 @@ func _process(delta):
 	if current_stage == 3 and ship_destroyed > 5:
 		overmind.level_spawner_destroyed += 1
 		queue_free()
-
-#	else:
-#		if alarm_0 <0:
-#			if current_stage < stage_max:
-#				if current_stage < 4:
-#					current_stage += 1
-#					alarm_0 = 2.0
-#					for missile in get_tree().get_root().get_children():
-#						if missile.is_in_group("enemy"):
-#							if missile.boss_stage == current_stage:
-#								missile.activated = true
-								
-
-			
-#	if alarm_0 < 0:
-#		alarm_0 = ALARM_DELAY
-#		if stage_terminated == true:
-#			if ship_num - ship_destroyed < ship_sim_max:
-#				if ship_type == "Bomber01":
-#					ship_instance = preload(BOMBER01_PATH)
-#				var ship = ship_instance.instance()
-#				get_tree().get_root().add_child(ship)
-#				ship.carrier = self
-#				if ship_level != 0:
-#					var new_ship_level = randi()%ship_level#ship_num%ship_level
-#					ship.fire_mode = new_ship_level
-#				else:
-#					ship.fire_mode = 0
-#				var i = randi()%EXPLOBOM_DROP_RATE-ship_level
-#				if i == 0:
-#					ship.fire_mode = 10 #EXPLOBOMBER!!!
-#				
-#				var ship_pos = ship.get_pos()
-#				ship_num += 1
-#				ship_pos.x = round(rand_range(get_viewport_rect().pos.x+X_MARGIN,get_viewport_rect().end.x-X_MARGIN))
-#				ship_pos.y = get_viewport_rect().pos.y - SHIP_Y_POS_INI
-#				
-#				ship.set_pos(ship_pos)
-#				
-#		elif ship_destroyed >= ship_max:
-#			#report to the overmind that the ship fleet is destroyed
-#			overmind.level_spawner_destroyed += 1
-#			#destroy the carrier
-#			queue_free()

@@ -52,7 +52,7 @@ func _process(delta):
 		if player_ship != null:
 			if player_ship.structure_points < player_ship.STRUCTURE_POINTS_MAX:
 				#create a power up
-				position = get_pos()
+				var position = get_pos()
 				var power_up = POWER_UP_INSTANCE.instance()
 				get_tree().get_root().add_child(power_up)
 				var power_up_pos = power_up.get_pos()
