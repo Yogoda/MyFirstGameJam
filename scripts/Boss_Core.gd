@@ -104,8 +104,8 @@ func _process(delta):
 			if attack_stage == 1:
 				#Shooooooot missiles everywhere !!!!!!
 				var new_angle = 0
-				for i in range(24):
-					new_angle += 15
+				for i in range(18):
+					new_angle += 20
 					var missile = MISSILE_INSTANCE.instance()
 					get_tree().get_root().add_child(missile)
 					var missile_pos = missile.get_pos()
