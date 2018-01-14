@@ -25,16 +25,19 @@ var level_spawner_max = 0
 var level_spawner_num = 0
 var level_spawner_destroyed = 0
 var level_spawner_sim_max = 0 #number of spawner that are allowed simultaneously
+var ini = true
 
 func _ready():
-	#let's play the music !!
-	var main_stream = get_tree().get_root().get_node("World").get_node("StreamMain")
-	if main_stream.is_playing() == false:
-		main_stream.play()
-	main_stream.set_volume(get_tree().get_root().get_node("World").pub_music_level)
 	set_process(true)
 
 func _process(delta):
+	if ini == true:
+		#let's play the music !!
+		var main_stream = get_tree().get_root().get_node("World").get_node("StreamMain")
+		if main_stream.is_playing() == false:
+			main_stream.play()
+		main_stream.set_volume(Globals.get("music_level"))
+		ini = false
 	#UPDATE ALARMS
 	alarm_0 -= delta
 	if alarm_0 < 0:
@@ -127,7 +130,7 @@ func _process(delta):
 					var boss_stream = get_tree().get_root().get_node("World").get_node("StreamBoss")
 					main_stream.stop()
 					boss_stream.play()
-					boss_stream.set_volume(get_tree().get_root().get_node("World").pub_music_level)
+					boss_stream.set_volume(Globals.get("music_level"))
 					
 					pass
 				else:
@@ -137,7 +140,7 @@ func _process(delta):
 					if main_stream.is_playing() == false:
 						main_stream.play()
 					boss_stream.stop()
-					main_stream.set_volume(get_tree().get_root().get_node("World").pub_music_level)
+					main_stream.set_volume(Globals.get("music_level"))
 					
 					if level_spawner_num - level_spawner_destroyed < level_spawner_sim_max: #spawn a new carrier !!!
 						level_spawner_num += 1
@@ -168,4 +171,4 @@ func _process(delta):
 							var end_stream = get_tree().get_root().get_node("World").get_node("StreamEnd")
 							boss_stream.stop()
 							end_stream.play()
-							end_stream.set_volume(get_tree().get_root().get_node("World").pub_music_level)
+							end_stream.set_volume(Globals.get("music_level"))

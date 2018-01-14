@@ -1,7 +1,7 @@
 extends Node
-const pub_music_level = 0.5
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
+	
+	Globals.set("music_level", 0.5)
+	Globals.set("sound_level", 0.5)
 	pass

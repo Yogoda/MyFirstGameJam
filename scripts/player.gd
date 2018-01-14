@@ -1,6 +1,5 @@
 extends Node2D
 
-var so_level = 0.5
 const SPEED = 400
 var missile_speed = 500
 var end_level = false
@@ -111,7 +110,6 @@ func _ready():
 	player_pos.x = round(get_viewport_rect().end.x /2)
 	set_pos(player_pos)
 	up_direction = true
-	so_level = get_tree().get_root().get_node("World").pub_sound_level
 	
 	update_model()
 	
@@ -308,7 +306,7 @@ func _process(delta):
 					child.queue_free()
 			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEvents")
 			var so_id = so_player.play("AltAttack")
-			so_player.set_volume(so_id,so_level)
+			so_player.set_volume(so_id,Globals.get("sound_level"))
 			alt_bar.set_value(0)
 			
 			
@@ -319,7 +317,7 @@ func _process(delta):
 		right_direction = false
 		var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerDeath")
 		var so_id = so_player.play("Explosion2")
-		so_player.set_volume(so_id,so_level)
+		so_player.set_volume(so_id,Globals.get("sound_level"))
 		current_model.explode()
 		death = true
 		

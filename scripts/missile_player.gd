@@ -1,6 +1,5 @@
 extends Area2D
 
-var so_level = 0.5
 var speed = 500
 const SCREEN_MARGIN = 8
 var velocity = Vector2(0,-speed)
@@ -24,17 +23,16 @@ func play_sound(missile_type):
 	
 	if missile_type == MISSILE_TYPE_1:
 		so_id = so_player.play("Laser_Shoot1")
-		so_player.set_volume(so_id,so_level)
+		so_player.set_volume(so_id,Globals.get("sound_level"))
 	elif missile_type == MISSILE_TYPE_2:
 		so_id = so_player.play("Laser_Shoot4")
-		so_player.set_volume(so_id,0.5*so_level)
+		so_player.set_volume(so_id,0.5*Globals.get("sound_level"))
 	elif missile_type == MISSILE_TYPE_2:
 		so_id = so_player.play("Laser_Shoot5")
-		so_player.set_volume(so_id,0.5*so_level)
+		so_player.set_volume(so_id,0.5*Globals.get("sound_level"))
 		
 
 func _ready():
-	so_level = get_tree().get_root().get_node("World").pub_sound_level
 	connect("area_enter",self,"_on_area_enter")
 	set_process(true)
 	

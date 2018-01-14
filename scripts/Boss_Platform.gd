@@ -63,7 +63,7 @@ func _process(delta):
 		#sound of explosion
 		var so_player = get_node("SamplePlayer")
 		var so_id = so_player.play("Explosion6")
-		so_player.set_volume(so_id,get_tree().get_root().get_node("World").pub_sound_level)
+		so_player.set_volume(so_id,Globals.get("sound_level"))
 		death = true
 		
 	if death == true:

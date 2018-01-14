@@ -1,7 +1,6 @@
 extends Node2D
 
 var so_delay = 1.5
-var so_level = 0.5
 var entry_sound = true
 var overmind
 var vertical_speed = 30
@@ -40,7 +39,6 @@ func _process(delta):
 	
 	if ini == false:
 		ini = true
-		so_level = get_tree().get_root().get_node("World").pub_sound_level
 		#SPAWN MOTHERSHIP PARTS
 		var position = get_pos()
 		#CORE
@@ -93,7 +91,7 @@ func _process(delta):
 			var i = randi()%4
 			var so_player = get_node("SoBossPlayer")
 			var so_id = so_player.play("BossEntry")
-			so_player.set_volume(so_id,so_level)
+			so_player.set_volume(so_id,Globals.get("sound_level"))
 			entry_sound = false
 	
 	if down_direction == true:

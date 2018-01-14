@@ -55,7 +55,6 @@ enabled = false
 [node name="3" parent="25D Model" instance=ExtResource( 6 )]
 
 visibility/visible = false
-enabled = true
 
 [node name="4" parent="25D Model" instance=ExtResource( 7 )]
 

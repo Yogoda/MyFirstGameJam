@@ -26,7 +26,6 @@ const MISSILE_ANGLE_SPEED = 80
 var hp = 5
 var death = false
 var death_duration = 0.5
-var so_level = 0.5
 var fire_mode = 0 # 0 is 1 missile down, 1 is 4 missiles to the sides, 2 is two missiles to the diagonals, 3 is 1 missile rotating around center, 4 is 4 missiles rotating around center
 var fire1_rate = 0.8
 const FIRE1_SHIFT = 20
@@ -62,7 +61,6 @@ func _fixed_process(delta):
 func _process(delta):
 	
 	if ini == true:
-		so_level = get_tree().get_root().get_node("World").pub_sound_level
 		if fire_mode == 0:
 			var Model = SHIP0_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
@@ -147,7 +145,7 @@ func _process(delta):
 				so_id = so_player.play("Explosion4")
 			else:
 				so_id = so_player.play("Explosion5")
-			so_player.set_volume(so_id,so_level)
+			so_player.set_volume(so_id,Globals.get("music_level"))
 			
 			var player_ship = get_tree().get_root().get_node("Player")
 			if player_ship != null:
@@ -313,4 +311,4 @@ func _process(delta):
 			else:
 				var so_player = get_node("Sounds")
 				var so_id = so_player.play(so_laser)
-				so_player.set_volume(so_id,SO_SHOOT_LVL*so_level)
+				so_player.set_volume(so_id,SO_SHOOT_LVL*Globals.get("music_level"))
