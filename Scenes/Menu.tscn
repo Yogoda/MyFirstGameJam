@@ -342,7 +342,7 @@ v_offset = 0.0
 [node name="Spatial" type="Spatial" parent="Spatial"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.819152, 0.573576, -7.52154e-08, 0, 1.31134e-07, 1, 0.573576, -0.819152, 1.07419e-07, 1.94015, 1.55449, -10 )
+transform/local = Transform( 0.819152, 0.573576, -7.52154e-08, 0, 1.31134e-07, 1, 0.573576, -0.819152, 1.07419e-07, 1.25813, 1.55449, -8.89706 )
 
 [node name="MeshInstance" parent="Spatial/Spatial" instance=ExtResource( 20 )]
 
@@ -354,26 +354,6 @@ transform/local = Transform( 1, 0, 0, 0, 1, 0, -2.13163e-14, -2.13163e-14, 1, -4
 material/0 = ExtResource( 17 )
 
 [node name="MeshInstance2" parent="Spatial/Spatial" instance=ExtResource( 20 )]
-
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 8.9407e-08 )
-material/0 = ExtResource( 5 )
-
-[node name="Spatial1" type="Spatial" parent="Spatial"]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.819152, 0.573576, -7.52154e-08, 0, 1.31134e-07, 1, 0.573576, -0.819152, 1.07419e-07, 0.452718, 1.55449, -7 )
-visibility/visible = false
-
-[node name="MeshInstance" parent="Spatial/Spatial1" instance=ExtResource( 20 )]
-
-material/0 = ExtResource( 17 )
-
-[node name="MeshInstance1" parent="Spatial/Spatial1" instance=ExtResource( 20 )]
-
-transform/local = Transform( 1, 0, 0, 0, 1, 0, -1.42109e-14, -2.13163e-14, 1, -2.38419e-07, 1.2, -2.38419e-07 )
-material/0 = ExtResource( 17 )
-
-[node name="MeshInstance2" parent="Spatial/Spatial1" instance=ExtResource( 20 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 8.9407e-08 )
 material/0 = ExtResource( 5 )

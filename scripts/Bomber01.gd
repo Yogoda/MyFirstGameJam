@@ -119,7 +119,6 @@ func _process(delta):
 
 	if death == true:
 		death_duration -= delta
-		get_node("25D Model/Model").explode()
 		if death_duration < 0:
 			queue_free()
 	
@@ -164,6 +163,7 @@ func _process(delta):
 						power_up.set_pos(power_up_pos)
 						power_up.speed = vertical_speed
 			
+			get_node("25D Model/Model").explode()
 			death = true
 		
 	#step events

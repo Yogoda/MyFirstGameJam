@@ -16,6 +16,7 @@
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 1 )
+enabled = true
 hide = true
 rotate = false
 rotation_speed = 15.0

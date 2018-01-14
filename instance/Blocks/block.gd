@@ -13,6 +13,11 @@ var blinkDuration
 var blinkTimer
 var blinkSteps
 
+var exploding = false
+
+var explodeDuration = 0.5
+var explodeTimer
+
 func _ready():
 
 #	exposion direction	
@@ -36,11 +41,16 @@ func _fixed_process(delta):
 			blinking = false
 			blinkTimer = blinkDuration
 			set_hidden(false)
+			
+	if exploding:
+		
+		global_translate(dir)
+		global_rotate(rotAxis, rotSpeed)
 
 func explode():
 
-	global_translate(dir)
-	global_rotate(rotAxis, rotSpeed)
+	explodeTimer = explodeDuration
+	exploding = true
 
 func blink(nb):
 	

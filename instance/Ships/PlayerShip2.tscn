@@ -14,6 +14,7 @@
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 1 )
+enabled = true
 hide = true
 rotate = false
 rotation_speed = 15.0
@@ -41,11 +42,6 @@ material/0 = ExtResource( 5 )
 [node name="MeshInstance 4" parent="." instance=ExtResource( 8 )]
 
 transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.4, 2 )
-material/0 = ExtResource( 9 )
-
-[node name="MeshInstance5" parent="." instance=ExtResource( 8 )]
-
-transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 2.4, 2 )
 material/0 = ExtResource( 9 )
 
 

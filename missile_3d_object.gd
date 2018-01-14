@@ -1,9 +1,5 @@
 extends Spatial
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 var rotationSpeed = 0.03
 var scale = 1
 var enabled = true

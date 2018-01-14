@@ -35,13 +35,20 @@ var death = false
 var death_duration = 0.5
 const MISSILE_INSTANCE = preload("res://instance/missile_player.tscn")
 
-#const PLAYER_SHIP_1 = preload("res://instance/Ships/PlayerShip1.tscn")
-const PLAYER_SHIP_2 = preload("res://instance/Ships/PlayerShip2.tscn")
-const PLAYER_SHIP_3 = preload("res://instance/Ships/PlayerShip3.tscn")
-const PLAYER_SHIP_4 = preload("res://instance/Ships/PlayerShip4.tscn")
-const PLAYER_SHIP_5 = preload("res://instance/Ships/PlayerShip5.tscn")
+#const PLAYER_EXPL_1 = preload("res://instance/Ships/Explosions/Explosion1.tscn")
+const PLAYER_EXPL_2 = preload("res://instance/Ships/Explosions/Explosion2.tscn")
+const PLAYER_EXPL_3 = preload("res://instance/Ships/Explosions/Explosion3.tscn")
+const PLAYER_EXPL_4 = preload("res://instance/Ships/Explosions/Explosion4.tscn")
+const PLAYER_EXPL_5 = preload("res://instance/Ships/Explosions/Explosion5.tscn")
+
+const SHIP_EXPLOSION = preload("res://instance/Ships/Ship Explosion.tscn")
 
 var current_model
+
+func set_invincible():
+	
+	hit_invicible = true
+	invici_counter = INVICI_COUNT
 
 func update_model():
 	
@@ -57,6 +64,7 @@ func upgrade(amnt):
 	if structure_points < STRUCTURE_POINTS_MAX:
 		structure_points += amnt
 		update_model()
+		set_invincible()
 		return amnt
 	
 	return 0
@@ -64,17 +72,33 @@ func upgrade(amnt):
 func damage(dmg):
 	
 	if invicible == false and hit_invicible == false:
-		
+
+		if structure_points > 1:
+			var explosion = SHIP_EXPLOSION.instance()
+			add_child(explosion)
+			
+#			if structure_points == 1:
+#				explosion.explode(PLAYER_EXPL_1)
+			if structure_points == 2:
+				explosion.explode(PLAYER_EXPL_2)
+			if structure_points == 3:
+				explosion.explode(PLAYER_EXPL_3)
+			if structure_points == 4:
+				explosion.explode(PLAYER_EXPL_4)
+			if structure_points == 5:
+				explosion.explode(PLAYER_EXPL_5)
+						
 		if structure_points > 3:#lose all power ups
 			structure_points = 3
 		else:
 			structure_points -= dmg
-		#temporary invicibility if hit
-		hit_invicible = true
-		invici_counter = INVICI_COUNT
 
-		current_model.blink(4)
-		update_model()
+		if structure_points > 0:
+			#temporary invicibility if hit
+			set_invincible()
+			
+			update_model()
+			current_model.blink(4)
 		
 		return dmg
 	
@@ -149,7 +173,6 @@ func _process(delta):
 	
 	if death == true:
 		death_duration -= delta
-		current_model.explode()
 		if death_duration < 0:
 			#communicate death to the overmind
 			var overmind = get_tree().get_root().get_node("World").get_node("Overmind")
@@ -200,8 +223,7 @@ func _process(delta):
 				player_control = true
 				invicible = false
 				#temporary invicibility "wow that's a lot of i's! but I think indivisibility beats it :P
-				hit_invicible = true
-				invici_counter = INVICI_COUNT
+				set_invincible()
 				
 	set_pos(player_pos)
 	
@@ -298,5 +320,6 @@ func _process(delta):
 		var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerDeath")
 		var so_id = so_player.play("Explosion2")
 		so_player.set_volume(so_id,so_level)
+		current_model.explode()
 		death = true
 		
