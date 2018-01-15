@@ -4,7 +4,7 @@ var ship
 onready var camera = get_node("/root/World/Camera")
 
 var speed = 4
-var camDist = 80;
+export var camDist = 80;
 
 export var setRotation = true
 export var set_visiblity = true
