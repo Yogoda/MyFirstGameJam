@@ -34,7 +34,7 @@ func _ready():
 	elif difficulty == 1:
 		MAX_LEVEL = 5
 	elif difficulty == 2:
-		MAX_LEVEL = 7
+		MAX_LEVEL = 5
 
 	set_process(true)
 

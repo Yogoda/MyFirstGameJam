@@ -1,6 +1,6 @@
 extends Node2D
 
-var timer = 5
+var timer = 15
 const X_SHIFT = 25
 var init = true
 
