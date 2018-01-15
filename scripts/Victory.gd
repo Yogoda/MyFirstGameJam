@@ -1,6 +1,6 @@
 extends Node2D
 
-var timer = 1.5
+var timer = 5
 const X_SHIFT = 25
 var init = true
 
@@ -26,5 +26,8 @@ func _process(delta):
 		so_player.set_volume(so_id,Globals.get("sound_level"))
 	
 	if timer < 0:
-		queue_free()
-	pass
+		#restart game !!!!
+		for node in get_tree().get_root().get_children():
+			node.queue_free()
+			
+		get_tree().change_scene("res://Scenes/Menu.tscn")

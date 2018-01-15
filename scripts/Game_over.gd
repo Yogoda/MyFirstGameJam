@@ -32,6 +32,6 @@ func _process(delta):
 		for node in get_tree().get_root().get_children():
 			node.queue_free()
 			
-		get_tree().change_scene("res://Scenes/World.tscn")
+		get_tree().change_scene("res://Scenes/Menu.tscn")
 		
 	pass

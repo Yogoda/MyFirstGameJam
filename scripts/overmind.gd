@@ -1,6 +1,6 @@
 extends Node2D
 
-const MAX_LEVEL = 1 #number of game levels
+var MAX_LEVEL = 5 #number of game levels
 var current_level = 1
 var level_status = "starting"
 var end_game = false
@@ -28,6 +28,14 @@ var level_spawner_sim_max = 0 #number of spawner that are allowed simultaneously
 var ini = true
 
 func _ready():
+	var difficulty = Globals.get("difficulty")
+	if difficulty == 0:
+		MAX_LEVEL = 5
+	elif difficulty == 1:
+		MAX_LEVEL = 5
+	elif difficulty == 2:
+		MAX_LEVEL = 7
+
 	set_process(true)
 
 func _process(delta):
@@ -88,21 +96,13 @@ func _process(delta):
 					level_spawner_sim_max = 2
 					ship_level = 4
 				if current_level == 5:
-					level_spawner_max = 4
-					level_spawner_sim_max = 2
-					ship_level = 5
-				if current_level == 6:
 					level_spawner_max = 6
 					level_spawner_sim_max = 3
 					ship_level = 3
-				if current_level == 7:
+				if current_level == 6:
 					level_spawner_max = 6
 					level_spawner_sim_max = 3
 					ship_level = 4
-				if current_level == 8:
-					level_spawner_max = 6
-					level_spawner_sim_max = 3
-					ship_level = 5
 				
 		elif level_status == "ending":
 			if current_level < MAX_LEVEL:
