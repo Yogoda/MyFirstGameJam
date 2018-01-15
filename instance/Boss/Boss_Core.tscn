@@ -69,7 +69,7 @@ camDist = 80
 setRotation = true
 set_visiblity = true
 
-[node name="Model" parent="25D Model" instance=ExtResource( 4 )]
+[node name="Model 2" parent="25D Model" instance=ExtResource( 4 )]
 
 rotation_speed = 5.0
 

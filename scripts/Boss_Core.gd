@@ -115,7 +115,7 @@ func _process(delta):
 			fire1_rate = 0.1
 			
 	if hp < 1 and death == false:
-		get_node("25D Model/Model").explode()
+		get_node("25D Model/Model 2").explode()
 		mothership.ship_destroyed += 1
 		var player_ship = get_tree().get_root().get_node("Player")
 		if player_ship != null:

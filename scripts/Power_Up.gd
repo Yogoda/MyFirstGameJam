@@ -38,5 +38,7 @@ func _on_area_enter(other):
 	if other.is_in_group("player"):
 		
 		if other.upgrade(1) > 0:
-			get_tree().get_root().get_node("World").get_node("SoPlayerPowerUp").play("Powerup")
+			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerPowerUp")
+			var so_id = so_player.play("Powerup")
+			so_player.set_volume(so_id,Globals.get("sound_level"))
 			queue_free()

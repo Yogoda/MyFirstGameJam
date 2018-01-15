@@ -168,7 +168,7 @@ func _process(delta):
 			#sound of explosion
 			var i = randi()%4
 			var so_player = get_node("SoPlayerDeath")
-			var so_id = so_player.play("Explosion")
+			var so_id #= so_player.play("Explosion")
 			if i == 0:
 				so_id = so_player.play("Explosion")
 			elif i == 1:
@@ -177,7 +177,7 @@ func _process(delta):
 				so_id = so_player.play("Explosion4")
 			else:
 				so_id = so_player.play("Explosion5")
-			so_player.set_volume(so_id,Globals.get("music_level"))
+			so_player.set_volume(so_id,Globals.get("sound_level"))
 			
 			var player_ship = get_tree().get_root().get_node("Player")
 			if player_ship != null:
@@ -343,4 +343,4 @@ func _process(delta):
 			else:
 				var so_player = get_node("Sounds")
 				var so_id = so_player.play(so_laser)
-				so_player.set_volume(so_id,SO_SHOOT_LVL*Globals.get("music_level"))
+				so_player.set_volume(so_id,SO_SHOOT_LVL*Globals.get("sound_level"))
