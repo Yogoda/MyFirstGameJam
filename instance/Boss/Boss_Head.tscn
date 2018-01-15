@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/Boss_Head.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://instance/25D Model.tscn" type="PackedScene" id=3]
-[ext_resource path="res://instance/Ships/Ship6.tscn" type="PackedScene" id=4]
+[ext_resource path="res://instance/Ships/Boss/Head.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sounds/Explosion6.wav" type="Sample" id=5]
 [ext_resource path="res://Sounds/Laser_Shoot10.wav" type="Sample" id=6]
 
@@ -62,8 +62,6 @@ setRotation = true
 set_visiblity = true
 
 [node name="Model" parent="25D Model" instance=ExtResource( 4 )]
-
-enabled = true
 
 [node name="SamplePlayer" type="SamplePlayer" parent="."]
 
