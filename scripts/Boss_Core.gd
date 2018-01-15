@@ -31,6 +31,10 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
+	
+	if activated:
+		rotate(delta * 3)
+	
 	if active_check == true and activated == false:
 		activation_delay -= delta
 		if activation_delay < 0:
