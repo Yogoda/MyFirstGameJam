@@ -19,6 +19,16 @@ const POWER_UP_INSTANCE = preload("res://instance/Power_Up.tscn")
 var power_up_speed = 20
 
 func _ready():
+	var difficulty = Globals.get("difficulty")
+	if difficulty == 0:
+		fire1_rate = 1.5
+		hp = 50
+	elif difficulty == 1:
+		fire1_rate = 1.0
+		hp = 75
+	elif difficulty == 2:
+		fire1_rate = 0.8
+		hp = 100
 	set_process(true)
 
 func _process(delta):

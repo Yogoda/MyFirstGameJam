@@ -61,16 +61,27 @@ func _fixed_process(delta):
 func _process(delta):
 	
 	if ini == true:
+		var difficulty = Globals.get("difficulty")
 		if fire_mode == 0:
 			var Model = SHIP0_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
-			hp = 5
+			if difficulty == 0:
+				hp = 3
+			elif difficulty == 1:
+				hp = 5
+			elif difficulty == 2:
+				hp = 7
 			so_laser = "Laser_Shoot2"
 			
 		if fire_mode == 1:
 			var Model = SHIP1_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
-			hp = 6
+			if difficulty == 0:
+				hp = 4
+			elif difficulty == 1:
+				hp = 6
+			elif difficulty == 2:
+				hp = 8
 			so_laser = "Laser_Shoot9"
 			
 		if fire_mode == 2:
@@ -78,21 +89,37 @@ func _process(delta):
 			get_node("25D Model").add_child(Model)
 			left_direction = false
 			right_direction = false
-			hp = 10
+			if difficulty == 0:
+				hp = 8
+			elif difficulty == 1:
+				hp = 10
+			elif difficulty == 2:
+				hp = 12
 			so_laser = "Laser_Shoot7"
 			
 		if fire_mode == 3:
 			var Model = SHIP3_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
 			fire1_rate = 0.4
-			hp = 8
+			if difficulty == 0:
+				hp = 6
+			elif difficulty == 1:
+				hp = 8
+			elif difficulty == 2:
+				hp = 10
+
 			so_laser = "Laser_Shoot6"
 			
 		if fire_mode == 4:
 			var Model = SHIP5_INSTANCE.instance()
 			get_node("25D Model").add_child(Model)
 			fire1_rate = 0.5
-			hp = 7
+			if difficulty == 0:
+				hp = 5
+			elif difficulty == 1:
+				hp = 7
+			elif difficulty == 2:
+				hp = 9
 			so_laser = "Laser_Shoot3"
 			
 		if fire_mode == 10:
@@ -102,7 +129,12 @@ func _process(delta):
 			right_direction = false
 			vertical_speed = 45
 			fire1_rate = 2.0
-			hp = 14
+			if difficulty == 0:
+				hp = 12
+			elif difficulty == 1:
+				hp = 14
+			elif difficulty == 2:
+				hp = 16
 			so_laser = "Blip_Bomb"
 			
 		ini = false

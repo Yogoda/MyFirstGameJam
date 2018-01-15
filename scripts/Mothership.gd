@@ -68,28 +68,28 @@ func _process(delta):
 			var m_ship_platform = m_ship_platform_instance.instance()
 			get_tree().get_root().add_child(m_ship_platform)
 			position = get_pos()
-			position.y += y_shift
+			position.y += 2*y_shift
 			if i == 0:
-				position.x += x_shift
+				position.x += 2*x_shift
 			else:
-				position.x -= x_shift
+				position.x -= 2*x_shift
 			m_ship_platform.set_pos(position)
 			m_ship_platform.mothership = self
-			m_ship_platform.y_shift = y_shift
+			m_ship_platform.y_shift = 2*y_shift
 		#SILOS
 		for i in range(2):
 			var m_ship_silo_instance = preload(SILO_PATH)
 			var m_ship_silo = m_ship_silo_instance.instance()
 			get_tree().get_root().add_child(m_ship_silo)
 			position = get_pos()
-			position.y += 2*y_shift
+			position.y += y_shift
 			if i == 0:
-				position.x += 2*x_shift
+				position.x += x_shift
 			else:
-				position.x -= 2*x_shift
+				position.x -= x_shift
 			m_ship_silo.set_pos(position)
 			m_ship_silo.mothership = self
-			m_ship_silo.y_shift = 2*y_shift
+			m_ship_silo.y_shift = y_shift
 			
 
 	if entry_sound == true:

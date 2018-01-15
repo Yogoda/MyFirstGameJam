@@ -3,7 +3,7 @@ var active_check = false
 var mothership
 var activated = false
 var activation_delay = 1
-const HP_MAX = 70
+var HP_MAX = 70
 var hp = HP_MAX
 var death = false
 var death_duration = 0.5
@@ -28,6 +28,19 @@ const POWER_UP_INSTANCE = preload("res://instance/Power_Up.tscn")
 var power_up_speed = 20
 
 func _ready():
+	var difficulty = Globals.get("difficulty")
+	if difficulty == 0:
+		HP_MAX = 40
+		hp = HP_MAX
+		fire1_rate = 1.5
+	elif difficulty == 1:
+		HP_MAX = 70
+		hp = HP_MAX
+		fire1_rate = 1.2
+	elif difficulty == 2:
+		HP_MAX = 100
+		hp = HP_MAX
+		fire1_rate = 1.0
 	set_process(true)
 
 func _process(delta):
@@ -93,7 +106,13 @@ func _process(delta):
 			
 	if hp < HP_MAX/2 and attack_stage == 1:
 		attack_stage = 2
-		fire1_rate = 0.1
+		var difficulty = Globals.get("difficulty")
+		if difficulty == 0:
+			fire1_rate = 0.2
+		elif difficulty == 1:
+			fire1_rate = 0.15
+		elif difficulty == 2:
+			fire1_rate = 0.1
 			
 	if hp < 1 and death == false:
 		mothership.ship_destroyed += 1

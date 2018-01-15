@@ -16,6 +16,14 @@ var is_scoring = true
 const HIT_SCORE = 100
 
 func _ready():
+	var difficulty = Globals.get("difficulty")
+	if difficulty == 0:
+		hp = 30
+	elif difficulty == 1:
+		hp = 45
+	elif difficulty == 2:
+		hp = 60
+		
 	set_process(true)
 
 func _process(delta):
