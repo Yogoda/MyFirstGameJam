@@ -9,6 +9,7 @@ script/script = ExtResource( 1 )
 
 [node name="25D Model" parent="." instance=ExtResource( 2 )]
 
+camDist = 80
 setRotation = true
 set_visiblity = true
 

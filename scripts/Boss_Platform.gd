@@ -46,6 +46,7 @@ func _process(delta):
 		ship.set_pos(ship_pos)
 		
 	if hp < 0 and death == false:
+		get_node("25D Model/Model").explode()
 		mothership.ship_destroyed += 1
 		#create a power up!
 		var player_ship = get_tree().get_root().get_node("Player")
@@ -68,7 +69,6 @@ func _process(delta):
 		
 	if death == true:
 		death_duration -= delta
-		#get_node("25D Model/Model").explode()
 		if death_duration < 0:
 			queue_free()
 
