@@ -48,7 +48,6 @@ func _process(delta):
 		if player_respawn_delay < 0:
 			if player_ship > 0:
 				player_ship -= 1
-				print(player_ship)
 				player_respawn_delay = RESPAWN_DELAY
 				player_destroyed = false
 				var player_ship = PLAYER_INSTANCE.instance()
@@ -62,7 +61,6 @@ func _process(delta):
 				
 			
 	if alarm_0 < 0:
-#		print(level_status)
 		if level_status == "starting":
 			get_tree().get_root().get_node("World").get_node("Level").level = current_level
 			level_spawner_num = 0
