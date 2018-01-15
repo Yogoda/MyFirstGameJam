@@ -20,6 +20,7 @@ const HEAD_PATH = "res://instance/Boss/Boss_Head.tscn"
 const CORE_PATH = "res://instance/Boss/Boss_Core.tscn"
 const SILO_PATH = "res://instance/Boss/Boss_Silo.tscn"
 const PLATFORM_PATH = "res://instance/Boss/Boss_Platform.tscn"
+const STRUCTURE_PATH = "res://instance/Boss/Boss_Structure.tscn"
 var y_shift = 30
 var x_shift = 80
 
@@ -47,6 +48,12 @@ func _process(delta):
 		get_tree().get_root().add_child(m_ship_core)
 		m_ship_core.set_pos(position)
 		m_ship_core.mothership = self
+		#STRUCTURE
+		var m_ship_structure_instance = preload(STRUCTURE_PATH)
+		var m_ship_structure = m_ship_structure_instance.instance()
+		get_tree().get_root().add_child(m_ship_structure)
+		m_ship_structure.set_pos(position)
+		m_ship_structure.mothership = self
 		#HEAD
 		var m_ship_head_instance = preload(HEAD_PATH)
 		var m_ship_head = m_ship_head_instance.instance()
@@ -110,5 +117,7 @@ func _process(delta):
 	if current_stage == 2 and ship_destroyed > 4:
 		current_stage = 3
 	if current_stage == 3 and ship_destroyed > 5:
+		current_stage = 4
+	if current_stage == 4 and ship_destroyed > 6:
 		overmind.level_spawner_destroyed += 1
 		queue_free()

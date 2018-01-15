@@ -77,19 +77,15 @@ func _process(delta):
 			position.y += SPEED * delta
 			
 		if position.x + SCREEN_MARGIN > get_viewport_rect().end.x:
-			position.x = get_viewport_rect().end.x - SCREEN_MARGIN
 			right_direction = false
 			left_direction = true
 		if position.y + SCREEN_MARGIN +30 > get_viewport_rect().end.y:
-			position.y = get_viewport_rect().end.y - SCREEN_MARGIN -30
 			up_direction = true
 			down_direction = false
 		if position.x < get_viewport_rect().pos.x + SCREEN_MARGIN:
-			position.x = get_viewport_rect().pos.x + SCREEN_MARGIN
 			right_direction = true
 			left_direction = false
 		if position.y < get_viewport_rect().pos.y + SCREEN_MARGIN:
-			position.y = get_viewport_rect().pos.y + SCREEN_MARGIN
 			up_direction = false
 			down_direction = true
 			
@@ -99,7 +95,7 @@ func _process(delta):
 		attack_stage = 2
 		fire1_rate = 0.1
 			
-	if hp < 0 and death == false:
+	if hp < 1 and death == false:
 		mothership.ship_destroyed += 1
 		var player_ship = get_tree().get_root().get_node("Player")
 		if player_ship != null:
@@ -126,7 +122,7 @@ func _process(delta):
 			queue_free()
 			
 	if active_check == false:
-		if mothership.current_stage > 2:
+		if mothership.current_stage > 3:
 			active_check = true
 	
 	if activated == true:

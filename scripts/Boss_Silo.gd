@@ -45,7 +45,7 @@ func _process(delta):
 		ship_pos.y = get_pos().y+30
 		ship.set_pos(ship_pos)
 		
-	if hp < 0 and death == false:
+	if hp < 1 and death == false:
 		mothership.ship_destroyed += 1
 		var player_ship = get_tree().get_root().get_node("Player")
 		if player_ship != null:

@@ -1,6 +1,6 @@
 extends Node2D
 
-const MAX_LEVEL = 5 #number of game levels
+const MAX_LEVEL = 1 #number of game levels
 var current_level = 1
 var level_status = "starting"
 var end_game = false
