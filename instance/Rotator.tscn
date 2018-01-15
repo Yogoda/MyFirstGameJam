@@ -1,0 +1,161 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://scripts/3D_ship.gd" type="Script" id=1]
+[ext_resource path="res://instance/Blocks/block_1x1r.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Meshes/block_1x1r.msh" type="Mesh" id=3]
+[ext_resource path="res://instance/Blocks/Materials/black.tres" type="Material" id=4]
+[ext_resource path="res://instance/Blocks/block.gd" type="Script" id=5]
+[ext_resource path="res://instance/Blocks/block_2x2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Meshes/block_2x2.msh" type="Mesh" id=7]
+[ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Meshes/block_6x1.msh" type="Mesh" id=9]
+[ext_resource path="res://instance/Blocks/Materials/grey.tres" type="Material" id=10]
+
+[node name="Rotator" type="Spatial"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 1 )
+enabled = true
+hide = false
+rotate = true
+rotation_speed = 10.0
+
+[node name="MeshInstance 6" type="MeshInstance" parent="." instance=ExtResource( 2 )]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.4, 0.5 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 3 )
+mesh/skeleton = NodePath("..")
+material/0 = ExtResource( 4 )
+script/script = ExtResource( 5 )
+
+[node name="MeshInstance 7" type="MeshInstance" parent="." instance=ExtResource( 6 )]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 7 )
+mesh/skeleton = NodePath("..")
+material/0 = ExtResource( 4 )
+script/script = ExtResource( 5 )
+
+[node name="MeshInstance 8" type="MeshInstance" parent="." instance=ExtResource( 8 )]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8, -3 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 9 )
+mesh/skeleton = NodePath("..")
+material/0 = ExtResource( 10 )
+script/script = ExtResource( 5 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="." instance=ExtResource( 8 )]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.8, 3 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 9 )
+mesh/skeleton = NodePath("..")
+material/0 = ExtResource( 10 )
+script/script = ExtResource( 5 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="." instance=ExtResource( 8 )]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 4.8, 1 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 9 )
+mesh/skeleton = NodePath("..")
+material/0 = ExtResource( 10 )
+script/script = ExtResource( 5 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="." instance=ExtResource( 8 )]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 4.8, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = ExtResource( 9 )
+mesh/skeleton = NodePath("..")
+material/0 = ExtResource( 10 )
+script/script = ExtResource( 5 )
+
+

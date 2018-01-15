@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://scripts/3D_ship.gd" type="Script" id=1]
 [ext_resource path="res://instance/Blocks/block_4x1.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://instance/Blocks/block_6x2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://instance/Blocks/block_3x2.tscn" type="PackedScene" id=7]
 [ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://instance/Rotator.tscn" type="PackedScene" id=9]
 
 [node name="Model" type="Spatial"]
 
@@ -327,5 +328,23 @@ material/0 = ExtResource( 3 )
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 3.6, 10 )
 material/0 = ExtResource( 3 )
+
+[node name="Rotator" parent="." instance=ExtResource( 9 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 2.5, 2.5 )
+rotation_speed = -10.0
+
+[node name="Rotator1" parent="." instance=ExtResource( 9 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 2.5, 2.5 )
+
+[node name="Rotator2" parent="." instance=ExtResource( 9 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 2.5, 5.5 )
+
+[node name="Rotator3" parent="." instance=ExtResource( 9 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 2.5, 5.5 )
+rotation_speed = -10.0
 
 
