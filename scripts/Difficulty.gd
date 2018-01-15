@@ -3,6 +3,10 @@ extends HSlider
 var previous_val = 1
 
 func _ready():
+	if Globals.has("difficulty"):
+		set_val(Globals.get("difficulty"))
+		previous_val = get_val()
+		
 	set_process_input(true)
 	
 func _input(event):

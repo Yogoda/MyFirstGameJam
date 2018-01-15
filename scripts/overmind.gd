@@ -34,7 +34,7 @@ func _ready():
 	elif difficulty == 1:
 		MAX_LEVEL = 5
 	elif difficulty == 2:
-		MAX_LEVEL = 5
+		MAX_LEVEL = 6
 
 	set_process(true)
 
@@ -96,9 +96,9 @@ func _process(delta):
 					level_spawner_sim_max = 2
 					ship_level = 4
 				if current_level == 5:
-					level_spawner_max = 6
-					level_spawner_sim_max = 3
-					ship_level = 3
+					level_spawner_max = 4
+					level_spawner_sim_max = 2
+					ship_level = 5
 				if current_level == 6:
 					level_spawner_max = 6
 					level_spawner_sim_max = 3
