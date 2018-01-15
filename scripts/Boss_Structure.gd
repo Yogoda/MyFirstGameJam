@@ -26,6 +26,7 @@ func _process(delta):
 	print (mothership.current_stage)
 
 	if hp < 1 and death == false:
+		get_node("25D Model/Model").explode()
 		mothership.ship_destroyed += 1
 		#sound of explosion
 		var so_player = get_node("SamplePlayer")
