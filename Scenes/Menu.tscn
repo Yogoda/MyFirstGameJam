@@ -1,30 +1,34 @@
-[gd_scene load_steps=29 format=1]
+[gd_scene load_steps=34 format=1]
 
 [ext_resource path="res://scripts/Menu_Node.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Start_Game.gd" type="Script" id=2]
-[ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://instance/Blocks/Materials/white.tres" type="Material" id=4]
-[ext_resource path="res://instance/Blocks/block_3x2.tscn" type="PackedScene" id=5]
-[ext_resource path="res://instance/Blocks/Materials/black.tres" type="Material" id=6]
-[ext_resource path="res://instance/Blocks/Materials/blue.tres" type="Material" id=7]
-[ext_resource path="res://instance/Blocks/block_2x2o.tscn" type="PackedScene" id=8]
-[ext_resource path="res://instance/Blocks/block_1x2o.tscn" type="PackedScene" id=9]
-[ext_resource path="res://instance/Blocks/Materials/grey.tres" type="Material" id=10]
-[ext_resource path="res://instance/Blocks/block_4x2.tscn" type="PackedScene" id=11]
-[ext_resource path="res://instance/Blocks/Materials/green.tres" type="Material" id=12]
-[ext_resource path="res://instance/Blocks/block_2x2.tscn" type="PackedScene" id=13]
-[ext_resource path="res://instance/Blocks/block_4x1.tscn" type="PackedScene" id=14]
-[ext_resource path="res://instance/Blocks/block_6x2.tscn" type="PackedScene" id=15]
-[ext_resource path="res://instance/Blocks/yellow.tres" type="Material" id=16]
-[ext_resource path="res://instance/Blocks/block_1x2.tscn" type="PackedScene" id=17]
-[ext_resource path="res://instance/Blocks/Materials/yellow.tres" type="Material" id=18]
-[ext_resource path="res://instance/Blocks/block_1x1r.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Scenes/Menu_enviro.tres" type="Environment" id=20]
-[ext_resource path="res://instance/Blocks/block_1x1.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Meshes/block_2x2.msh" type="Mesh" id=22]
-[ext_resource path="res://instance/Blocks/Materials/red.tres" type="Material" id=23]
-[ext_resource path="res://Music/menu.ogg" type="AudioStream" id=24]
-[ext_resource path="res://scripts/StreamMain.gd" type="Script" id=25]
+[ext_resource path="res://scripts/Difficulty.gd" type="Script" id=3]
+[ext_resource path="res://Sounds/Blip_Select.wav" type="Sample" id=4]
+[ext_resource path="res://scripts/Slider_music.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Slider_sound.gd" type="Script" id=6]
+[ext_resource path="res://instance/Blocks/block_6x1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://instance/Blocks/Materials/white.tres" type="Material" id=8]
+[ext_resource path="res://instance/Blocks/block_3x2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://instance/Blocks/Materials/black.tres" type="Material" id=10]
+[ext_resource path="res://instance/Blocks/Materials/blue.tres" type="Material" id=11]
+[ext_resource path="res://instance/Blocks/block_2x2o.tscn" type="PackedScene" id=12]
+[ext_resource path="res://instance/Blocks/block_1x2o.tscn" type="PackedScene" id=13]
+[ext_resource path="res://instance/Blocks/Materials/grey.tres" type="Material" id=14]
+[ext_resource path="res://instance/Blocks/block_4x2.tscn" type="PackedScene" id=15]
+[ext_resource path="res://instance/Blocks/Materials/green.tres" type="Material" id=16]
+[ext_resource path="res://instance/Blocks/block_2x2.tscn" type="PackedScene" id=17]
+[ext_resource path="res://instance/Blocks/block_4x1.tscn" type="PackedScene" id=18]
+[ext_resource path="res://instance/Blocks/block_6x2.tscn" type="PackedScene" id=19]
+[ext_resource path="res://instance/Blocks/yellow.tres" type="Material" id=20]
+[ext_resource path="res://instance/Blocks/block_1x2.tscn" type="PackedScene" id=21]
+[ext_resource path="res://instance/Blocks/Materials/yellow.tres" type="Material" id=22]
+[ext_resource path="res://instance/Blocks/block_1x1r.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Menu_enviro.tres" type="Environment" id=24]
+[ext_resource path="res://instance/Blocks/block_1x1.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Meshes/block_2x2.msh" type="Mesh" id=26]
+[ext_resource path="res://instance/Blocks/Materials/red.tres" type="Material" id=27]
+[ext_resource path="res://Music/menu.ogg" type="AudioStream" id=28]
+[ext_resource path="res://scripts/StreamMain.gd" type="Script" id=29]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -45,12 +49,22 @@ shader/shading_mode = 0
 [sub_resource type="Theme" id=3]
 
 
+[sub_resource type="SampleLibrary" id=4]
+
+samples/Blip_Select = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+
 [node name="Node" type="Node"]
 
 script/script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
 
+visibility/self_opacity = 0.5
 material/material = SubResource( 2 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -60,7 +74,7 @@ theme/theme = SubResource( 3 )
 margin/left = 113.0
 margin/top = 97.0
 margin/right = 340.0
-margin/bottom = 216.0
+margin/bottom = 373.0
 
 [node name="Start Game" type="Button" parent="Panel"]
 
@@ -68,10 +82,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 71.0
-margin/top = 76.0
-margin/right = 171.0
-margin/bottom = 96.0
+margin/left = 65.0
+margin/top = 56.0
+margin/right = 165.0
+margin/bottom = 76.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -85,12 +99,170 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 40.0
-margin/top = 30.0
-margin/right = 186.0
-margin/bottom = 51.0
+margin/left = 43.0
+margin/top = 23.0
+margin/right = 189.0
+margin/bottom = 44.0
 text = "BRICKS BLASTER"
 align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Difficulty" type="HSlider" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 39.0
+margin/top = 120.0
+margin/right = 193.0
+margin/bottom = 136.0
+range/min = 0.0
+range/max = 2.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 2
+script/script = ExtResource( 3 )
+
+[node name="Easy" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 23.0
+margin/top = 96.0
+margin/right = 63.0
+margin/bottom = 110.0
+text = "Easy"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Normal" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 90.0
+margin/top = 97.0
+margin/right = 137.0
+margin/bottom = 114.0
+text = "Normal"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Hard" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 174.0
+margin/top = 98.0
+margin/right = 214.0
+margin/bottom = 112.0
+text = "Hard"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="SamplePlayer" type="SamplePlayer" parent="Panel"]
+
+config/polyphony = 1
+config/samples = SubResource( 4 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[node name="Slider_Music" type="HSlider" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 39.0
+margin/top = 177.0
+margin/right = 193.0
+margin/bottom = 193.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 50.0
+range/exp_edit = false
+range/rounded = false
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 2
+script/script = ExtResource( 5 )
+
+[node name="Label_Music" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 71.0
+margin/top = 155.0
+margin/right = 161.0
+margin/bottom = 169.0
+text = "Music volume"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Slider_Sound" type="HSlider" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 40.0
+margin/top = 236.0
+margin/right = 195.0
+margin/bottom = 252.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 50.0
+range/exp_edit = false
+range/rounded = false
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 2
+script/script = ExtResource( 6 )
+
+[node name="Label_Sound" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 67.0
+margin/top = 211.0
+margin/right = 172.0
+margin/bottom = 225.0
+text = "Effects volume"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -105,40 +277,40 @@ editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1.14886, 0, -0.804441, 0, 1.4025, 0, 0.804441, 0, 1.14886, -3, 0, -2 )
 
-[node name="MeshInstance" parent="Spatial/Player 3" instance=ExtResource( 3 )]
+[node name="MeshInstance" parent="Spatial/Player 3" instance=ExtResource( 7 )]
 
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
-material/0 = ExtResource( 4 )
+material/0 = ExtResource( 8 )
 
-[node name="MeshInstance1" parent="Spatial/Player 3" instance=ExtResource( 3 )]
+[node name="MeshInstance1" parent="Spatial/Player 3" instance=ExtResource( 7 )]
 
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 1 )
-material/0 = ExtResource( 4 )
+material/0 = ExtResource( 8 )
 
-[node name="MeshInstance 2" parent="Spatial/Player 3" instance=ExtResource( 5 )]
+[node name="MeshInstance 2" parent="Spatial/Player 3" instance=ExtResource( 9 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="MeshInstance3" parent="Spatial/Player 3" instance=ExtResource( 5 )]
+[node name="MeshInstance3" parent="Spatial/Player 3" instance=ExtResource( 9 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
-material/0 = ExtResource( 7 )
+material/0 = ExtResource( 11 )
 
-[node name="MeshInstance 3" parent="Spatial/Player 3" instance=ExtResource( 8 )]
+[node name="MeshInstance 3" parent="Spatial/Player 3" instance=ExtResource( 12 )]
 
 transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.2, -2 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="MeshInstance 4" parent="Spatial/Player 3" instance=ExtResource( 9 )]
+[node name="MeshInstance 4" parent="Spatial/Player 3" instance=ExtResource( 13 )]
 
 transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 2.4, 2 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 14 )
 
-[node name="MeshInstance5" parent="Spatial/Player 3" instance=ExtResource( 9 )]
+[node name="MeshInstance5" parent="Spatial/Player 3" instance=ExtResource( 13 )]
 
 transform/local = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.4, 2 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 14 )
 
 [node name="Plane 1" type="Spatial" parent="Spatial"]
 
@@ -146,40 +318,40 @@ editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 8, -1, -18 )
 
-[node name="MeshInstance" parent="Spatial/Plane 1" instance=ExtResource( 11 )]
+[node name="MeshInstance" parent="Spatial/Plane 1" instance=ExtResource( 15 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 1.2, 0 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="MeshInstance3" parent="Spatial/Plane 1" instance=ExtResource( 11 )]
+[node name="MeshInstance3" parent="Spatial/Plane 1" instance=ExtResource( 15 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 1.2, 0 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="MeshInstance4" parent="Spatial/Plane 1" instance=ExtResource( 11 )]
+[node name="MeshInstance4" parent="Spatial/Plane 1" instance=ExtResource( 15 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.2, 2 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="RigidBody 3" parent="Spatial/Plane 1" instance=ExtResource( 13 )]
+[node name="RigidBody 3" parent="Spatial/Plane 1" instance=ExtResource( 17 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43051e-06, 2.4, 1 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="MeshInstance 2" parent="Spatial/Plane 1" instance=ExtResource( 14 )]
+[node name="MeshInstance 2" parent="Spatial/Plane 1" instance=ExtResource( 18 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.2, -2 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="MeshInstance 3" parent="Spatial/Plane 1" instance=ExtResource( 11 )]
+[node name="MeshInstance 3" parent="Spatial/Plane 1" instance=ExtResource( 15 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="MeshInstance 4" parent="Spatial/Plane 1" instance=ExtResource( 5 )]
+[node name="MeshInstance 4" parent="Spatial/Plane 1" instance=ExtResource( 9 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
 [node name="Bomber" type="Spatial" parent="Spatial"]
 
@@ -187,123 +359,123 @@ editor/display_folded = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 9, 2, -42 )
 
-[node name="6x2" parent="Spatial/Bomber" instance=ExtResource( 15 )]
+[node name="6x2" parent="Spatial/Bomber" instance=ExtResource( 19 )]
 
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="6x1 1" parent="Spatial/Bomber" instance=ExtResource( 3 )]
+[node name="6x1 1" parent="Spatial/Bomber" instance=ExtResource( 7 )]
 
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.2, 0 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="6x12" parent="Spatial/Bomber" instance=ExtResource( 3 )]
+[node name="6x12" parent="Spatial/Bomber" instance=ExtResource( 7 )]
 
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.2, -1 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="6x13" parent="Spatial/Bomber" instance=ExtResource( 3 )]
+[node name="6x13" parent="Spatial/Bomber" instance=ExtResource( 7 )]
 
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 1.2, -1 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="1x4" parent="Spatial/Bomber" instance=ExtResource( 14 )]
+[node name="1x4" parent="Spatial/Bomber" instance=ExtResource( 18 )]
 
 transform/local = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.2, -3 )
-material/0 = ExtResource( 16 )
+material/0 = ExtResource( 20 )
 
-[node name="1x2" parent="Spatial/Bomber" instance=ExtResource( 17 )]
+[node name="1x2" parent="Spatial/Bomber" instance=ExtResource( 21 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 0, 0 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="1x3" parent="Spatial/Bomber" instance=ExtResource( 17 )]
+[node name="1x3" parent="Spatial/Bomber" instance=ExtResource( 21 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0, 0 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="1x2 2 " parent="Spatial/Bomber" instance=ExtResource( 17 )]
+[node name="1x2 2 " parent="Spatial/Bomber" instance=ExtResource( 21 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 2 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="2x2o" parent="Spatial/Bomber" instance=ExtResource( 8 )]
+[node name="2x2o" parent="Spatial/Bomber" instance=ExtResource( 12 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 3 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="1x2o" parent="Spatial/Bomber" instance=ExtResource( 9 )]
+[node name="1x2o" parent="Spatial/Bomber" instance=ExtResource( 13 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.4, -3 )
-material/0 = ExtResource( 16 )
+material/0 = ExtResource( 20 )
 
-[node name="1x2o 2" parent="Spatial/Bomber" instance=ExtResource( 9 )]
+[node name="1x2o 2" parent="Spatial/Bomber" instance=ExtResource( 13 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.4, -3 )
-material/0 = ExtResource( 16 )
+material/0 = ExtResource( 20 )
 
 [node name="Helicopter" type="Spatial" parent="Spatial"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.995964, -0.0301537, -0.0845278, 0.0151344, 0.984808, -0.172987, 0.0884599, 0.17101, 0.98129, -11, 0, -39 )
 
-[node name="MeshInstance" parent="Spatial/Helicopter" instance=ExtResource( 5 )]
+[node name="MeshInstance" parent="Spatial/Helicopter" instance=ExtResource( 9 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="MeshInstance 2" parent="Spatial/Helicopter" instance=ExtResource( 11 )]
+[node name="MeshInstance 2" parent="Spatial/Helicopter" instance=ExtResource( 15 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="MeshInstance 3" parent="Spatial/Helicopter" instance=ExtResource( 13 )]
+[node name="MeshInstance 3" parent="Spatial/Helicopter" instance=ExtResource( 17 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
-material/0 = ExtResource( 12 )
+material/0 = ExtResource( 16 )
 
-[node name="MeshInstance 4" parent="Spatial/Helicopter" instance=ExtResource( 8 )]
+[node name="MeshInstance 4" parent="Spatial/Helicopter" instance=ExtResource( 12 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 2 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="MeshInstance 5" parent="Spatial/Helicopter" instance=ExtResource( 8 )]
+[node name="MeshInstance 5" parent="Spatial/Helicopter" instance=ExtResource( 12 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -4 )
-material/0 = ExtResource( 18 )
+material/0 = ExtResource( 22 )
 
 [node name="Rotator" type="Spatial" parent="Spatial/Helicopter"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="MeshInstance 6" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 19 )]
+[node name="MeshInstance 6" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 23 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.4, 0.5 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="MeshInstance 7" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 13 )]
+[node name="MeshInstance 7" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 17 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
-[node name="MeshInstance 8" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 3 )]
+[node name="MeshInstance 8" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 7 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.8, -3 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 14 )
 
-[node name="MeshInstance9" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 3 )]
+[node name="MeshInstance9" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 7 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.8, 3 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 14 )
 
-[node name="MeshInstance10" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 3 )]
+[node name="MeshInstance10" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 7 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 4.8, 1 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 14 )
 
-[node name="MeshInstance11" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 3 )]
+[node name="MeshInstance11" parent="Spatial/Helicopter/Rotator" instance=ExtResource( 7 )]
 
 transform/local = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3, 4.8, 0 )
-material/0 = ExtResource( 10 )
+material/0 = ExtResource( 14 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Spatial"]
 
@@ -340,7 +512,7 @@ far = 10000.0
 keep_aspect = 1
 current = true
 visible_layers = 1048575
-environment = ExtResource( 20 )
+environment = ExtResource( 24 )
 h_offset = 0.0
 v_offset = 0.0
 
@@ -349,38 +521,38 @@ v_offset = 0.0
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.819152, 0.573576, -7.52154e-08, 0, 1.31134e-07, 1, 0.573576, -0.819152, 1.07419e-07, 1.25813, 1.55449, -8.89706 )
 
-[node name="MeshInstance" parent="Spatial/Spatial" instance=ExtResource( 21 )]
+[node name="MeshInstance" parent="Spatial/Spatial" instance=ExtResource( 25 )]
 
-material/0 = ExtResource( 18 )
+material/0 = ExtResource( 22 )
 
-[node name="MeshInstance1" parent="Spatial/Spatial" instance=ExtResource( 21 )]
+[node name="MeshInstance1" parent="Spatial/Spatial" instance=ExtResource( 25 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, -2.13163e-14, -2.13163e-14, 1, -4.76837e-07, 1.2, 0 )
-material/0 = ExtResource( 18 )
+material/0 = ExtResource( 22 )
 
-[node name="MeshInstance2" parent="Spatial/Spatial" instance=ExtResource( 21 )]
+[node name="MeshInstance2" parent="Spatial/Spatial" instance=ExtResource( 25 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 8.9407e-08 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
 [node name="Spatial2" type="Spatial" parent="Spatial"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.819152, 0.573576, -7.52154e-08, 0, 1.31134e-07, 1, 0.573576, -0.819152, 1.07419e-07, -1.95316, 1.55449, -4.47282 )
 
-[node name="MeshInstance" parent="Spatial/Spatial2" instance=ExtResource( 21 )]
+[node name="MeshInstance" parent="Spatial/Spatial2" instance=ExtResource( 25 )]
 
-material/0 = ExtResource( 18 )
+material/0 = ExtResource( 22 )
 
-[node name="MeshInstance1" parent="Spatial/Spatial2" instance=ExtResource( 21 )]
+[node name="MeshInstance1" parent="Spatial/Spatial2" instance=ExtResource( 25 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
-material/0 = ExtResource( 18 )
+material/0 = ExtResource( 22 )
 
-[node name="MeshInstance2" parent="Spatial/Spatial2" instance=ExtResource( 21 )]
+[node name="MeshInstance2" parent="Spatial/Spatial2" instance=ExtResource( 25 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, -1.42109e-14, -2.13163e-14, 1, 0, 2.4, -2.38419e-07 )
-material/0 = ExtResource( 6 )
+material/0 = ExtResource( 10 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Spatial"]
 
@@ -400,9 +572,9 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 22 )
+mesh/mesh = ExtResource( 26 )
 mesh/skeleton = NodePath("..")
-material/0 = ExtResource( 23 )
+material/0 = ExtResource( 27 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="Spatial"]
 
@@ -422,9 +594,9 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 22 )
+mesh/mesh = ExtResource( 26 )
 mesh/skeleton = NodePath("..")
-material/0 = ExtResource( 23 )
+material/0 = ExtResource( 27 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="Spatial"]
 
@@ -445,9 +617,9 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 22 )
+mesh/mesh = ExtResource( 26 )
 mesh/skeleton = NodePath("..")
-material/0 = ExtResource( 23 )
+material/0 = ExtResource( 27 )
 
 [node name="MeshInstance1" type="MeshInstance" parent="Spatial"]
 
@@ -467,9 +639,9 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 22 )
+mesh/mesh = ExtResource( 26 )
 mesh/skeleton = NodePath("..")
-material/0 = ExtResource( 23 )
+material/0 = ExtResource( 27 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="Spatial"]
 
@@ -489,9 +661,9 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 22 )
+mesh/mesh = ExtResource( 26 )
 mesh/skeleton = NodePath("..")
-material/0 = ExtResource( 23 )
+material/0 = ExtResource( 27 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="Spatial"]
 
@@ -512,13 +684,13 @@ geometry/depth_scale = false
 geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
-mesh/mesh = ExtResource( 22 )
+mesh/mesh = ExtResource( 26 )
 mesh/skeleton = NodePath("..")
-material/0 = ExtResource( 23 )
+material/0 = ExtResource( 27 )
 
 [node name="StreamPlayer" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 24 )
+stream/stream = ExtResource( 28 )
 stream/play = false
 stream/loop = true
 stream/volume_db = 0.0
@@ -526,6 +698,6 @@ stream/autoplay = true
 stream/paused = false
 stream/loop_restart_time = 0.0
 stream/buffering_ms = 500
-script/script = ExtResource( 25 )
+script/script = ExtResource( 29 )
 
 
