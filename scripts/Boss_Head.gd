@@ -38,7 +38,7 @@ func _process(delta):
 			active_check = true
 			activated = true
 
-	if hp < 0 and death == false:
+	if hp < 1 and death == false:
 		get_node("25D Model/Model").explode()
 		mothership.ship_destroyed += 1
 		var player_ship = get_tree().get_root().get_node("Player")
