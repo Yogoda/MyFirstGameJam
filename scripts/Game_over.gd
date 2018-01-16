@@ -1,6 +1,6 @@
 extends Node2D
 
-var timer = 7.5
+var timer = 4.0
 const X_SHIFT = 25
 var currentScene = null
 var init = true
