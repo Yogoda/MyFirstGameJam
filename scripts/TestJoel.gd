@@ -9,12 +9,7 @@ var camDist = 4;
 func _ready():
 	set_process(true)
 
-	print(get_viewport_rect().size)
-	print(get_viewport_rect().end)
-
 func _process(delta):
-
-	print(get_parent().get_pos())
 
 	var ray_origin = camera.project_ray_origin(get_parent().get_pos())
 	var ray_direction = camera.project_ray_normal(get_parent().get_pos())

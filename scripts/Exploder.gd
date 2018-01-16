@@ -16,8 +16,6 @@ func _process(delta):
 			
 func explode(model):
 	
-	print("explode")
-	
 	var ship = model.instance()
 	add_child(ship)
 	
