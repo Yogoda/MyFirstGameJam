@@ -27,7 +27,7 @@ func play_sound(missile_type):
 
 	var so_player = get_node("SoPlayerShoot")
 	var so_id 
-	
+
 	if missile_type == MISSILE_TYPE_1:
 		so_id = so_player.play("Laser_Shoot1")
 		so_player.set_volume(so_id,Globals.get("sound_level"))
@@ -84,7 +84,7 @@ func _process(delta):
 			queue_free()
 
 func _on_area_enter(other):
-	if other.is_in_group("enemy"):
+	if other.is_in_group("enemy") and not destroy:
 		if other.death == false and other.activated == true:
 			other.hp -= 1
 			other.get_node("25D Model").blink(1)
