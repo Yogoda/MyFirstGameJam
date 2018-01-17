@@ -1,5 +1,5 @@
 extends HSlider
-var previous_val = 50
+var previous_val = 10
 const DELAY = 0.3
 var alarm_0 = DELAY
 

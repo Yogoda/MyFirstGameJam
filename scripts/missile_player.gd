@@ -15,6 +15,13 @@ const MISSILE_TYPE_2 = 2
 const MISSILE_TYPE_3 = 3
 
 var destroy = false
+var destroy_timer = 0.5
+
+func destroy():
+	
+	get_node("25D Model/Spatial").enabled = false
+	get_node("25D Model/Spatial").set_hidden(true)
+	destroy = true
 
 func play_sound(missile_type):
 
@@ -72,7 +79,9 @@ func _process(delta):
 		destroy = true
 	
 	if destroy == true:
-		queue_free()
+		destroy_timer -= delta
+		if destroy_timer <= 0:
+			queue_free()
 
 func _on_area_enter(other):
 	if other.is_in_group("enemy"):
@@ -92,4 +101,5 @@ func _on_area_enter(other):
 			var prog_bar_value = prog_bar.get_value()
 			prog_bar_value += prog_bar.get_step()
 			prog_bar.set_value(prog_bar_value)
-			queue_free()
+			
+			destroy()

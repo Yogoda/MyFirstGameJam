@@ -45,6 +45,7 @@ _update_shape_index = 0
 [node name="25D Model" parent="." instance=ExtResource( 4 )]
 
 visibility/visible = true
+camDist = 80
 setRotation = false
 set_visiblity = true
 
@@ -53,6 +54,7 @@ set_visiblity = true
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, -0.547282, 0.554493, 0 )
 script/script = ExtResource( 5 )
+enabled = true
 hide = true
 rotate = false
 rotation_speed = 15.0

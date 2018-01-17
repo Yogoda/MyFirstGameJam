@@ -233,6 +233,7 @@ func _process(delta):
 				fire1_alarm = FIRE1_RATE
 				var missile = MISSILE_INSTANCE.instance()
 				get_tree().get_root().add_child(missile)
+#				add_child(missile)
 				var missile_pos = missile.get_pos()
 				missile_pos.x = player_pos.x
 				missile_pos.y = player_pos.y - FIRE1_Y_SHIFT
