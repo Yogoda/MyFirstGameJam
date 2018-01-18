@@ -63,25 +63,24 @@ func _process(delta):
 		missile_pos.x += velocity.x*sin(amplitude)*delta
 		missile_pos.y += velocity.y*cos(amplitude)*delta
 		
-	set_pos(missile_pos)
 		
 	#destroy if out of game range
 	
-	missile_pos = get_pos()
-	
-	if missile_pos.x < get_viewport_rect().pos.x - SCREEN_MARGIN:
+	if missile_pos.x < get_viewport_rect().pos.x + SCREEN_MARGIN:
 		destroy = true
-	if missile_pos.x > get_viewport_rect().end.x + SCREEN_MARGIN:
+	if missile_pos.x > get_viewport_rect().end.x - SCREEN_MARGIN:
 		destroy = true
-	if missile_pos.y < get_viewport_rect().pos.y - SCREEN_MARGIN:
+	if missile_pos.y < get_viewport_rect().pos.y + SCREEN_MARGIN:
 		destroy = true
-	if missile_pos.y > get_viewport_rect().end.y + SCREEN_MARGIN:
+	if missile_pos.y > get_viewport_rect().end.y - SCREEN_MARGIN:
 		destroy = true
 	
 	if destroy == true:
 		destroy_timer -= delta
 		if destroy_timer <= 0:
 			queue_free()
+			
+	set_pos(missile_pos)
 
 func _on_area_enter(other):
 	if other.is_in_group("enemy") and not destroy:
