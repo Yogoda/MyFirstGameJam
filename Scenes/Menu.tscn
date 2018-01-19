@@ -1,8 +1,8 @@
-[gd_scene load_steps=44 format=1]
+[gd_scene load_steps=45 format=1]
 
 [ext_resource path="res://scripts/Menu_Node.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/bulbigames_logo_small.png" type="Texture" id=2]
-[ext_resource path="res://Fonts/small.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Fonts/small.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Sprites/bulbigames_logo_small.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Start_Game.gd" type="Script" id=4]
 [ext_resource path="res://Fonts/big.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scripts/Difficulty.gd" type="Script" id=6]
@@ -103,6 +103,34 @@ func credits():
 	
 		get_tree().get_root().get_node(\"Node\").get_node(\"Credits\").set_hidden(false)"
 
+[sub_resource type="GDScript" id=11]
+
+script/source = "extends Label
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+var blink_duration = 0.3
+var blink_timer = blink_duration
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	set_process(true)
+	
+func _process(delta):
+	
+	blink_timer -= delta
+	
+	if blink_timer <= 0:
+		if is_hidden():
+			set_hidden(false)
+		else:
+			set_hidden(true)
+			
+		blink_timer = blink_duration"
+
 [sub_resource type="SampleLibrary" id=8]
 
 samples/Blip_Select = {
@@ -152,10 +180,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 4.0
-margin/top = 623.0
-margin/right = 72.0
-margin/bottom = 637.0
+margin/left = 8.0
+margin/top = 615.0
+margin/right = 96.0
+margin/bottom = 635.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.714844, 0.966583, 1, 1 )
 text = "v. 0.9.3-RC"
 percent_visible = 1.0
 lines_skipped = 0
@@ -165,7 +195,7 @@ max_lines_visible = -1
 
 transform/pos = Vector2( 442.635, 614.889 )
 transform/scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
 
@@ -174,9 +204,10 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 337.0
-margin/top = 616.0
+margin/top = 610.0
 margin/right = 426.0
 margin/bottom = 630.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.921875, 0.785709, 0.050415, 1 )
 text = "BULBIGAMES!"
 percent_visible = 1.0
@@ -207,7 +238,9 @@ margin/left = 51.0
 margin/top = 115.0
 margin/right = 177.0
 margin/bottom = 144.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_disabled = Color( 0.613281, 0.347366, 0.347366, 1 )
+custom_colors/font_color = Color( 1, 0.87451, 0.0627451, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -225,7 +258,9 @@ margin/left = 65.0
 margin/top = 177.0
 margin/right = 165.0
 margin/bottom = 203.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.627451, 1, 0.576471, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -243,7 +278,9 @@ margin/left = 65.0
 margin/top = 148.0
 margin/right = 165.0
 margin/bottom = 174.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.627451, 1, 0.576471, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -261,13 +298,33 @@ margin/left = 65.0
 margin/top = 206.0
 margin/right = 165.0
 margin/bottom = 232.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.627451, 1, 0.576471, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Credits"
 flat = false
 script/script = SubResource( 6 )
+
+[node name="Title1" type="Label" parent="Menu"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 25.0
+margin/top = 10.0
+margin/right = 207.0
+margin/bottom = 43.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.273438, 0.273438, 0.273438, 1 )
+text = "BRICKS BLASTER"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="Title" type="Label" parent="Menu"]
 
@@ -276,15 +333,17 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 25.0
-margin/top = 12.0
+margin/top = 10.0
 margin/right = 207.0
-margin/bottom = 45.0
+margin/bottom = 43.0
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 1, 0.876007, 0.0664063, 1 )
 text = "BRICKS BLASTER"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+script/script = SubResource( 11 )
 
 [node name="PanelContainer" type="PanelContainer" parent="Menu"]
 
@@ -318,7 +377,8 @@ margin/left = 13.0
 margin/top = 8.0
 margin/right = 55.0
 margin/bottom = 28.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.714844, 0.966583, 1, 1 )
 text = "Easy"
 percent_visible = 1.0
 lines_skipped = 0
@@ -334,7 +394,8 @@ margin/left = 77.0
 margin/top = 8.0
 margin/right = 132.0
 margin/bottom = 28.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.630859, 1, 0.578125, 1 )
 text = "Normal"
 percent_visible = 1.0
 lines_skipped = 0
@@ -350,7 +411,8 @@ margin/left = 156.0
 margin/top = 8.0
 margin/right = 191.0
 margin/bottom = 28.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0.21875, 0.21875, 1 )
 text = "Hard"
 percent_visible = 1.0
 lines_skipped = 0
@@ -418,9 +480,11 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 43.0
-margin/top = 23.0
+margin/top = 18.0
 margin/right = 189.0
-margin/bottom = 44.0
+margin/bottom = 51.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.627451, 1, 0.576471, 1 )
 text = "OPTIONS"
 align = 1
 percent_visible = 1.0
@@ -474,8 +538,10 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 71.0
 margin/top = 80.0
-margin/right = 161.0
-margin/bottom = 94.0
+margin/right = 167.0
+margin/bottom = 100.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.714844, 0.966583, 1, 1 )
 text = "Music volume"
 percent_visible = 1.0
 lines_skipped = 0
@@ -511,8 +577,10 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 67.0
 margin/top = 136.0
-margin/right = 172.0
-margin/bottom = 150.0
+margin/right = 179.0
+margin/bottom = 156.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.714844, 0.966583, 1, 1 )
 text = "Effects volume"
 percent_visible = 1.0
 lines_skipped = 0
@@ -527,7 +595,9 @@ size_flags/vertical = 2
 margin/left = 69.0
 margin/top = 215.0
 margin/right = 158.0
-margin/bottom = 235.0
+margin/bottom = 241.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.627451, 1, 0.576471, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -545,10 +615,10 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = SubResource( 3 )
-margin/left = 113.0
+margin/left = 90.0
 margin/top = 97.0
-margin/right = 340.0
-margin/bottom = 373.0
+margin/right = 363.0
+margin/bottom = 490.0
 script/script = SubResource( 9 )
 
 [node name="Title" type="Label" parent="Controls"]
@@ -557,10 +627,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 43.0
-margin/top = 23.0
-margin/right = 189.0
-margin/bottom = 44.0
+margin/left = 0.0
+margin/top = 13.0
+margin/right = 272.0
+margin/bottom = 46.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.627451, 1, 0.576471, 1 )
 text = "CONTROLS"
 align = 1
 percent_visible = 1.0
@@ -590,10 +662,11 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 69.0
-margin/top = 215.0
-margin/right = 158.0
-margin/bottom = 235.0
+margin/left = 94.0
+margin/top = 340.0
+margin/right = 183.0
+margin/bottom = 366.0
+custom_fonts/font = ExtResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -607,20 +680,64 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 14.0
-margin/top = 54.0
-margin/right = 228.0
-margin/bottom = 214.0
+margin/left = 20.0
+margin/top = 66.0
+margin/right = 261.0
+margin/bottom = 283.0
+custom_fonts/normal_font = ExtResource( 2 )
+custom_colors/default_color = Color( 0.714844, 0.966583, 1, 1 )
 bbcode/enabled = false
-bbcode/bbcode = "Movement  W A S D
-Fire             SPACEBAR
-Special        F
+bbcode/bbcode = "Movement 
+Fire  
+Special
 
-OR
 
-Movement  Up Left Down Right
-Fire             SPACEBAR
-Special        Alt"
+
+Movement
+Fire          
+Special     "
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="Controls"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 113.0
+margin/top = 66.0
+margin/right = 269.0
+margin/bottom = 283.0
+custom_fonts/normal_font = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 0.21875, 0.21875, 1 )
+bbcode/enabled = false
+bbcode/bbcode = "W A S D
+SPACEBAR
+F
+
+
+
+Up Left Down Right
+SPACEBAR
+Alt"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Controls"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 22.0
+margin/top = 151.0
+margin/right = 64.0
+margin/bottom = 175.0
+custom_fonts/normal_font = ExtResource( 2 )
+custom_colors/default_color = Color( 0.627451, 1, 0.576471, 1 )
+bbcode/enabled = false
+bbcode/bbcode = "OR"
 visible_characters = -1
 percent_visible = 1.0
 
@@ -650,7 +767,9 @@ size_flags/vertical = 0
 margin/left = 149.0
 margin/top = 23.0
 margin/right = 295.0
-margin/bottom = 44.0
+margin/bottom = 56.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.627451, 1, 0.576471, 1 )
 text = "CREDITS"
 align = 1
 percent_visible = 1.0
@@ -664,9 +783,10 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 187.0
-margin/top = 591.0
+margin/top = 601.0
 margin/right = 276.0
-margin/bottom = 611.0
+margin/bottom = 621.0
+custom_colors/font_color = Color( 0.627451, 1, 0.576471, 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -682,7 +802,7 @@ texture = ExtResource( 10 )
 
 [node name="Sprite1" type="Sprite" parent="Credits"]
 
-transform/pos = Vector2( 187.194, 438.335 )
+transform/pos = Vector2( 175.194, 438.335 )
 transform/scale = Vector2( 0.517181, 0.517181 )
 texture = ExtResource( 11 )
 
@@ -693,9 +813,10 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 19.0
-margin/top = 376.0
-margin/right = 85.0
-margin/bottom = 390.0
+margin/top = 369.0
+margin/right = 91.0
+margin/bottom = 389.0
+custom_fonts/font = ExtResource( 2 )
 text = "Made with"
 percent_visible = 1.0
 lines_skipped = 0
@@ -707,10 +828,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 174.0
-margin/top = 467.0
-margin/right = 430.0
-margin/bottom = 481.0
+margin/left = 157.0
+margin/top = 464.0
+margin/right = 445.0
+margin/bottom = 484.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 0.969971, 0.519531, 1 )
 text = "The Free and Open Source Game Engine"
 percent_visible = 1.0
@@ -726,7 +848,8 @@ size_flags/vertical = 0
 margin/left = 332.0
 margin/top = 214.0
 margin/right = 372.0
-margin/bottom = 228.0
+margin/bottom = 234.0
+custom_fonts/font = ExtResource( 2 )
 text = "Code"
 percent_visible = 1.0
 lines_skipped = 0
@@ -740,8 +863,9 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 332.0
 margin/top = 235.0
-margin/right = 378.0
-margin/bottom = 249.0
+margin/right = 380.0
+margin/bottom = 255.0
+custom_fonts/font = ExtResource( 2 )
 text = "Sounds"
 percent_visible = 1.0
 lines_skipped = 0
@@ -753,10 +877,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 332.0
+margin/left = 333.0
 margin/top = 285.0
-margin/right = 372.0
-margin/bottom = 299.0
+margin/right = 373.0
+margin/bottom = 305.0
+custom_fonts/font = ExtResource( 2 )
 text = "Code"
 percent_visible = 1.0
 lines_skipped = 0
@@ -770,8 +895,9 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 332.0
 margin/top = 265.0
-margin/right = 388.0
-margin/bottom = 279.0
+margin/right = 396.0
+margin/bottom = 285.0
+custom_fonts/font = ExtResource( 2 )
 text = "Graphics"
 percent_visible = 1.0
 lines_skipped = 0
@@ -783,10 +909,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 259.0
+margin/left = 245.0
 margin/top = 214.0
-margin/right = 316.0
-margin/bottom = 228.0
+margin/right = 317.0
+margin/bottom = 234.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.829834, 0.359375, 1, 1 )
 text = "Astadriel"
 percent_visible = 1.0
@@ -799,10 +926,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 259.0
+margin/left = 245.0
 margin/top = 265.0
-margin/right = 316.0
-margin/bottom = 279.0
+margin/right = 302.0
+margin/bottom = 285.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 0.692535, 0.394531, 1 )
 text = "joel127"
 percent_visible = 1.0
@@ -816,9 +944,10 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 20.0
-margin/top = 523.0
+margin/top = 504.0
 margin/right = 77.0
-margin/bottom = 537.0
+margin/bottom = 524.0
+custom_fonts/font = ExtResource( 2 )
 text = "Music"
 percent_visible = 1.0
 lines_skipped = 0
@@ -830,10 +959,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 115.0
-margin/top = 524.0
-margin/right = 448.0
-margin/bottom = 538.0
+margin/left = 61.0
+margin/top = 525.0
+margin/right = 453.0
+margin/bottom = 545.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.617188, 1, 0.650085, 1 )
 text = "8Bit Action Game Loops by Muz Station Productions"
 percent_visible = 1.0
@@ -847,9 +977,10 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 20.0
-margin/top = 546.0
-margin/right = 106.0
-margin/bottom = 560.0
+margin/top = 549.0
+margin/right = 124.0
+margin/bottom = 569.0
+custom_fonts/font = ExtResource( 2 )
 text = "Sound effects"
 percent_visible = 1.0
 lines_skipped = 0
@@ -861,10 +992,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 113.0
-margin/top = 547.0
-margin/right = 401.0
-margin/bottom = 561.0
+margin/left = 60.0
+margin/top = 571.0
+margin/right = 412.0
+margin/bottom = 591.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0716858, 0.679688, 0.237936, 1 )
 text = "Generated using BFXR (https://www.bfxr.net/)"
 percent_visible = 1.0
