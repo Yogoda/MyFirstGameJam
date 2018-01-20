@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Node2D
+
+var radius = 0
+const PULSE_DURATION = 0.3
+var lifetime = PULSE_DURATION
+var expand_rate = 1500
+var pulses_max = 2
+var pulses = pulses_max
+var ini = true
+const INSTANCE_PULSE = preload(\"res://instance/AlternateAttack_visual.tscn\")
+
+var ship_position = Vector2(get_viewport_rect().end.x /2,get_viewport_rect().end.x /2)
+
+func _ready():
+	
+	set_process(true)
+	
+func _process(delta):
+	if ini == true:
+		pulses = pulses_max
+		ini = false
+	
+	var child
+	for child in get_tree().get_root().get_children():
+		if child.is_in_group(\"missile_enemy\"):
+			#destroy enemy missiles
+			child.queue_free()
+	lifetime -= delta
+	if lifetime < PULSE_DURATION/2 and pulses == pulses_max and pulses_max > 0:
+		var alt_attack_visual = INSTANCE_PULSE.instance()
+		get_tree().get_root().add_child(alt_attack_visual)
+		alt_attack_visual.set_pos(Vector2(get_pos().x,get_pos().y))
+		pulses -= 1
+		alt_attack_visual.pulses_max = pulses
+	if lifetime < 0:
+		queue_free()
+			
+		
+	update()
+		
+	radius = radius + delta*expand_rate
+
+func _draw():
+	var center = ship_position
+	var color = Color(0.6, 0.8, 1.0, 0.05)
+	draw_circle( center, radius, color)
+"
+
+[node name="AlternateAttack_visual" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+

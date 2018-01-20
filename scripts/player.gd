@@ -41,6 +41,7 @@ const PLAYER_EXPL_4 = preload("res://instance/Ships/Explosions/Explosion4.tscn")
 const PLAYER_EXPL_5 = preload("res://instance/Ships/Explosions/Explosion5.tscn")
 
 const SHIP_EXPLOSION = preload("res://instance/Ships/Ship Explosion.tscn")
+const ALT_ATTACK_VISUAL_INSTANCE = preload("res://instance/AlternateAttack_visual.tscn")
 
 var current_model
 
@@ -300,15 +301,14 @@ func _process(delta):
 	if alt_attack == true:
 		var alt_bar = get_tree().get_root().get_node("World").get_node("AlternateAttack").get_node("ProgressBar")
 		if alt_bar.get_value() ==alt_bar.get_max():
-			var child
-			for child in get_tree().get_root().get_children():
-				if child.is_in_group("missile_enemy"):
-					#destroy enemy missiles
-					child.queue_free()
 			var so_player = get_tree().get_root().get_node("World").get_node("SoPlayerEvents")
 			var so_id = so_player.play("AltAttack")
 			so_player.set_volume(so_id,Globals.get("sound_level"))
 			alt_bar.set_value(0)
+			#visual
+			var alt_attack_visual = ALT_ATTACK_VISUAL_INSTANCE.instance()
+			get_tree().get_root().add_child(alt_attack_visual)
+			alt_attack_visual.set_pos(Vector2(get_pos().x,get_pos().y))
 			
 			
 	if structure_points < 1 and death == false:

@@ -103,7 +103,7 @@ func credits():
 	
 		get_tree().get_root().get_node(\"Node\").get_node(\"Credits\").set_hidden(false)"
 
-[sub_resource type="GDScript" id=11]
+[sub_resource type="GDScript" id=7]
 
 script/source = "extends Label
 
@@ -343,7 +343,7 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = SubResource( 11 )
+script/script = SubResource( 7 )
 
 [node name="PanelContainer" type="PanelContainer" parent="Menu"]
 
