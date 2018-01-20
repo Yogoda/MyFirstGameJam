@@ -4,7 +4,6 @@ var timer = 5
 const X_SHIFT = 25
 var init = true
 
-
 func _ready():
 	var label = get_node("Label")
 	var position = get_pos()
@@ -31,3 +30,4 @@ func _process(delta):
 			node.queue_free()
 			
 		get_tree().change_scene("res://Scenes/Menu.tscn")
+#		get_tree().get_root().get_node("Node").show_credits()

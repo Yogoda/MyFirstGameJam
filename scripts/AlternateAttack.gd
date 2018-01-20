@@ -19,16 +19,15 @@ func _process(delta):
 		size = prog_bar.get_size()
 		size.width = get_viewport_rect().size.width
 		position.x = get_viewport_rect().pos.x
-		position.y = get_viewport_rect().end.y - size.height
+		position.y = get_viewport_rect().end.y - size.height + 2
 		set_pos(position)
 #		prog_bar.set_pos(position)
 		prog_bar.set_size(size)
-		label.set_pos(Vector2(prog_bar.get_pos().x, prog_bar.get_pos().y - 4))
+		label.set_pos(Vector2(prog_bar.get_pos().x, prog_bar.get_pos().y - 3))
 		label.set_size(size)
 		ini = false
 		
 	if prog_bar.get_value() == prog_bar.get_max():
 		label.set_text(text)
-		label.color
 	else:
 		label.set_text(text2)

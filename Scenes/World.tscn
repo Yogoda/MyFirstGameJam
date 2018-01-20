@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=22 format=1]
 
 [ext_resource path="res://Scenes/World.gd" type="Script" id=1]
 [ext_resource path="res://World.tres" type="Environment" id=2]
@@ -13,9 +13,12 @@
 [ext_resource path="res://Sounds/StageCleared.wav" type="Sample" id=11]
 [ext_resource path="res://Sounds/Victory.wav" type="Sample" id=12]
 [ext_resource path="res://scripts/AlternateAttack.gd" type="Script" id=13]
-[ext_resource path="res://Music/main.ogg" type="AudioStream" id=14]
-[ext_resource path="res://Music/boss.ogg" type="AudioStream" id=15]
-[ext_resource path="res://Music/menu.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Fonts/small.tres" type="DynamicFont" id=14]
+[ext_resource path="res://Styles/yellow_fg.tres" type="StyleBox" id=15]
+[ext_resource path="res://Styles/gray_bg.tres" type="StyleBox" id=16]
+[ext_resource path="res://Music/main.ogg" type="AudioStream" id=17]
+[ext_resource path="res://Music/boss.ogg" type="AudioStream" id=18]
+[ext_resource path="res://Music/menu.ogg" type="AudioStream" id=19]
 
 [sub_resource type="SampleLibrary" id=1]
 
@@ -152,7 +155,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-theme/theme = ExtResource( 4 )
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 66.0
@@ -217,11 +219,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-theme/theme = ExtResource( 4 )
 margin/left = -90.0
 margin/top = 12.0
 margin/right = 367.0
 margin/bottom = 32.0
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Test text"
 align = 1
 percent_visible = 1.0
@@ -235,11 +238,12 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-theme/theme = ExtResource( 4 )
 margin/left = 0.0
 margin/top = -2.0
 margin/right = 16.0
 margin/bottom = 14.0
+custom_styles/fg = ExtResource( 15 )
+custom_styles/bg = ExtResource( 16 )
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0
@@ -251,7 +255,7 @@ percent/visible = false
 
 [node name="StreamMain" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 14 )
+stream/stream = ExtResource( 17 )
 stream/play = false
 stream/loop = true
 stream/volume_db = 0.0
@@ -262,7 +266,7 @@ stream/buffering_ms = 500
 
 [node name="StreamBoss" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 15 )
+stream/stream = ExtResource( 18 )
 stream/play = false
 stream/loop = true
 stream/volume_db = 0.0
@@ -273,7 +277,7 @@ stream/buffering_ms = 500
 
 [node name="StreamEnd" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 16 )
+stream/stream = ExtResource( 19 )
 stream/play = false
 stream/loop = true
 stream/volume_db = 0.0
